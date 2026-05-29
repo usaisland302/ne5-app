@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ NE5 APP ZONE</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #0d0e12; 
+            color: #fff; 
+            margin: 0; 
+            padding: 0; 
+        }
+        header { 
+            background-color: #161820; 
+            padding: 15px 20px; 
+            border-bottom: 2px solid #00e676; 
+            text-align: center;
+        }
+        .logo { 
+            font-size: 24px; 
+            font-weight: bold; 
+            color: #00e676; 
+        }
+        .search-section { 
+            padding: 20px; 
+            text-align: center; 
+            max-width: 500px; 
+            margin: 0 auto; 
+        }
+        .search-box { 
+            width: 100%; 
+            padding: 12px 20px; 
+            border-radius: 25px; 
+            border: 2px solid #161820; 
+            background-color: #1f222e; 
+            color: white; 
+            font-size: 16px; 
+            outline: none; 
+            box-sizing: border-box;
+        }
+        .search-box:focus { border-color: #00e676; }
+        .category-container { text-align: center; margin: 15px 0; }
+        .cat-btn { 
+            background-color: #1f222e; 
+            border: none; 
+            color: #a1a1aa; 
+            padding: 8px 16px; 
+            margin: 5px; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
+        .cat-btn.active, .cat-btn:hover { background-color: #00e676; color: #000; }
+        
+        .app-grid { 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 15px; 
+            margin-top: 20px;
+        }
+        .app-card { 
+            background-color: #161820; 
+            border-radius: 12px; 
+            padding: 20px; 
+            margin-bottom: 20px; 
+            border: 1px solid #232632; 
+            text-align: center; 
+            width: 100%;
+            max-width: 320px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+        }
+        
+        .icon-box {
+            width: 85px;
+            height: 85px;
+            border-radius: 22px; 
+            margin: 0 auto 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: #000;
+            background: linear-gradient(135deg, #00e676, #00b0ff); 
+            border: 2px solid #232632;
+        }
+        
+        .app-title { 
+            font-size: 18px; 
+            margin: 5px 0; 
+            font-weight: bold; 
+        }
+        .app-ver { 
+            font-size: 13px; 
+            color: #888; 
+            margin-bottom: 15px; 
+        }
+        .download-btn { 
+            display: inline-block; 
+            background-color: #00e676; 
+            color: #000; 
+            padding: 12px 30px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            text-decoration: none; 
+            font-size: 15px; 
+        }
+
+        /* 🔥 VIP POP-UP OVERLAY STYLE 🔥 */
+        #vipScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0d0e12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .vip-card {
+            background: linear-gradient(145deg, #161820, #0f1015);
+            border: 2px solid #ffd700;
+            border-radius: 16px;
+            padding: 30px 20px;
+            width: 90%;
+            max-width: 340px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+        }
+        .vip-badge {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: #000;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .vip-title {
+            font-size: 16px;
+            color: #e0e0e0;
+            margin: 5px 0;
+            font-style: italic;
+        }
+        .vip-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+        .confirm-btn {
+            display: block;
+            background-color: #25d366;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ⭐ FIRST TIME VIP SCREEN ⭐ -->
+    <div id="vipScreen">
+        <div class="vip-card">
+            <div class="vip-badge">👑 OFFICIAL VIP</div>
+            <div class="vip-title">This Website Created By</div>
+            <div class="vip-name">Ñè5 Hûñtèr</div>
+            <button onclick="redirectToChannel()" class="confirm-btn">✓ Confirm & Join Channel</button>
+        </div>
+    </div>
+
+    <!-- MAIN WEBSITE CONTENT -->
+    <header>
+        <div class="logo">⚡ NE5 APP ZONE</div>
+    </header>
+
+    <div class="search-section">
+        <input type="text" class="search-box" placeholder="Search apps or games...">
+    </div>
+
+    <div class="category-container">
+        <button class="cat-btn active">All</button>
+        <button class="cat-btn">Games</button>
+        <button class="cat-btn">Mods</button>
+        <button class="cat-btn">Tools</button>
+    </div>
+
+    <div class="app-grid">
+        <!-- CARD 1: FREE FIRE -->
+        <div class="app-card">
+            <div class="icon-box">FF</div>
+            <div class="app-title">Free Fire Mod Menu</div>
+            <div class="app-ver">v1.104.x | Category: Games</div>
+            <a href="#" class="download-btn">Download APK</a>
+        </div>
+
+        <!-- CARD 2: CAPCUT PRO -->
+        <div class="app-card">
+            <div class="icon-box">CC</div>
+            <div class="app-title">Capcut pro</div>
+            <div class="app-ver">v1.0.0 | Category: Tools</div>
+            <a href="https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19" class="download-btn">Download APK</a>
+        </div>
+    </div>
+
+    <!-- 🧠 AUTOMATION SCRIPT -->
+    <script>
+        // Check karna ke user ne pehle click kiya hai ya nahi
+        if (localStorage.getItem("vipConfirmed") === "true") {
+            // Agar pehle click ho chuka hai, to VIP screen ko mita do direct web kholo
+            document.getElementById("vipScreen").style.display = "none";
+        }
+
+        function redirectToChannel() {
+            // Browser memory me save karo ke click ho gaya hai
+            localStorage.setItem("vipConfirmed", "true");
+            
+            // VIP screen ko fauran chupao taake back aane par website khuli mile
+            document.getElementById("vipScreen").style.display = "none";
+            
+            // User ko WhatsApp channel par bhej do
+            window.location.href = "https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19";
+        }
+    </script>
+
+</body>
+  </html>
