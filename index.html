@@ -3,242 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ NE5 APP ZONE</title>
+    <title>⚡ NE5 APP ZONE - Premium Mod APKs</title>
     <style>
+        /* --- PREMIUM THEME COLORS --- */
+        :root {
+            --bg-main: #0b0c10;
+            --bg-card: #14161d;
+            --accent-green: #00ff87;
+            --accent-blue: #60efff;
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
+        }
+
         body { 
-            font-family: Arial, sans-serif;
-            background-color: #0d0e12; 
-            color: #fff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-main); 
+            color: var(--text-white); 
             margin: 0; 
             padding: 0; 
+            padding-bottom: 60px;
         }
+
+        /* --- SHANDAR HEADER --- */
         header { 
-            background-color: #161820; 
-            padding: 15px 20px; 
-            border-bottom: 2px solid #00e676; 
+            background: linear-gradient(180deg, #1b1f2b 0%, var(--bg-main) 100%);
+            padding: 25px 20px; 
             text-align: center;
+            border-bottom: 1px solid rgba(0, 255, 135, 0.15);
         }
-        .logo { 
-            font-size: 24px; 
-            font-weight: bold; 
-            color: #00e676; 
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 135, 0.3);
+            display: inline-block;
         }
+        .subtitle {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- SEARCH SECTION --- */
         .search-section { 
-            padding: 20px; 
+            padding: 15px 20px; 
             text-align: center; 
-            max-width: 500px; 
+            max-width: 450px; 
             margin: 0 auto; 
         }
         .search-box { 
             width: 100%; 
-            padding: 12px 20px; 
-            border-radius: 25px; 
-            border: 2px solid #161820; 
-            background-color: #1f222e; 
+            padding: 14px 25px; 
+            border-radius: 50px; 
+            border: 2px solid #1e293b; 
+            background-color: #151f32; 
             color: white; 
-            font-size: 16px; 
+            font-size: 15px; 
             outline: none; 
             box-sizing: border-box;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-        .search-box:focus { border-color: #00e676; }
-        .category-container { text-align: center; margin: 15px 0; }
-        .cat-btn { 
-            background-color: #1f222e; 
-            border: none; 
-            color: #a1a1aa; 
-            padding: 8px 16px; 
-            margin: 5px; 
-            border-radius: 20px; 
-            cursor: pointer; 
-            font-weight: bold; 
+        .search-box:focus { 
+            border-color: var(--accent-green);
+            box-shadow: 0 0 15px rgba(0, 255, 135, 0.25);
         }
-        .cat-btn.active, .cat-btn:hover { background-color: #00e676; color: #000; }
-        
+
+        /* --- LITEAPKS STYLE CATEGORIES --- */
+        .categories-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 15px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+        .cat-btn {
+            background-color: #1e293b;
+            color: var(--text-gray);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .cat-btn.active, .cat-btn:hover {
+            background: linear-gradient(45deg, #00ff87, #00e1ff);
+            color: #000;
+            box-shadow: 0 4px 10px rgba(0, 255, 135, 0.3);
+        }
+
+        /* --- PREMIUM APP GRID --- */
         .app-grid { 
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 0 15px; 
-            margin-top: 20px;
         }
         .app-card { 
-            background-color: #161820; 
-            border-radius: 12px; 
-            padding: 20px; 
-            margin-bottom: 20px; 
-            border: 1px solid #232632; 
-            text-align: center; 
+            background-color: var(--bg-card); 
+            border-radius: 16px; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            border: 1px solid rgba(255,255,255,0.03); 
+            display: flex;
+            align-items: center;
             width: 100%;
-            max-width: 320px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            max-width: 360px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
             box-sizing: border-box;
+            transition: transform 0.2s ease;
+        }
+        .app-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0, 255, 135, 0.2);
         }
         
+        /* --- CARD LEFT: ICON --- */
         .icon-box {
-            width: 85px;
-            height: 85px;
-            border-radius: 22px; 
-            margin: 0 auto 15px;
-            overflow: hidden;
+            width: 75px;
+            height: 75px;
+            border-radius: 18px; 
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 24px;
+            font-weight: 800;
+            font-size: 22px;
             color: #000;
-            background: linear-gradient(135deg, #00e676, #00b0ff); 
-            border: 2px solid #232632;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue)); 
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 255, 135, 0.2);
         }
         
+        /* --- CARD CENTER: DETAILS --- */
+        .app-details {
+            margin-left: 15px;
+            flex-grow: 1;
+            text-align: left;
+        }
         .app-title { 
-            font-size: 18px; 
-            margin: 5px 0; 
-            font-weight: bold; 
+            font-size: 16px; 
+            font-weight: 700; 
+            margin: 0 0 4px 0;
+            color: var(--text-white);
         }
-        .app-ver { 
-            font-size: 13px; 
-            color: #888; 
-            margin-bottom: 15px; 
+        .app-meta {
+            font-size: 12px;
+            color: var(--text-gray);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 6px;
         }
+        .badge-ver {
+            background-color: #242936;
+            color: var(--accent-blue);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .app-stats {
+            font-size: 12px;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .rating { color: #ffb703; font-weight: bold; }
+        
+        /* --- CARD RIGHT: DOWNLOAD BUTTON --- */
         .download-btn { 
-            display: inline-block; 
-            background-color: #00e676; 
-            color: #000; 
-            padding: 12px 30px; 
-            border-radius: 8px; 
-            font-weight: bold; 
+            background: rgba(0, 255, 135, 0.1);
+            color: var(--accent-green); 
+            border: 1px solid rgba(0, 255, 135, 0.3);
+            padding: 10px 16px; 
+            border-radius: 12px; 
+            font-weight: 700; 
             text-decoration: none; 
-            font-size: 15px; 
+            font-size: 13px;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .download-btn:hover {
+            background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
+            color: #000;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(0, 255, 135, 0.3);
         }
 
-        /* 🔥 VIP POP-UP OVERLAY STYLE 🔥 */
-        #vipScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0d0e12;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-        .vip-card {
-            background: linear-gradient(145deg, #161820, #0f1015);
-            border: 2px solid #ffd700;
-            border-radius: 16px;
-            padding: 30px 20px;
-            width: 90%;
-            max-width: 340px;
+        /* --- VIP FOOTER JOIN SYSTEM --- */
+        footer {
+            margin-top: 30px;
+            background-color: #14161d;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+            font-size: 13px;
+            color: var(--text-gray);
+            border-top: 1px solid #1e293b;
         }
-        .vip-badge {
-            background: linear-gradient(135deg, #ffd700, #ffa500);
-            color: #000;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 5px 15px;
-            border-radius: 20px;
+        .join-btn {
             display: inline-block;
-            margin-bottom: 20px;
-        }
-        .vip-title {
-            font-size: 16px;
-            color: #e0e0e0;
-            margin: 5px 0;
-            font-style: italic;
-        }
-        .vip-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffd700;
-            margin-bottom: 25px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-        }
-        .confirm-btn {
-            display: block;
             background-color: #25d366;
             color: white;
-            padding: 14px 20px;
+            text-decoration: none;
+            padding: 10px 20px;
             border-radius: 25px;
             font-weight: bold;
-            text-decoration: none;
-            font-size: 16px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            box-sizing: border-box;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <!-- ⭐ FIRST TIME VIP SCREEN ⭐ -->
-    <div id="vipScreen">
-        <div class="vip-card">
-            <div class="vip-badge">👑 OFFICIAL VIP</div>
-            <div class="vip-title">This Website Created By</div>
-            <div class="vip-name">Ñè5 Hûñtèr</div>
-            <button onclick="redirectToChannel()" class="confirm-btn">✓ Confirm & Join Channel</button>
-        </div>
-    </div>
-
-    <!-- MAIN WEBSITE CONTENT -->
+    <!-- HEADER -->
     <header>
         <div class="logo">⚡ NE5 APP ZONE</div>
+        <div class="subtitle">Premium Android Mod Hub</div>
     </header>
 
+    <!-- SEARCH BAR -->
     <div class="search-section">
-        <input type="text" class="search-box" placeholder="Search apps or games...">
+        <input type="text" id="searchBar" class="search-box" onkeyup="filterApps()" placeholder="Search mods, games, tools...">
     </div>
 
-    <div class="category-container">
-        <button class="cat-btn active">All</button>
-        <button class="cat-btn">Games</button>
-        <button class="cat-btn">Mods</button>
-        <button class="cat-btn">Tools</button>
+    <!-- LITEAPKS STYLE FILTERS -->
+    <div class="categories-container">
+        <button class="cat-btn active" onclick="filterCategory('all', this)">All</button>
+        <button class="cat-btn" onclick="filterCategory('games', this)">Games</button>
+        <button class="cat-btn" onclick="filterCategory('mods', this)">Mods</button>
+        <button class="cat-btn" onclick="filterCategory('tools', this)">Tools</button>
     </div>
 
-    <div class="app-grid">
-        <!-- CARD 1: FREE FIRE -->
-        <div class="app-card">
+    <!-- APP GRID SYSTEM -->
+    <div class="app-grid" id="appGrid">
+        
+        <!-- CARD 1 (GAMES / MODS) -->
+        <div class="app-card" data-category="games mods">
             <div class="icon-box">FF</div>
-            <div class="app-title">Free Fire Mod Menu</div>
-            <div class="app-ver">v1.104.x | Category: Games</div>
-            <a href="#" class="download-btn">Download APK</a>
+            <div class="app-details">
+                <div class="app-title">Free Fire Mod Menu</div>
+                <div class="app-meta">
+                    <span class="badge-ver">v1.104.x</span>
+                    <span>• 75 MB</span>
+                </div>
+                <div class="app-stats">
+                    <span class="rating">★ 4.8</span>
+                    <span style="color: var(--text-gray);">| 50K+ Dls</span>
+                </div>
+            </div>
+            <a href="#" class="download-btn">GET</a>
         </div>
 
-        <!-- CARD 2: CAPCUT PRO -->
-        <div class="app-card">
+        <!-- CARD 2 (TOOLS) -->
+        <div class="app-card" data-category="tools">
             <div class="icon-box">CC</div>
-            <div class="app-title">Capcut pro</div>
-            <div class="app-ver">v1.0.0 | Category: Tools</div>
-            <a href="https://play.google.com/store/apps/details?id=com.lemon.lvoverseas" class="download-btn">Download APK</a>
+            <div class="app-details">
+                <div class="app-title">CapCut Pro Premium</div>
+                <div class="app-meta">
+                    <span class="badge-ver">v11.2.0</span>
+                    <span>• 120 MB</span>
+                </div>
+                <div class="app-stats">
+                    <span class="rating">★ 4.6</span>
+                    <span style="color: var(--text-gray);">| 12K+ Dls</span>
+                </div>
+            </div>
+            <a href="https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19" class="download-btn">GET</a>
         </div>
+
     </div>
 
-    <!-- 🧠 AUTOMATION SCRIPT -->
+    <!-- PREMIUM FOOTER -->
+    <footer>
+        <div>© 2026 NE5 APP ZONE. Made for Gamers.</div>
+        <a href="https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19" target="_blank" class="join-btn">💬 Join Official WhatsApp Channel</a>
+    </footer>
+
+    <!-- --- SHANDAR AUTOMATIC FILTER SYSTEM SCRIPT --- -->
     <script>
-        // Check karna ke user ne pehle click kiya hai ya nahi
-        if (localStorage.getItem("vipConfirmed") === "true") {
-            // Agar pehle click ho chuka hai, to VIP screen ko mita do direct web kholo
-            document.getElementById("vipScreen").style.display = "none";
+        // Search Filter System
+        function filterApps() {
+            let input = document.getElementById('searchBar').value.toLowerCase();
+            let cards = document.getElementsByClassName('app-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].querySelector('.app-title').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
         }
 
-        function redirectToChannel() {
-            // Browser memory me save karo ke click ho gaya hai
-            localStorage.setItem("vipConfirmed", "true");
-            
-            // VIP screen ko fauran chupao taake back aane par website khuli mile
-            document.getElementById("vipScreen").style.display = "none";
-            
-            // User ko WhatsApp channel par bhej do
-            window.location.href = "https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19";
+        // Category Filter System
+        function filterCategory(category, button) {
+            // Active button color change
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            let cards = document.getElementsByClassName('app-card');
+            for (let i = 0; i < cards.length; i++) {
+                let cardCats = cards[i].getAttribute('data-category');
+                if (category === 'all' || cardCats.includes(category)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
         }
     </script>
 
 </body>
-  </html>
+</html>
