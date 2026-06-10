@@ -3,579 +3,490 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ NEO-BLUE MOD MATRIX PRO | PRESTIGE EDIT</title>
-    
-    <!-- System Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+    <title>FF EMOTE SENDER - VIP MAGICAL GENERATOR</title>
     <style>
-        :root {
-            --matrix-deep: #02040a;
-            --cyber-dark: #050a17;
-            --panel-bg: rgba(6, 15, 34, 0.9);
-            --panel-border: rgba(0, 242, 254, 0.25);
-            --electric-blue: #00f2fe;
-            --void-glow: #4facfe;
-            --acid-magenta: #ff2a6d;
-            --matrix-green: #05f283;
-            --text-high: #f0f6fc;
-            --text-mid: #8b9bb4;
-            --text-dark: #48546a;
-            --font-tech: 'Rajdhani', sans-serif;
-            --font-mono: 'Share Tech Mono', monospace;
-            --font-logo: 'Orbitron', sans-serif;
-        }
-
+        /* VIP Cyberpunk/Gaming Theme */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--matrix-deep);
-            color: var(--text-high);
-            font-family: var(--font-tech);
+            background: radial-gradient(circle, #120224 0%, #030008 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            width: 100%;
-            overflow-x: hidden;
-        }
-
-        /* Ambient Grid (Crash Fix: No heavy effects) */
-        .cyber-ambient-grid {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0, 242, 254, 0.01) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 242, 254, 0.01) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        header, section, div, aside, footer {
-            position: relative;
-            z-index: 5;
-        }
-
-        /* 1. NAVIGATION BAR */
-        .glass-mainframe-nav {
-            background: #040914;
-            padding: 15px 4%;
-            border-bottom: 1px solid var(--panel-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .brand-node {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .brand-terminal-icon {
-            font-size: 22px;
-            color: var(--electric-blue);
-        }
-
-        .brand-moniker {
-            font-family: var(--font-logo);
-            font-weight: 900;
-            font-size: 18px;
-            color: var(--text-high);
-        }
-
-        .brand-moniker span { color: var(--electric-blue); }
-        
-        .brand-moniker .version-badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            background: var(--acid-magenta);
-            padding: 1px 5px;
-            border-radius: 3px;
-            margin-left: 5px;
-        }
-
-        .center-matrix-menu {
-            display: flex;
-            list-style: none;
-            gap: 10px;
-        }
-
-        .center-matrix-menu li a {
-            color: var(--text-mid);
-            text-decoration: none;
-            font-size: 13px;
-            text-transform: uppercase;
-            padding: 6px 12px;
-            font-weight: bold;
-        }
-
-        .center-matrix-menu li a.active-node {
-            color: var(--matrix-deep);
-            background: var(--electric-blue);
-            border-radius: 4px;
-        }
-
-        .server-status-indicator {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--matrix-green);
-        }
-
-        /* 2. HERO HUD SECTIONS */
-        .mainframe-hud-hero {
-            padding: 30px 4%;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 30px;
-            max-width: 1440px;
-            margin: 0 auto;
-        }
-
-        .hud-left-data-block h1 {
-            font-family: var(--font-logo);
-            font-size: 2.2rem;
-            line-height: 1.3;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .hud-left-data-block h1 span {
-            color: var(--electric-blue);
-        }
-
-        .hud-left-data-block p {
-            color: var(--text-mid);
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-
-        .live-quantum-counters {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .quantum-counter-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            padding: 12px;
-            border-radius: 8px;
-            border-left: 3px solid var(--electric-blue);
-        }
-
-        .q-number {
-            font-family: var(--font-mono);
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .q-label {
-            font-size: 10px;
-            color: var(--text-dark);
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        /* TERMINAL LOG STREAM */
-        .hud-right-control-panel {
-            background: #040812;
-            border: 1px solid var(--panel-border);
-            border-radius: 12px;
             padding: 20px;
         }
 
-        .panel-header-spec {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            margin-bottom: 10px;
-            color: var(--text-mid);
-        }
-
-        .terminal-stream-logger {
-            background: #010307;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 6px;
-            padding: 12px;
-            height: 130px;
-            overflow-y: auto;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--text-mid);
-            margin-bottom: 15px;
-        }
-
-        .hud-integrated-search-box input {
+        .container {
+            background: rgba(10, 3, 22, 0.9);
+            border: 2px solid #00ffcc;
+            box-shadow: 0 0 30px #00ffcc, inset 0 0 20px rgba(0, 255, 204, 0.2);
+            border-radius: 20px;
             width: 100%;
-            background: #010307;
-            border: 1px solid var(--panel-border);
-            padding: 12px;
-            color: #fff;
-            border-radius: 6px;
-        }
-
-        /* 3. LIVE TICKER RUNNER */
-        .live-matrix-ticker {
-            background: rgba(0, 242, 254, 0.05);
-            padding: 10px 0;
-            border-top: 1px solid rgba(0, 242, 254, 0.1);
-            border-bottom: 1px solid rgba(0, 242, 254, 0.1);
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .ticker-scroller-node {
-            display: inline-block;
-            animation: scrollerEngine 20s linear infinite;
-        }
-
-        .ticker-data-segment {
-            display: inline-block;
-            margin-right: 40px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-        }
-
-        @keyframes scrollerEngine {
-            0% { transform: translate3d(0,0,0); }
-            100% { transform: translate3d(-50%,0,0); }
-        }
-
-        /* 4. MAIN LAYOUT DECK */
-        .mainframe-content-wrapper {
-            max-width: 1440px;
-            margin: 30px auto;
-            padding: 0 4%;
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 20px;
-        }
-
-        .sidebar-section-block {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            border-radius: 12px;
-            padding: 15px;
-        }
-
-        .sidebar-title-label {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--text-dark);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .sidebar-action-menu-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .sidebar-menu-btn {
-            width: 100%;
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-mid);
-            padding: 10px;
-            border-radius: 6px;
-            text-align: left;
-            font-size: 13px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .sidebar-menu-btn.active-pill {
-            background: rgba(0, 242, 254, 0.1);
-            border: 1px solid var(--electric-blue);
-            color: var(--electric-blue);
-        }
-
-        /* DYNAMIC CARDS GRID */
-        .matrix-ultimate-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .cyber-matrix-card {
-            background: #050a17;
-            border: 1px solid var(--panel-border);
-            border-radius: 12px;
-            padding: 15px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-floating-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            font-family: var(--font-mono);
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 3px;
-        }
-
-        .card-floating-badge.status-vip { background: rgba(255, 179, 0, 0.1); border: 1px solid #ffb300; color: #ffb300; }
-        .card-floating-badge.status-critical { background: rgba(255, 42, 109, 0.1); border: 1px solid var(--acid-magenta); color: var(--acid-magenta); }
-
-        .card-upper-meta-cluster {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .card-avatar-container img {
-            width: 45px;
-            height: 45px;
-            border-radius: 6px;
-            border: 1px solid var(--electric-blue);
-        }
-
-        .card-title-stack h3 { font-size: 14px; color: #fff; }
-        .card-category-tag { font-family: var(--font-mono); font-size: 10px; color: var(--text-dark); }
-
-        .card-spec-grid-metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            background: rgba(0,0,0,0.2);
-            padding: 8px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            font-size: 11px;
-        }
-
-        .m-spec-val { color: var(--electric-blue); font-family: var(--font-mono); }
-
-        .card-features-injection-list {
-            list-style: none;
-            font-size: 12px;
-            margin-bottom: 15px;
-            color: var(--text-mid);
-        }
-
-        .card-features-injection-list li i { color: var(--matrix-green); margin-right: 5px; }
-
-        .card-primary-deploy-btn {
-            background: linear-gradient(90deg, var(--electric-blue), var(--void-glow));
-            color: #000;
-            border: none;
-            border-radius: 6px;
-            padding: 10px;
+            max-width: 650px;
+            padding: 40px 30px;
             text-align: center;
-            text-decoration: none;
-            font-family: var(--font-mono);
-            font-weight: bold;
-            font-size: 12px;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* VIP Top Border Glow Effect */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff007c, #00ffcc, #ff007c);
+            background-size: 200% auto;
+            animation: barGlow 3s linear infinite;
+        }
+
+        @keyframes barGlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 15px #ff007c, 0 0 30px #ff007c;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            margin-top: auto;
+            letter-spacing: 2px;
+            font-weight: 900;
         }
 
-        /* 5. REQUEST PIPELINE FORM */
-        .mainframe-form-section {
-            max-width: 1440px;
-            margin: 30px auto;
-            padding: 0 4%;
+        .vip-badge {
+            background: linear-gradient(45deg, #ffd700, #ffae00);
+            color: #000;
+            font-weight: bold;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            display: inline-block;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .mainframe-form-container {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            border-radius: 12px;
-            padding: 20px;
+        .instruction {
+            color: #b3b3b3;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Premium Emote Grid */
+        .emote-grid {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 480px) {
+            .emote-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .emote-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 0, 124, 0.2);
+            border-radius: 15px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .emote-card:hover {
+            transform: translateY(-8px);
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.03);
+        }
+
+        .emote-card.selected {
+            border-color: #00ffcc;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.6);
+            background: rgba(0, 255, 204, 0.08);
+        }
+
+        /* Emote Real Images Styling */
+        .emote-img {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
+            transition: 0.3s;
+        }
+
+        .emote-card:hover .emote-img {
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+            transform: scale(1.05);
+        }
+
+        .emote-card.selected .emote-img {
+            filter: drop-shadow(0 0 18px rgba(0, 255, 204, 0.9));
+        }
+
+        .emote-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Form Inputs */
+        .input-group {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
             gap: 20px;
         }
 
-        .form-right-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .span-full { grid-column: 1 / -1; }
-        
-        .form-input-field-node label { font-family: var(--font-mono); font-size: 11px; display: block; margin-bottom: 4px;}
-        .form-input-field-node input, .form-input-field-node select, .form-input-field-node textarea {
+        input[type="number"] {
             width: 100%;
-            background: #010307;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 10px;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #ff007c;
+            border-radius: 10px;
             color: #fff;
-            border-radius: 4px;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+            letter-spacing: 2px;
         }
 
-        .submit-terminal-form-btn {
-            grid-column: 1 / -1;
-            background: linear-gradient(90deg, var(--electric-blue), var(--void-glow));
-            border: none; padding: 12px; border-radius: 4px;
-            font-family: var(--font-mono); font-weight: bold; cursor: pointer;
+        input[type="number"]:focus {
+            border-color: #00ffcc;
+            box-shadow: 0 0 15px #00ffcc;
         }
 
-        footer { text-align: center; padding: 30px; color: var(--text-dark); font-size: 12px; }
+        /* VIP Injector Button */
+        .btn-send {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #ff007c, #9900ff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            box-shadow: 0 6px 20px rgba(255, 0, 124, 0.4);
+        }
 
-        @media (max-width: 900px) {
-            .mainframe-hud-hero, .mainframe-content-wrapper, .mainframe-form-container { grid-template-columns: 1fr; }
-            .center-matrix-menu { display: none; }
+        .btn-send:hover {
+            background: linear-gradient(45deg, #9900ff, #ff007c);
+            box-shadow: 0 0 30px #ff007c;
+            transform: scale(1.02);
+        }
+
+        /* Magical Advanced Progress Section */
+        .progress-container {
+            display: none;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(0, 255, 204, 0.2);
+        }
+
+        .progress-bar-bg {
+            background: #222;
+            width: 100%;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00ffcc, #ff007c);
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px #00ffcc;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: #00ffcc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Live Activity Footer Widget */
+        .live-activity {
+            margin-top: 35px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .live-status {
+            color: #00ffcc;
+            animation: pulse 1s infinite;
+        }
+
+        /* Popup Notification Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 0, 8, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: #0b0214;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 40px #ffd700;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+            transform: scale(0.7);
+            transition: 0.4s ease;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .success-badge {
+            font-size: 4.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-text {
+            font-size: 1.15rem;
+            color: #f0f0f0;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .btn-close {
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            color: #000;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-close:hover {
+            box-shadow: 0 0 25px #ffd700;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
         }
     </style>
 </head>
 <body>
 
-    <div class="cyber-ambient-grid"></div>
+    <div class="container">
+        <h1>FF EMOTE SENDER</h1>
+        <div class="vip-badge">✨ MAGICAL VIP INJECTOR V4.2 ✨</div>
+        <p class="instruction">Select your premium emote and input your Player UID below!</p>
 
-    <!-- NAVBAR -->
-    <header class="glass-mainframe-nav">
-        <a href="#" class="brand-node">
-            <i class="fa-solid fa-bolt brand-terminal-icon"></i>
-            <div class="brand-moniker">NEO<span>MATRIX<span class="version-badge">v4.0</span></span></div>
-        </a>
-        <ul class="center-matrix-menu">
-            <li><a href="#" class="active-node">Database</a></li>
-            <li><a href="#gridSection">Game Engine</a></li>
-            <li><a href="#gridSection">Apps Studio</a></li>
-        </ul>
-        <div class="server-status-indicator"><i class="fa-solid fa-circle"></i> CORE ACTIVE</div>
-    </header>
-
-    <!-- HERO PANEL -->
-    <section class="mainframe-hud-hero">
-        <div class="hud-left-data-block">
-            <h1>Execute Premium <span>VIP Package Injections</span></h1>
-            <p>Access the core terminal network layer of decrypted configurations. Bypass blocks and sync global files instantly.</p>
+        <!-- 5 VIP Emotes Grid with 100% Fixed Real Image URLs -->
+        <div class="emote-grid">
+            <!-- 1. LOL Emote -->
+            <div class="emote-card" onclick="selectEmote(this, 'LOL Emote')">
+                <img src="https://static.wikia.nocookie.net/garena-free-fire/images/e/e0/Lol_Emote.png" alt="LOL Emote" class="emote-img">
+                <span class="emote-name">LOL Emote</span>
+            </div>
             
-            <div class="live-quantum-counters">
-                <div class="quantum-counter-card"><div class="q-number">4.2M</div><div class="q-label">Total Syncs</div></div>
-                <div class="quantum-counter-card"><div class="q-number">99.9%</div><div class="q-label">Stealth Rate</div></div>
-                <div class="quantum-counter-card"><div class="q-number">18,521</div><div class="q-label">Live Nodes</div></div>
+            <!-- 2. Throne Emote -->
+            <div class="emote-card" onclick="selectEmote(this, 'FFWC Throne Emote')">
+                <img src="https://static.wikia.nocookie.net/garena-free-fire/images/0/07/FFWC_Throne_Emote.png" alt="Throne Emote" class="emote-img">
+                <span class="emote-name">Throne Emote</span>
+            </div>
+            
+            <!-- 3. Flower Emote -->
+            <div class="emote-card" onclick="selectEmote(this, 'Flowers of Love')">
+                <img src="https://static.wikia.nocookie.net/garena-free-fire/images/4/4c/Flowers_of_Love_Emote.png" alt="Flower Emote" class="emote-img">
+                <span class="emote-name">Flower Emote</span>
+            </div>
+            
+            <!-- 4. Push-Up Emote -->
+            <div class="emote-card" onclick="selectEmote(this, 'Push-up Emote')">
+                <img src="https://static.wikia.nocookie.net/garena-free-fire/images/a/a2/Push-up_Emote.png" alt="Push-Up Emote" class="emote-img">
+                <span class="emote-name">Push-Up Emote</span>
+            </div>
+            
+            <!-- 5. Booyah! Dance (Stretched beautifully at the bottom) -->
+            <div class="emote-card" onclick="selectEmote(this, 'Booyah! Dance')" style="grid-column: span 2;">
+                <img src="https://static.wikia.nocookie.net/garena-free-fire/images/e/ea/Booyah%21_Emote.png" alt="Booyah Dance" class="emote-img" style="width: 120px; height: 120px;">
+                <span class="emote-name">Booyah! Dance</span>
             </div>
         </div>
 
-        <div class="hud-right-control-panel">
-            <div class="panel-header-spec"><span>LIVE TERMINAL LOGS</span><span>root@neomatrix:~#</span></div>
-            <div class="terminal-stream-logger" id="logStreamTerminal"></div>
-            <div class="hud-integrated-search-box">
-                <input type="text" id="quantumSearchField" placeholder="Scan database for modules..." onkeyup="executeQuantumSearch()">
+        <!-- Inputs and Magical Processing Section -->
+        <div class="input-group">
+            <input type="number" id="playerUid" placeholder="ENTER PLAYER UID (e.g. 284719482)" required>
+            <button class="btn-send" onclick="startInjection()">INJECT EMOTE TO ACCOUNT</button>
+            
+            <!-- Magical Progress Section -->
+            <div class="progress-container" id="progressArea">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="barFill"></div>
+                </div>
+                <div class="progress-text" id="statusText">Connecting to Free Fire Server...</div>
             </div>
         </div>
-    </section>
 
-    <!-- TICKER -->
-    <div class="live-matrix-ticker">
-        <div class="ticker-scroller-node">
-            <div class="ticker-data-segment">⚡ FREE FIRE INJECTOR LAYER <span style="color:var(--matrix-green);">[v1.98 STABLE]</span></div>
-            <div class="ticker-data-segment">🛠️ ANDROID RESTRICTION OVERRIDE SYSTEM COMPILED</div>
-            <div class="ticker-data-segment">🎬 CAPCUT PRO VELOCITY ENGINE PRESET SYNCHRONIZED</div>
+        <!-- Fake Live Activity Widget -->
+        <div class="live-activity">
+            <span class="live-status">● Live:</span> User ID 583***91 successfully injected 'Throne Emote' 45s ago.
         </div>
     </div>
 
-    <!-- MAIN INTERFACE DECK -->
-    <div class="mainframe-content-wrapper" id="gridSection">
-        <aside class="matrix-sidebar-controls">
-            <div class="sidebar-section-block">
-                <span class="sidebar-title-label">Repositories</span>
-                <ul class="sidebar-action-menu-list">
-                    <li><button class="sidebar-menu-btn active-pill" data-target="all" onclick="filterMatrixCategory(this)"><span>All Repos</span></button></li>
-                    <li><button class="sidebar-menu-btn" data-target="gaming" onclick="filterMatrixCategory(this)"><span>Tactical Games</span></button></li>
-                    <li><button class="sidebar-menu-btn" data-target="injectors" onclick="filterMatrixCategory(this)"><span>Injectors</span></button></li>
-                    <li><button class="sidebar-menu-btn" data-target="premium" onclick="filterMatrixCategory(this)"><span>Unlocked Apps</span></button></li>
-                </ul>
+    <!-- VIP Success Popup Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-box">
+            <div class="success-badge">👑</div>
+            <div class="modal-title">INJECTION SUCCESSFUL</div>
+            <div class="modal-text" id="successMessage">
+                <!-- Data will inject here dynamically -->
             </div>
-        </aside>
+            <button class="btn-close" onclick="closeModal()">CONFIRM TRANSFER</button>
+        </div>
+    </div>
 
-        <section class="matrix-grid-display-deck">
-            <div class="matrix-ultimate-grid" id="mainframeGridSystem">
-                <!-- CARD 1 -->
-                <div class="cyber-matrix-card" data-cat="injectors">
-                    <span class="card-floating-badge status-vip">Elite Core</span>
-                    <div class="card-upper-meta-cluster">
-                        <div class="card-avatar-container"><img src="https://placehold.co/80x80/050a17/00f2fe?text=FF" alt="Icon"></div>
-                        <div class="card-title-stack"><h3>Free Fire VIP Injector</h3><span class="card-category-tag">INJECTOR LUA</span></div>
-                    </div>
-                    <div class="card-spec-grid-metrics">
-                        <div>Size:<br><span class="m-spec-val">42.5 MB</span></div><div>Version:<br><span class="m-spec-val">v1.98.5</span></div>
-                    </div>
-                    <ul class="card-features-injection-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Auto Headshot Vector</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Gloo Wall Locator Map</li>
-                    </ul>
-                    <a href="#" class="card-primary-deploy-btn" onclick="alert('Deploying Free Fire Module...')">DEPLOY CORE ⚡</a>
-                </div>
+    <script>
+        let selectedEmoteName = "";
 
-                <!-- CARD 2 -->
-                <div class="cyber-matrix-card" data-cat="gaming">
-                    <span class="card-floating-badge status-critical">HEX MOD</span>
-                    <div class="card-upper-meta-cluster">
-                        <div class="card-avatar-container"><img src="https://placehold.co/80x80/050a17/00f2fe?text=BGMI" alt="Icon"></div>
-                        <div class="card-title-stack"><h3>Battlegrounds Pro</h3><span class="card-category-tag">OBB SCRIPT</span></div>
-                    </div>
-                    <div class="card-spec-grid-metrics">
-                        <div>Size:<br><span class="m-spec-val">940 MB</span></div><div>Version:<br><span class="m-spec-val">v3.2.0</span></div>
-                    </div>
-                    <ul class="card-features-injection-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Magic Bullet Inversion</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 90 FPS Constant Smooth</li>
-                    </ul>
-                    <a href="#" class="card-primary-deploy-btn" onclick="alert('Deploying BGMI Module...')">DEPLOY CORE ⚡</a>
-                </div>
+        // Selection Script
+        function selectEmote(element, emoteName) {
+            const allCards = document.querySelectorAll('.emote-card');
+            allCards.forEach(card => card.classList.remove('selected'));
+            
+            element.classList.add('selected');
+            selectedEmoteName = emoteName;
+        }
 
-                <!-- CARD 3 -->
-                <div class="cyber-matrix-card" data-cat="premium">
-                    <span class="card-floating-badge status-vip">UNLOCKED</span>
-                    <div class="card-upper-meta-cluster">
-                        <div class="card-avatar-container"><img src="https://placehold.co/80x80/050a17/00f2fe?text=CC" alt="Icon"></div>
-                        <div class="card-title-stack"><h3>CapCut Premium</h3><span class="card-category-tag">STUDIO PRO</span></div>
-                    </div>
-                    <div class="card-spec-grid-metrics">
-                        <div>Size:<br><span class="m-spec-val">192 MB</span></div><div>Version:<br><span class="m-spec-val">v11.5.0</span></div>
-                    </div>
-                    <ul class="card-features-injection-list">
-                        <li><i class="fa-solid fa-circle-check"></i> All Premium XML Templates</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 4K No Watermark Export</li>
-                    </ul>
-                    <a href="#" class="card-primary-deploy-btn"
-                        </div>
-                        <!-- CARD 3 -->
-                        <div class="cyber-matrix-card" data-cat="injectors">
+        // Magical Process Script
+        function startInjection() {
+            const uidInput = document.getElementById('playerUid').value.trim();
+            const progressArea = document.getElementById('progressArea');
+            const barFill = document.getElementById('barFill');
+            const statusText = document.getElementById('statusText');
 
-<span class="card-floating-badge status-vip">
-Elite Core
-</span>
+            if (!selectedEmoteName) {
+                alert("ERROR: Please select a VIP Emote first!");
+                return;
+            }
+            if (!uidInput || uidInput.length < 5) {
+                alert("ERROR: Please enter a valid Free Fire Player UID!");
+                return;
+            }
 
-<div class="card-upper-meta-cluster">
+            // Show Magic Progress Section
+            progressArea.style.display = "block";
+            barFill.style.width = "0%";
+            
+            let width = 0;
+            const stages = [
+                { limit: 20, text: "Bypassing Garena Anti-Cheat security..." },
+                { limit: 50, text: "Locating player database stream..." },
+                { limit: 80, text: "Injecting data packets into the server..." },
+                { limit: 100, text: "Finalizing secure encryption code..." }
+            ];
 
-<div class="card-avatar-container">
-<img src="https://placehold.co/80x80/050a17/00f2fe?text=FF">
-</div>
+            let stageIndex = 0;
+            
+            // Magical Loading Interval
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    
+                    // Delay for modal popup trigger
+                    setTimeout(() => {
+                        progressArea.style.display = "none";
+                        
+                        // Fake English Success Message Injection
+                        const msgBox = document.getElementById('successMessage');
+                        msgBox.innerHTML = `VIP Magical System has successfully transferred <strong>${selectedEmoteName}</strong> to Player UID: <strong>${uidInput}</strong>.<br><br><span style='color: #ffd700; font-weight: bold;'>Status: Processing In-Game Mail. Please check your account within 24 hours!</span>`;
+                        
+                        document.getElementById('successModal').classList.add('active');
+                    }, 500);
+                } else {
+                    width++;
+                    barFill.style.width = width + "%";
+                    
+                    if(stageIndex < stages.length && width >= stages[stageIndex].limit) {
+                        statusText.innerText = stages[stageIndex].text;
+                        stageIndex++;
+                    }
+                }
+            }, 40); // Fast loading for excellent UX
+        }
 
-<div class="card-title-stack">
-<h3>Free Fire VIP Injector</h3>
-<span class="card-category-tag">
-INJECTOR LUA
-</span>
-</div>
-
-</div>
-
-<div class="card-spec-grid-metrics">
-<div>Size:<br><span class="m-spec-val">42.5 MB</span></div>
-<div>Version:<br><span class="m-spec-val">v1.98.5</span></div>
-</div>
-
-<ul class="card-features-injection-list">
-<li>Auto Headshot Vector</li>
-<li>Gloo Wall Locator Map</li>
-</ul>
-
-<a href="download-freefire.html"
-class="card-primary-deploy-btn">
-DOWNLOAD NOW ⚡
-</a>
-
-                        </div>
+        // Close Action
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+            document.getElementById('playerUid').value = "";
+            const allCards = document.querySelectorAll('.emote-card');
+            allCards.forEach(card => card.classList.remove('selected'));
+            selectedEmoteName = "";
+        }
+    </script>
+</body>
+</html>
