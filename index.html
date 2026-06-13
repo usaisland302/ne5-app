@@ -359,6 +359,7 @@
             padding: 25px;
             text-align: center;
             margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .status-txt {
@@ -413,6 +414,90 @@
             font-weight: 800;
             color: #00b894;
             margin: 15px 0;
+        }
+
+        /* --- NEW DYNAMIC PROMOTED/ANIMATION AD BOX SYSTEM --- */
+        .timer-bottom-content-box {
+            background-color: var(--card-bg);
+            border: 1px dashed var(--search-border);
+            border-radius: 24px;
+            padding: 20px;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .box-header-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ff5858;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ad-app-strip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.04);
+            padding: 12px;
+            border-radius: 16px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .ad-app-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .ad-app-details {
+            flex: 1;
+        }
+
+        .ad-app-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .ad-app-tagline {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .ad-install-btn {
+            background: #1f4068;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Server log item animation placeholder */
+        .live-log-item {
+            font-size: 13px;
+            color: #2af598;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-log-item i {
+            animation: spinLog 1s linear infinite;
+        }
+
+        @keyframes spinLog {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -492,6 +577,26 @@
                 Verify Next <i class="fas fa-chevron-right"></i>
             </button>
         </div>
+
+        <div class="timer-bottom-content-box">
+            <div class="box-header-title"><i class="fas fa-fire"></i> Sponsored Hot Unlocks</div>
+            <div class="ad-app-strip">
+                <img src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=150" class="ad-app-img">
+                <div class="ad-app-details">
+                    <div class="ad-app-name">Spotify Music Mod</div>
+                    <div class="ad-app-tagline">Unlimited Skips, No Ad Interruptions</div>
+                </div>
+                <button class="ad-install-btn" onclick="switchToHomeView()">Get</button>
+            </div>
+            <div class="ad-app-strip">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150" class="ad-app-img">
+                <div class="ad-app-details">
+                    <div class="ad-app-name">CapCut Pro Tool</div>
+                    <div class="ad-app-tagline">VIP Cinematic Filters Active</div>
+                </div>
+                <button class="ad-install-btn" onclick="switchToHomeView()">Get</button>
+            </div>
+        </div>
     </div>
 
 
@@ -509,6 +614,13 @@
             <button class="btn-action-trigger" id="nextBtnStep2" onclick="navigateToStep3View()">
                 Proceed Link <i class="fas fa-external-link-alt"></i>
             </button>
+        </div>
+
+        <div class="timer-bottom-content-box">
+            <div class="box-header-title" style="color:#2af598;"><i class="fas fa-terminal"></i> Secure Core Live Console</div>
+            <div class="live-log-item"><i class="fas fa-spinner"></i> <span>Handshaking secure node hash: 0x8F92...</span></div>
+            <div class="live-log-item"><i class="fas fa-spinner"></i> <span>Bypassing payload checking algorithms...</span></div>
+            <div class="live-log-item" style="color:var(--text-muted);"><i class="fas fa-check-circle" style="animation:none; color:#2af598;"></i> <span>SSL Key Generation Completed successfully.</span></div>
         </div>
     </div>
 
@@ -530,6 +642,17 @@
             <button class="btn-action-trigger" id="finalDownloadBtn" onclick="executePlayStoreRedirection()" style="background: linear-gradient(135deg, #00b894 0%, #2ecc71 100%);">
                 <i class="fas fa-cloud-download-alt"></i> Download Now
             </button>
+        </div>
+
+        <div class="timer-bottom-content-box">
+            <div class="box-header-title" style="color:#00b894;"><i class="fas fa-user-shield"></i> Play Protect Handshake</div>
+            <div class="ad-app-strip" style="border: 1px solid #00b894; background: rgba(0,184,148,0.05);">
+                <i class="fas fa-shield-virus" style="font-size: 28px; color: #00b894; margin: 0 10px;"></i>
+                <div class="ad-app-details">
+                    <div class="ad-app-name" style="color:#00b894;">100% Virus Free Scanner</div>
+                    <div class="ad-app-tagline">Fully certified package. Final link redirects straight to official Google Play Store app server layers.</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -557,10 +680,19 @@
         let selectedAppObject = null;
         let runningGlobalTimerReference = null;
         let counterIntervalTimerReference = null;
+        let isAppInternalPageActive = false;
 
         // --- 2. INITIALIZATION ROUTINE ENGINE ---
         window.addEventListener('DOMContentLoaded', () => {
             renderAppsToDOMInterface(globalAppsDatabase);
+            
+            // INTEL BACK BUTTON INTERACTION FIXER
+            window.history.replaceState({page: 'home'}, 'Home', '');
+            window.addEventListener('popstate', function(event) {
+                if (isAppInternalPageActive) {
+                    switchToHomeView();
+                }
+            });
         });
 
         function renderAppsToDOMInterface(dataArray) {
@@ -599,6 +731,7 @@
 
         function switchToHomeView() {
             clearAllTimerStates();
+            isAppInternalPageActive = false;
             document.querySelectorAll('.app-view-panel').forEach(view => view.style.display = "none");
             document.getElementById('home-view').style.display = "block";
             window.scrollTo(0,0);
@@ -608,6 +741,10 @@
         function initiateDownloadSequence(appId) {
             selectedAppObject = globalAppsDatabase.find(x => x.id === appId);
             if(!selectedAppObject) return;
+
+            // Register push state inside browser to trick the hardware back button
+            isAppInternalPageActive = true;
+            window.history.pushState({page: 'internal'}, 'Details', '#view');
 
             document.getElementById('st1-title').innerText = selectedAppObject.name;
             document.getElementById('st1-icon').src = selectedAppObject.icon;
