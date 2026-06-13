@@ -374,6 +374,8 @@
             gap: 15px;
             border: 1px solid var(--border-color);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .app-main-info {
@@ -382,19 +384,60 @@
             align-items: center;
         }
 
-        .app-icon {
+        /* --- MAGICAL FIRE CONTAINER (REPLACING IMAGE ICON) --- */
+        .magical-fire-container {
             width: 70px;
             height: 70px;
+            background: #050b14;
             border-radius: 18px;
-            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px solid #ff5858;
+            box-shadow: 0 0 15px rgba(255, 88, 88, 0.4);
+            animation: firePulse 1.5s ease-in-out infinite alternate;
+        }
+
+        .magical-fire-container i {
+            font-size: 32px;
+            color: #ff761b;
+            text-shadow: 0 0 10px #ff3300, 0 0 20px #ff6600;
+            animation: flickeringFire 0.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes firePulse {
+            0% { border-color: #ff3300; box-shadow: 0 0 10px rgba(255, 51, 0, 0.5); }
+            100% { border-color: #ffaa00; box-shadow: 0 0 20px rgba(255, 170, 0, 0.8); }
+        }
+
+        @keyframes flickeringFire {
+            0% { transform: scale(0.9) rotate(-2deg); opacity: 0.8; }
+            100% { transform: scale(1.1) rotate(3deg); opacity: 1; filter: drop-shadow(0 -5px 5px #ff3300); }
         }
 
         .app-details { flex: 1; }
 
-        .app-name {
+        /* --- MAGICAL WAVING TEXT --- */
+        .magical-wave-text {
+            display: inline-flex;
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 4px;
+            flex-wrap: wrap;
+        }
+
+        .magical-wave-text span {
+            display: inline-block;
+            animation: magicalLetterWave 2s ease-in-out infinite;
+            animation-delay: calc(0.1s * var(--i));
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(0, 184, 148, 0.3);
+        }
+
+        @keyframes magicalLetterWave {
+            0%, 100% { transform: translateY(0); color: #ffffff; }
+            50% { transform: translateY(-6px); color: #00ffc4; text-shadow: 0 0 10px #00ffc4; }
         }
 
         .app-rating {
@@ -474,11 +517,23 @@
             margin-bottom: 20px;
         }
 
-        .panel-icon {
+        .panel-icon-placeholder {
             width: 90px;
             height: 90px;
             border-radius: 24px;
-            margin-bottom: 15px;
+            margin: 0 auto 15px auto;
+            background: #050b14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ff5858;
+            box-shadow: 0 0 20px rgba(255, 88, 88, 0.6);
+        }
+
+        .panel-icon-placeholder i {
+            font-size: 45px;
+            color: #ff761b;
+            animation: flickeringFire 0.5s infinite alternate;
         }
 
         .panel-title {
@@ -618,17 +673,6 @@
             margin-bottom: 10px;
             border: 1px solid var(--border-color);
         }
-
-        .ad-app-img {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-
-        .ad-app-details { flex: 1; }
-        .ad-app-name { font-size: 14px; font-weight: bold; }
-        .ad-app-tagline { font-size: 12px; color: var(--text-muted); }
 
         .ad-install-btn {
             background: #1f4068;
@@ -782,7 +826,7 @@
         <div class="no-results" id="noResultsText">No packages found match parameters.</div>
 
         <div class="app-list" id="appsDynamicRenderContainer">
-            <!-- Apps list loaded dynamically from script below -->
+            <!-- Apps list loaded dynamically with Magical Fire Styles -->
         </div>
     </div>
 
@@ -792,7 +836,9 @@
         <button class="back-btn" onclick="switchToHomeView()"><i class="fas fa-arrow-left"></i> Cancel</button>
         
         <div class="panel-card">
-            <img id="st1-icon" src="" class="panel-icon">
+            <div class="panel-icon-placeholder">
+                <i class="fas fa-fire"></i>
+            </div>
             <div id="st1-title" class="panel-title">App Title</div>
             <span class="vip-tag">SECURE FILE ACCESS ROUTE LOADED</span>
         </div>
@@ -818,7 +864,7 @@
         <div class="timer-bottom-content-box">
             <div class="box-header-title"><i class="fas fa-fire"></i> Sponsored Hot Unlocks</div>
             <div class="ad-app-strip">
-                <img src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=150" class="ad-app-img">
+                <div class="magical-fire-container" style="width:45px; height:45px;"><i class="fas fa-fire" style="font-size:20px;"></i></div>
                 <div class="ad-app-details">
                     <div class="ad-app-name">Spotify Music Pro</div>
                     <div class="ad-app-tagline">Unlimited Skips, Audio Tracks Premium</div>
@@ -857,7 +903,9 @@
     <!-- ================= VIEW 4: STEP 3 FINAL FILE LINE (5 SECONDS) ================= -->
     <div id="step3-view" class="app-view-panel">
         <div class="panel-card">
-            <img id="st3-icon" src="" class="panel-icon">
+            <div class="panel-icon-placeholder">
+                <i class="fas fa-fire"></i>
+            </div>
             <div id="st3-title" class="panel-title">App Title</div>
             <span class="vip-tag" style="background: #00b894; color: #fff;">GATEWAY ACCESS DISPATCHED</span>
         </div>
@@ -880,15 +928,15 @@
     <script>
         // Database
         const globalAppsDatabase = [
-            { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", icon: "https://images.unsplash.com/photo-1611605698335-8b15d27e83f9?w=150", playstore: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically" },
-            { id: "whatsapp", name: "WhatsApp Plus Elite", type: "app", version: "2.24.8", size: "65 MB", rating: "4.6", desc: "Enhanced customization profiles with anti-delete tools and extreme privacy parameters enabled.", icon: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150", playstore: "https://play.google.com/store/apps/details?id=com.whatsapp" },
-            { id: "pubg", name: "PUBG Mobile Ultra Mod", type: "game", version: "3.1.0", size: "1.2 GB", rating: "4.5", desc: "Extreme graphics configuration profiles optimized for maximum smooth processing operations.", icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150", playstore: "https://play.google.com/store/apps/details?id=com.tencent.ig" },
-            { id: "freefire", name: "Free Fire Max VIP+", type: "game", version: "1.104.1", size: "645 MB", rating: "4.7", desc: "Experience advanced acceleration mechanics optimized perfectly for mobile battlefields.", icon: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150", playstore: "https://play.google.com/store/apps/details?id=com.dts.freefireth" },
-            { id: "instagram", name: "Instagram Pro Pure", type: "app", version: "320.0.1", size: "58 MB", rating: "4.4", desc: "Download high definition layout media profiles directly from the feed channel layout securely.", icon: "https://images.unsplash.com/photo-1611267254323-4db7b39c732c?w=150", playstore: "https://play.google.com/store/apps/details?id=com.instagram.android" },
-            { id: "capcut", name: "CapCut Video Pro", type: "app", version: "11.6.0", size: "210 MB", rating: "4.7", desc: "Advanced premium filters composition frames and complete tracking asset options unlocked.", icon: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150", playstore: "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas" },
-            { id: "subway", name: "Subway Surfers VIP+", type: "game", version: "3.28.0", size: "155 MB", rating: "4.5", desc: "Infinite execution tracks running cycles with optimized global leaderboard systems active.", icon: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150", playstore: "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf" },
-            { id: "spotify", name: "Spotify Premium Mod", type: "app", version: "8.9.22", size: "45 MB", rating: "4.8", desc: "Unlimited skip structures with pure audio parameters music streaming ad-free listening.", icon: "https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=150", playstore: "https://play.google.com/store/apps/details?id=com.spotify.music" },
-            { id: "minecraft", name: "Minecraft Premium Edition", type: "game", version: "1.20.73", size: "620 MB", rating: "4.6", desc: "Explore endless generation simulation sandbox blocks worlds with completely secure packages.", icon: "https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?w=150", playstore: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" }
+            { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", playstore: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically" },
+            { id: "whatsapp", name: "WhatsApp Plus Elite", type: "app", version: "2.24.8", size: "65 MB", rating: "4.6", desc: "Enhanced customization profiles with anti-delete tools and extreme privacy parameters enabled.", playstore: "https://play.google.com/store/apps/details?id=com.whatsapp" },
+            { id: "pubg", name: "PUBG Mobile Ultra Mod", type: "game", version: "3.1.0", size: "1.2 GB", rating: "4.5", desc: "Extreme graphics configuration profiles optimized for maximum smooth processing operations.", playstore: "https://play.google.com/store/apps/details?id=com.tencent.ig" },
+            { id: "freefire", name: "Free Fire Max VIP+", type: "game", version: "1.104.1", size: "645 MB", rating: "4.7", desc: "Experience advanced acceleration mechanics optimized perfectly for mobile battlefields.", playstore: "https://play.google.com/store/apps/details?id=com.dts.freefireth" },
+            { id: "instagram", name: "Instagram Pro Pure", type: "app", version: "320.0.1", size: "58 MB", rating: "4.4", desc: "Download high definition layout media profiles directly from the feed channel layout securely.", playstore: "https://play.google.com/store/apps/details?id=com.instagram.android" },
+            { id: "capcut", name: "CapCut Video Pro", type: "app", version: "11.6.0", size: "210 MB", rating: "4.7", desc: "Advanced premium filters composition frames and complete tracking asset options unlocked.", playstore: "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas" },
+            { id: "subway", name: "Subway Surfers VIP+", type: "game", version: "3.28.0", size: "155 MB", rating: "4.5", desc: "Infinite execution tracks running cycles with optimized global leaderboard systems active.", playstore: "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf" },
+            { id: "spotify", name: "Spotify Premium Mod", type: "app", version: "8.9.22", size: "45 MB", rating: "4.8", desc: "Unlimited skip structures with pure audio parameters music streaming ad-free listening.", playstore: "https://play.google.com/store/apps/details?id=com.spotify.music" },
+            { id: "minecraft", name: "Minecraft Premium Edition", type: "game", version: "1.20.73", size: "620 MB", rating: "4.6", desc: "Explore endless generation simulation sandbox blocks worlds with completely secure packages.", playstore: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" }
         ];
 
         let selectedAppObject = null;
@@ -904,6 +952,20 @@
                 if (isAppInternalPageActive) switchToHomeView();
             });
         });
+
+        // Helper to convert plain string name into split characters with CSS variable indexing for magical wave
+        function generateMagicalWaveHTML(appNameString) {
+            let htmlOutput = "";
+            for (let i = 0; i < appNameString.length; i++) {
+                let char = appNameString[i];
+                if (char === " ") {
+                    htmlOutput += `<span style="--i:${i}">&nbsp;</span>`;
+                } else {
+                    htmlOutput += `<span style="--i:${i}">${char}</span>`;
+                }
+            }
+            return htmlOutput;
+        }
 
         // Side Menu Drawer
         function toggleSideNavigationDrawer(open) {
@@ -942,10 +1004,8 @@
             }
 
             if(type === 'login') {
-                // If login, proceed direct bypass
                 bypassVerificationToMainDashboard();
             } else {
-                // If register, transition straight to Fake OTP sequence screen
                 switchAuthScreen('otp');
                 triggerFakeOtpResendSequence();
             }
@@ -982,17 +1042,22 @@
             window.scrollTo(0,0);
         }
 
-        // Main Site App Functions
+        // Main Site App Functions - Updated with Fire & Wave Effects
         function renderAppsToDOMInterface(dataArray) {
             const container = document.getElementById('appsDynamicRenderContainer');
             container.innerHTML = ""; 
             dataArray.forEach(app => {
+                let waveTextHTML = generateMagicalWaveHTML(app.name);
                 container.innerHTML += `
                     <div class="app-card" data-type="${app.type}" onclick="initiateDownloadSequence('${app.id}')">
                         <div class="app-main-info">
-                            <img src="${app.icon}" class="app-icon" alt="icon">
+                            <!-- MAGICAL FIRE ELEMENT INSTEAD OF ICON IMAGE -->
+                            <div class="magical-fire-container">
+                                <i class="fas fa-fire"></i>
+                            </div>
                             <div class="app-details">
-                                <div class="app-name">${app.name} <span class="vip-tag">VIP+</span></div>
+                                <!-- HILTA HUA MAGICAL NAME -->
+                                <div class="magical-wave-text">${waveTextHTML} <span class="vip-tag">VIP+</span></div>
                                 <div class="app-rating"><i class="fas fa-star"></i> ${app.rating}</div>
                             </div>
                         </div>
@@ -1030,7 +1095,6 @@
             window.history.pushState({page: 'internal'}, 'Details', '#view');
 
             document.getElementById('st1-title').innerText = selectedAppObject.name;
-            document.getElementById('st1-icon').src = selectedAppObject.icon;
             document.getElementById('st1-row-name').innerText = selectedAppObject.name;
             document.getElementById('st1-row-version').innerText = selectedAppObject.version;
             document.getElementById('st1-row-size').innerText = selectedAppObject.size;
@@ -1055,6 +1119,9 @@
                 actionBtn.style.display = "block";
             }, 18000);
         }
+
+        document.getElementById('st1-title').style.color = "#00ffc4";
+        document.getElementById('st3-title').style.color = "#00ffc4";
 
         function navigateToStep2View() {
             clearAllTimerStates();
@@ -1089,7 +1156,6 @@
             window.scrollTo(0,0);
 
             document.getElementById('st3-title').innerText = selectedAppObject.name;
-            document.getElementById('st3-icon').src = selectedAppObject.icon;
 
             const line = document.getElementById('line5s');
             const timerContainer = document.getElementById('timer5sContainer');
