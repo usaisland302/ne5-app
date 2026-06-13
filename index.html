@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getmods - Download & Enjoy VIP Mods</title>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CORE STYLES (Dark Theme Default) --- */
+        /* --- DESIGN VARIABLES (Dark Theme Default) --- */
         :root {
             --bg-color: #0b1326;
             --card-bg: #162447;
@@ -42,7 +41,7 @@
             padding-bottom: 60px;
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER NAVIGATION --- */
         header {
             background-color: var(--card-bg);
             padding: 15px 20px;
@@ -95,12 +94,19 @@
             cursor: pointer;
         }
 
-        /* --- MAIN HOME PAGE VIEW --- */
+        /* --- COMMON PAGES VISIBILITY WRAPPER --- */
+        .app-view-panel {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
         #home-view {
             display: block;
         }
 
-        /* --- SEARCH BAR --- */
+        /* --- SEARCH SECTION --- */
         .search-container {
             padding: 15px;
             max-width: 600px;
@@ -131,7 +137,7 @@
             color: var(--text-muted);
         }
 
-        /* --- CATEGORY GRID --- */
+        /* --- CATEGORIES SYSTEM GRID --- */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -169,7 +175,7 @@
 
         .cat-card i { font-size: 24px; }
 
-        /* --- APP LIST LAYOUT --- */
+        /* --- LIST CONTAINER STYLES --- */
         .section-title {
             padding: 15px 20px 5px 20px;
             font-size: 20px;
@@ -245,11 +251,7 @@
             color: var(--text-muted);
         }
 
-        .meta-specs {
-            display: flex;
-            gap: 12px;
-        }
-
+        .meta-specs { display: flex; gap: 12px; }
         .meta-specs span i { margin-right: 4px; }
 
         .btn-get {
@@ -278,14 +280,7 @@
             display: none;
         }
 
-        /* --- DYNAMIC DETAILS VIEW PAGE (Screenshot 4474 Layout) --- */
-        #details-view {
-            display: none;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
+        /* --- CONTROL TIMERS & BLOCKS GENERAL STYLES --- */
         .back-btn {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -298,7 +293,7 @@
             display: inline-block;
         }
 
-        .detail-header-card {
+        .panel-card {
             text-align: center;
             padding: 20px;
             background-color: var(--card-bg);
@@ -307,14 +302,14 @@
             margin-bottom: 20px;
         }
 
-        .detail-icon {
+        .panel-icon {
             width: 90px;
             height: 90px;
             border-radius: 24px;
             margin-bottom: 15px;
         }
 
-        .detail-title {
+        .panel-title {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 10px;
@@ -357,8 +352,7 @@
             font-weight: bold;
         }
 
-        /* --- TIMER & DOWNLOAD LINEAR AREA --- */
-        .download-box {
+        .timer-box-layout {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
@@ -367,15 +361,15 @@
             margin-top: 20px;
         }
 
-        .timer-text {
+        .status-txt {
             font-size: 16px;
             color: var(--text-muted);
             margin-bottom: 15px;
             font-weight: 600;
         }
 
-        /* Linear Progress Line Timer */
-        .progress-bar-container {
+        /* --- LINEAR TIMER RUNNING LINE --- */
+        .linear-progress-wrapper {
             width: 100%;
             height: 6px;
             background-color: var(--border-color);
@@ -384,7 +378,7 @@
             margin-bottom: 10px;
         }
 
-        .progress-line {
+        .linear-line {
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, #00f2fe, #4facfe);
@@ -392,17 +386,15 @@
             transform: scaleX(1);
         }
 
-        .animate-progress {
-            animation: startLineTimer 5s linear forwards;
-        }
+        .run-18s-timer { animation: reduceLine 18s linear forwards; }
+        .run-5s-timer { animation: reduceLine 5s linear forwards; }
 
-        @keyframes startLineTimer {
+        @keyframes reduceLine {
             from { transform: scaleX(1); }
             to { transform: scaleX(0); }
         }
 
-        /* Main Download Trigger Button */
-        .btn-download-trigger {
+        .btn-action-trigger {
             background: linear-gradient(135deg, #2af598 0%, #009ed2 100%);
             color: white;
             font-size: 18px;
@@ -415,215 +407,305 @@
             box-shadow: 0 5px 15px rgba(42, 245, 152, 0.3);
             display: none;
         }
+
+        .counter-numeric-text {
+            font-size: 48px;
+            font-weight: 800;
+            color: #00b894;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <div class="logo-area" onclick="showHomePage()">
+        <div class="logo-area" onclick="switchToHomeView()">
             <div class="logo-icon">G</div>
-            <div class="logo-text">Getmods<span id="sub-logo">download & enjoy</span></div>
+            <div class="logo-text">Getmods<span>download & enjoy</span></div>
         </div>
         <div class="nav-icons">
-            <i class="fas fa-search" onclick="focusSearch()"></i>
-            <i class="fas fa-moon" id="theme-icon-top" onclick="toggleTheme()"></i>
+            <i class="fas fa-search" onclick="focusSearchInput()"></i>
+            <i class="fas fa-moon" id="theme-icon-top" onclick="toggleThemeSystem()"></i>
         </div>
     </header>
 
-    <!-- ================= HOME PAGE VIEW ================= -->
     <div id="home-view">
-        <!-- Search Section -->
         <div class="search-container">
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search for apps, games, mods..." onkeyup="searchApps()">
+                <input type="text" id="searchInput" placeholder="Search from thousands of apps..." onkeyup="executeSearchFilter()">
             </div>
         </div>
 
-        <!-- Categories -->
         <div class="category-grid">
-            <div class="cat-card cat-home active-tab" id="tab-all" onclick="filterCategory('all')">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
+            <div class="cat-card cat-home active-tab" id="tab-all" onclick="filterCategoryList('all')">
+                <i class="fas fa-home"></i><span>Home</span>
             </div>
-            <div class="cat-card cat-games" id="tab-game" onclick="filterCategory('game')">
-                <i class="fas fa-gamepad"></i>
-                <span>Games</span>
+            <div class="cat-card cat-games" id="tab-game" onclick="filterCategoryList('game')">
+                <i class="fas fa-gamepad"></i><span>Games</span>
             </div>
-            <div class="cat-card cat-apps" id="tab-app" onclick="filterCategory('app')">
-                <i class="fas fa-th-large"></i>
-                <span>Apps</span>
+            <div class="cat-card cat-apps" id="tab-app" onclick="filterCategoryList('app')">
+                <i class="fas fa-th-large"></i><span>Apps</span>
             </div>
-            <div class="cat-card cat-blog" onclick="alert('Blog Updates Coming Soon!')">
-                <i class="fas fa-bell"></i>
-                <span>Blog</span>
+            <div class="cat-card cat-blog" onclick="alert('Blogs database updating...')">
+                <i class="fas fa-bell"></i><span>Blog</span>
             </div>
-            <div class="cat-card cat-faqs" onclick="alert('FAQs Section Is Active!')">
-                <i class="fas fa-comment-dots"></i>
-                <span>FAQs</span>
+            <div class="cat-card cat-faqs" onclick="alert('Security Parameters are active!')">
+                <i class="fas fa-comment-dots"></i><span>FAQs</span>
             </div>
-            <div class="cat-card cat-dark" onclick="toggleTheme()">
-                <i class="fas fa-lightbulb"></i>
-                <span id="theme-text">Light Mode</span>
+            <div class="cat-card cat-dark" onclick="toggleThemeSystem()">
+                <i class="fas fa-lightbulb"></i><span id="theme-text">Light Mode</span>
             </div>
         </div>
 
         <div class="section-title" id="list-title">VIP Premium Mods</div>
-        <div class="no-results" id="noResultsText">No applications found matching your search.</div>
+        <div class="no-results" id="noResultsText">No secure installation packages found.</div>
 
-        <!-- Dynamic Apps Container List -->
-        <div class="app-list" id="appsContainer">
-            <!-- App Card 1: Mobile Legends -->
-            <div class="app-card" data-type="game" data-id="mlbb" onclick="openDetailsPage('mlbb')">
-                <div class="app-main-info">
-                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150" class="app-icon">
-                    <div class="app-details">
-                        <div class="app-name">Mobile Legends <span class="vip-tag">VIP+</span></div>
-                        <div class="app-rating"><i class="fas fa-star"></i> 4.3</div>
-                    </div>
-                </div>
-                <div class="app-desc">In today's fast-paced world, experience the ultimate premium competitive gameplay battle arena.</div>
-                <div class="app-meta">
-                    <div class="meta-specs">
-                        <span><i class="fas fa-layer-group"></i> 22.1.71</span>
-                        <span><i class="fas fa-hdd"></i> 188 MB</span>
-                    </div>
-                    <button class="btn-get">Get</button>
+        <div class="app-list" id="appsDynamicRenderContainer">
+            </div>
+    </div>
+
+
+    <div id="step1-view" class="app-view-panel">
+        <button class="back-btn" onclick="switchToHomeView()"><i class="fas fa-arrow-left"></i> Cancel</button>
+        
+        <div class="panel-card">
+            <img id="st1-icon" src="" class="panel-icon">
+            <div id="st1-title" class="panel-title">App Title</div>
+            <span class="vip-tag">SECURE FILE PARAMETER ACTIVE</span>
+        </div>
+
+        <div class="info-table">
+            <div class="info-row"><i class="fas fa-th-large"></i><div class="info-data"><label>Package Name</label><span id="st1-row-name">-</span></div></div>
+            <div class="info-row"><i class="fas fa-history"></i><div class="info-data"><label>Version Profile</label><span id="st1-row-version">-</span></div></div>
+            <div class="info-row"><i class="fas fa-hdd"></i><div class="info-data"><label>File Allocation Size</label><span id="st1-row-size">-</span></div></div>
+        </div>
+
+        <div class="timer-box-layout">
+            <div id="timer18sContainer">
+                <div class="status-txt">Analyzing installation scripts... Please wait 18s</div>
+                <div class="linear-progress-wrapper">
+                    <div class="linear-line" id="line18s"></div>
                 </div>
             </div>
-
-            <!-- App Card 2: Drive Zone Online -->
-            <div class="app-card" data-type="game" data-id="drivezone" onclick="openDetailsPage('drivezone')">
-                <div class="app-main-info">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150" class="app-icon">
-                    <div class="app-details">
-                        <div class="app-name">Drive Zone Online <span class="vip-tag">VIP+</span></div>
-                        <div class="app-rating"><i class="fas fa-star"></i> 4.1</div>
-                    </div>
-                </div>
-                <div class="app-desc">Unleash the supreme thrill with premium VIP unlocks in the ultimate open-world driving simulator.</div>
-                <div class="app-meta">
-                    <div class="meta-specs">
-                        <span><i class="fas fa-layer-group"></i> 1.10.0</span>
-                        <span><i class="fas fa-hdd"></i> 325 MB</span>
-                    </div>
-                    <button class="btn-get">Get</button>
-                </div>
-            </div>
-
-            <!-- App Card 3: YouTube Premium -->
-            <div class="app-card" data-type="app" data-id="youtube" onclick="openDetailsPage('youtube')">
-                <div class="app-main-info">
-                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=150" class="app-icon">
-                    <div class="app-details">
-                        <div class="app-name">YouTube Premium <span class="vip-tag">VIP+</span></div>
-                        <div class="app-rating"><i class="fas fa-star"></i> 4.0</div>
-                    </div>
-                </div>
-                <div class="app-desc">Unlock full background playback streaming, completely ad-free mod features enabled flawlessly.</div>
-                <div class="app-meta">
-                    <div class="meta-specs">
-                        <span><i class="fas fa-layer-group"></i> 21.24.363</span>
-                        <span><i class="fas fa-hdd"></i> 136 MB</span>
-                    </div>
-                    <button class="btn-get">Get</button>
-                </div>
-            </div>
+            <button class="btn-action-trigger" id="nextBtnStep1" onclick="navigateToStep2View()">
+                Verify Next <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 
 
-    <!-- ================= DYNAMIC DETAILS PAGE VIEW ================= -->
-    <div id="details-view">
-        <button class="back-btn" onclick="showHomePage()"><i class="fas fa-arrow-left"></i> Back to Home</button>
-        
-        <div class="detail-header-card">
-            <img id="det-icon" src="" class="detail-icon">
-            <div id="det-title" class="detail-title">App Name</div>
-            <span class="vip-tag" style="margin: 0 auto; display: inline-block;">VIP+ PREMIUM ACTIVE</span>
+    <div id="step2-view" class="app-view-panel">
+        <div class="panel-card">
+            <div class="panel-title" style="color: #ff5858;"><i class="fas fa-shield-alt"></i> Link Verification Page</div>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">Please hold tightly while our secure server encrypts your redirect handshake keys.</p>
         </div>
 
-        <div class="info-table">
-            <div class="info-row">
-                <i class="fas fa-th-large"></i>
-                <div class="info-data"><label>App Name</label><span id="row-name">Name</span></div>
+        <div class="timer-box-layout">
+            <div id="counter10sBox">
+                <div class="status-txt">Checking system integrity cloud configurations...</div>
+                <div class="counter-numeric-text" id="numericCounterText">10</div>
             </div>
-            <div class="info-row">
-                <i class="fas fa-history"></i>
-                <div class="info-data"><label>Version</label><span id="row-version">0.0.0</span></div>
-            </div>
-            <div class="info-row">
-                <i class="fas fa-hdd"></i>
-                <div class="info-data"><label>Size</label><span id="row-size">00 MB</span></div>
-            </div>
-            <div class="info-row">
-                <i class="fas fa-user-shield"></i>
-                <div class="info-data"><label>Publisher</label><span>Google LLC Verified</span></div>
-            </div>
-            <div class="info-row">
-                <i class="fab fa-android"></i>
-                <div class="info-data"><label>Requirements</label><span>Android 5.0+ Compatible</span></div>
-            </div>
+            <button class="btn-action-trigger" id="nextBtnStep2" onclick="navigateToStep3View()">
+                Proceed Link <i class="fas fa-external-link-alt"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <div id="step3-view" class="app-view-panel">
+        <div class="panel-card">
+            <img id="st3-icon" src="" class="panel-icon">
+            <div id="st3-title" class="panel-title">App Title</div>
+            <span class="vip-tag" style="background: #00b894; color: #fff;">FINAL STEP READY</span>
         </div>
 
-        <!-- Download Controller with 5-Second Linear Timer -->
-        <div class="download-box">
-            <div id="timerContainer">
-                <div class="timer-text" id="countdownLabel">Securing links... checking secure VIP parameters</div>
-                <div class="progress-bar-container">
-                    <div class="progress-line" id="progressLine"></div>
+        <div class="timer-box-layout">
+            <div id="timer5sContainer">
+                <div class="status-txt">Finalizing safe download gateway lines... Please wait 5s</div>
+                <div class="linear-progress-wrapper">
+                    <div class="linear-line" id="line5s"></div>
                 </div>
             </div>
-            <button class="btn-download-trigger" id="finalDownloadBtn" onclick="redirectToPlayStore()">
+            <button class="btn-action-trigger" id="finalDownloadBtn" onclick="executePlayStoreRedirection()" style="background: linear-gradient(135deg, #00b894 0%, #2ecc71 100%);">
                 <i class="fas fa-cloud-download-alt"></i> Download Now
             </button>
         </div>
     </div>
 
 
-    <!-- ================= CORE JAVASCRIPT LOGIC ================= -->
     <script>
-        // App Database Object Store
-        const appsDatabase = {
-            "mlbb": {
-                name: "Mobile Legends Bang Bang",
-                version: "22.1.71",
-                size: "188 MB",
-                icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150",
-                playstore: "https://play.google.com/store/apps/details?id=com.mobile.legends"
-            },
-            "drivezone": {
-                name: "Drive Zone Online",
-                version: "1.10.0",
-                size: "325 MB",
-                icon: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150",
-                playstore: "https://play.google.com/store/apps/details?id=com.avegames.drivezone"
-            },
-            "youtube": {
-                name: "YouTube Premium Player",
-                version: "21.24.363",
-                size: "136 MB",
-                icon: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=150",
-                playstore: "https://play.google.com/store/apps/details?id=com.google.android.youtube"
+        // --- 1. 15 AUTHENTIC APP STORES LIST DATABASE ---
+        const globalAppsDatabase = [
+            { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", icon: "https://images.unsplash.com/photo-1611605698335-8b15d27e83f9?w=150", playstore: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically" },
+            { id: "whatsapp", name: "WhatsApp Plus Elite", type: "app", version: "2.24.8", size: "65 MB", rating: "4.6", desc: "Enhanced customization profiles with anti-delete tools and extreme privacy parameters enabled.", icon: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150", playstore: "https://play.google.com/store/apps/details?id=com.whatsapp" },
+            { id: "pubg", name: "PUBG Mobile Ultra Mod", type: "game", version: "3.1.0", size: "1.2 GB", rating: "4.5", desc: "Extreme graphics configuration profiles optimized for maximum smooth processing operations.", icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150", playstore: "https://play.google.com/store/apps/details?id=com.tencent.ig" },
+            { id: "freefire", name: "Free Fire Max VIP+", type: "game", version: "1.104.1", size: "645 MB", rating: "4.7", desc: "Experience advanced acceleration mechanics optimized perfectly for mobile battlefields.", icon: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150", playstore: "https://play.google.com/store/apps/details?id=com.dts.freefireth" },
+            { id: "instagram", name: "Instagram Pro Pure", type: "app", version: "320.0.1", size: "58 MB", rating: "4.4", desc: "Download high definition layout media profiles directly from the feed channel layout securely.", icon: "https://images.unsplash.com/photo-1611267254323-4db7b39c732c?w=150", playstore: "https://play.google.com/store/apps/details?id=com.instagram.android" },
+            { id: "capcut", name: "CapCut Video Pro", type: "app", version: "11.6.0", size: "210 MB", rating: "4.7", desc: "Advanced premium filters composition frames and complete tracking asset options unlocked.", icon: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150", playstore: "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas" },
+            { id: "subway", name: "Subway Surfers VIP+", type: "game", version: "3.28.0", size: "155 MB", rating: "4.5", desc: "Infinite execution tracks running cycles with optimized global leaderboard systems active.", icon: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150", playstore: "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf" },
+            { id: "spotify", name: "Spotify Premium Mod", type: "app", version: "8.9.22", size: "45 MB", rating: "4.8", desc: "Unlimited skip structures with pure audio parameters music streaming ad-free listening.", icon: "https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=150", playstore: "https://play.google.com/store/apps/details?id=com.spotify.music" },
+            { id: "minecraft", name: "Minecraft Premium Edition", type: "game", version: "1.20.73", size: "620 MB", rating: "4.6", desc: "Explore endless generation simulation sandbox blocks worlds with completely secure packages.", icon: "https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?w=150", playstore: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" },
+            { id: "facebook", name: "Facebook Lite VIP", type: "app", version: "405.0.0", size: "3 MB", rating: "4.2", desc: "Extremely fast navigation profile layouts with active dark system mode configurations integrated.", icon: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=150", playstore: "https://play.google.com/store/apps/details?id=com.facebook.lite" },
+            { id: "candycrush", name: "Candy Crush Saga Mod", type: "game", version: "1.274.0", size: "95 MB", rating: "4.5", desc: "Unlimited logic execution lives and strategic moves profile keys fully accessible.", icon: "https://images.unsplash.com/photo-1553481187-be93c21490a9?w=150", playstore: "https://play.google.com/store/apps/details?id=com.king.candycrushsaga" },
+            { id: "ludo", name: "Ludo King VIP Master", type: "game", version: "8.7.3", size: "62 MB", rating: "4.3", desc: "Premium online interactive desktop board configurations parameters running smoothly.", icon: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=150", playstore: "https://play.google.com/store/apps/details?id=com.ludo.king" },
+            { id: "picsart", name: "PicsArt Photo Gold", type: "app", version: "24.7.1", size: "85 MB", rating: "4.6", desc: "Unlocking advanced image layering matrix tools and full filter properties.", icon: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=150", playstore: "https://play.google.com/store/apps/details?id=com.picsart.studio" },
+            { id: "templerun", name: "Temple Run 2 VIP", type: "game", version: "1.109.0", size: "124 MB", rating: "4.4", desc: "Infinite velocity running tracks maps and safe coin configurations loaded natively.", icon: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150", playstore: "https://play.google.com/store/apps/details?id=com.imangi.templerun2" },
+            { id: "netflix", name: "Netflix Premium Engine", type: "app", version: "8.112.0", size: "72 MB", rating: "4.7", desc: "High dynamic content visual playback engine streaming servers configurations parameters active.", icon: "https://images.unsplash.com/photo-1574375927938-d5a98e8edd86?w=150", playstore: "https://play.google.com/store/apps/details?id=com.netflix.mediaclient" }
+        ];
+
+        let selectedAppObject = null;
+        let runningGlobalTimerReference = null;
+        let counterIntervalTimerReference = null;
+
+        // --- 2. INITIALIZATION ROUTINE ENGINE ---
+        window.addEventListener('DOMContentLoaded', () => {
+            renderAppsToDOMInterface(globalAppsDatabase);
+        });
+
+        function renderAppsToDOMInterface(dataArray) {
+            const container = document.getElementById('appsDynamicRenderContainer');
+            container.innerHTML = ""; 
+            
+            dataArray.forEach(app => {
+                const cardHTML = `
+                    <div class="app-card" data-type="${app.type}" onclick="initiateDownloadSequence('${app.id}')">
+                        <div class="app-main-info">
+                            <img src="${app.icon}" class="app-icon" alt="icon">
+                            <div class="app-details">
+                                <div class="app-name">${app.name} <span class="vip-tag">VIP+</span></div>
+                                <div class="app-rating"><i class="fas fa-star"></i> ${app.rating}</div>
+                            </div>
+                        </div>
+                        <div class="app-desc">${app.desc}</div>
+                        <div class="app-meta">
+                            <div class="meta-specs">
+                                <span><i class="fas fa-layer-group"></i> ${app.version}</span>
+                                <span><i class="fas fa-hdd"></i> ${app.size}</span>
+                            </div>
+                            <button class="btn-get">Get</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        // --- 3. SYSTEM NAVIGATION FLOWS ROUTERS ---
+        function clearAllTimerStates() {
+            if(runningGlobalTimerReference) clearTimeout(runningGlobalTimerReference);
+            if(counterIntervalTimerReference) clearInterval(counterIntervalTimerReference);
+        }
+
+        function switchToHomeView() {
+            clearAllTimerStates();
+            document.querySelectorAll('.app-view-panel').forEach(view => view.style.display = "none");
+            document.getElementById('home-view').style.display = "block";
+            window.scrollTo(0,0);
+        }
+
+        // --- STEP 1: 18 SECONDS TIMER EXECUTION ---
+        function initiateDownloadSequence(appId) {
+            selectedAppObject = globalAppsDatabase.find(x => x.id === appId);
+            if(!selectedAppObject) return;
+
+            document.getElementById('st1-title').innerText = selectedAppObject.name;
+            document.getElementById('st1-icon').src = selectedAppObject.icon;
+            document.getElementById('st1-row-name').innerText = selectedAppObject.name;
+            document.getElementById('st1-row-version').innerText = selectedAppObject.version;
+            document.getElementById('st1-row-size').innerText = selectedAppObject.size;
+
+            document.getElementById('home-view').style.display = "none";
+            document.getElementById('step1-view').style.display = "block";
+            window.scrollTo(0,0);
+
+            const line = document.getElementById('line18s');
+            const timerContainer = document.getElementById('timer18sContainer');
+            const actionBtn = document.getElementById('nextBtnStep1');
+
+            actionBtn.style.display = "none";
+            timerContainer.style.display = "block";
+
+            line.classList.remove('run-18s-timer');
+            void line.offsetWidth; 
+            line.classList.add('run-18s-timer');
+
+            runningGlobalTimerReference = setTimeout(() => {
+                timerContainer.style.display = "none";
+                actionBtn.style.display = "block";
+            }, 18000);
+        }
+
+        // --- STEP 2: 10 SECONDS WAITING ENGINE ---
+        function navigateToStep2View() {
+            clearAllTimerStates();
+            document.getElementById('step1-view').style.display = "none";
+            document.getElementById('step2-view').style.display = "block";
+            window.scrollTo(0,0);
+
+            const displayCounter = document.getElementById('numericCounterText');
+            const counterContainer = document.getElementById('counter10sBox');
+            const actionBtn = document.getElementById('nextBtnStep2');
+
+            let timeLeft = 10;
+            displayCounter.innerText = timeLeft;
+            actionBtn.style.display = "none";
+            counterContainer.style.display = "block";
+
+            counterIntervalTimerReference = setInterval(() => {
+                timeLeft--;
+                displayCounter.innerText = timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(counterIntervalTimerReference);
+                    counterContainer.style.display = "none";
+                    actionBtn.style.display = "block";
+                }
+            }, 1000);
+        }
+
+        // --- STEP 3: 5 SECONDS FINAL TIME BAR ---
+        function navigateToStep3View() {
+            clearAllTimerStates();
+            document.getElementById('step2-view').style.display = "none";
+            document.getElementById('step3-view').style.display = "block";
+            window.scrollTo(0,0);
+
+            document.getElementById('st3-title').innerText = selectedAppObject.name;
+            document.getElementById('st3-icon').src = selectedAppObject.icon;
+
+            const line = document.getElementById('line5s');
+            const timerContainer = document.getElementById('timer5sContainer');
+            const actionBtn = document.getElementById('finalDownloadBtn');
+
+            actionBtn.style.display = "none";
+            timerContainer.style.display = "block";
+
+            line.classList.remove('run-5s-timer');
+            void line.offsetWidth; 
+            line.classList.add('run-5s-timer');
+
+            runningGlobalTimerReference = setTimeout(() => {
+                timerContainer.style.display = "none";
+                actionBtn.style.display = "block";
+            }, 5000);
+        }
+
+        function executePlayStoreRedirection() {
+            if(selectedAppObject && selectedAppObject.playstore) {
+                window.location.href = selectedAppObject.playstore;
             }
-        };
+        }
 
-        let activePlayStoreLink = "";
-        let timerTimeout = null;
-
-        // 1. Search Functionality
-        function searchApps() {
+        // --- SEARCH ENGINE INTERFACE ---
+        function executeSearchFilter() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('app-card');
             let noResults = document.getElementById('noResultsText');
             let matched = 0;
 
             for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].querySelector('.app-name').innerText.toLowerCase();
-                let desc = cards[i].querySelector('.app-desc').innerText.toLowerCase();
-                
-                if (name.includes(input) || desc.includes(input)) {
+                let text = cards[i].innerText.toLowerCase();
+                if(text.includes(input)) {
                     cards[i].style.display = "flex";
                     matched++;
                 } else {
@@ -633,8 +715,8 @@
             noResults.style.display = (matched === 0) ? "block" : "none";
         }
 
-        // 2. Filter Category Structure Tabs
-        function filterCategory(category) {
+        // --- FILTER CATEGORIES ENGINE ---
+        function filterCategoryList(category) {
             let cards = document.getElementsByClassName('app-card');
             let title = document.getElementById('list-title');
             
@@ -663,68 +745,8 @@
             }
         }
 
-        // 3. Navigation View Switching
-        function openDetailsPage(appId) {
-            const appData = appsDatabase[appId];
-            if(!appData) return;
-
-            // Set Data fields dynamically
-            document.getElementById('det-title').innerText = appData.name;
-            document.getElementById('det-icon').src = appData.icon;
-            document.getElementById('row-name').innerText = appData.name;
-            document.getElementById('row-version').innerText = appData.version;
-            document.getElementById('row-size').innerText = appData.size;
-            
-            activePlayStoreLink = appData.playstore;
-
-            // View Management
-            document.getElementById('home-view').style.style = "none";
-            document.getElementById('home-view').style.display = "none";
-            document.getElementById('details-view').style.display = "block";
-            window.scrollTo(0, 0);
-
-            // Trigger Linear Line Timer System
-            startLinearTimer();
-        }
-
-        function showHomePage() {
-            if(timerTimeout) clearTimeout(timerTimeout);
-            document.getElementById('details-view').style.display = "none";
-            document.getElementById('home-view').style.display = "block";
-        }
-
-        // 4. Linear Timer execution system
-        function startLinearTimer() {
-            const progressLine = document.getElementById('progressLine');
-            const timerContainer = document.getElementById('timerContainer');
-            const finalDownloadBtn = document.getElementById('finalDownloadBtn');
-            const label = document.getElementById('countdownLabel');
-
-            // Reset Initial UI Status
-            finalDownloadBtn.style.display = "none";
-            timerContainer.style.display = "block";
-            label.innerText = "Generating Premium VIP Link... Please Wait 5s";
-            
-            progressLine.classList.remove('animate-progress');
-            void progressLine.offsetWidth; // Trigger reflow to restart CSS animation state
-            progressLine.classList.add('animate-progress');
-
-            // Wait 5 seconds and display final button
-            timerTimeout = setTimeout(() => {
-                timerContainer.style.display = "none";
-                finalDownloadBtn.style.display = "block";
-            }, 5000);
-        }
-
-        // 5. Play Store Final Redirect
-        function redirectToPlayStore() {
-            if(activePlayStoreLink !== "") {
-                window.location.href = activePlayStoreLink;
-            }
-        }
-
-        // 6. Theme Switching Utility Toggle
-        function toggleTheme() {
+        // Theme switching utilities
+        function toggleThemeSystem() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme');
             const themeText = document.getElementById('theme-text');
@@ -741,7 +763,7 @@
             }
         }
 
-        function focusSearch() {
+        function focusSearchInput() {
             document.getElementById('searchInput').focus();
         }
     </script>
