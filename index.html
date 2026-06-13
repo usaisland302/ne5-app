@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getmods - Download & Enjoy VIP Mods</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -111,7 +112,7 @@
             cursor: pointer;
         }
 
-        /* --- SIDE NAVIGATION DRAWER CONTROLS --- */
+        /* --- SIDE NAVIGATION DRAWER --- */
         .side-navigation-drawer {
             position: fixed;
             top: 0;
@@ -186,45 +187,21 @@
             display: none;
         }
 
-        /* --- AUTH LAYER LANDING SCREEN --- */
+        /* --- AUTH PORTAL SCREENS --- */
         .auth-portal-screen-wrapper {
             max-width: 450px;
-            margin: 40px auto;
-            padding: 25px;
+            margin: 60px auto;
+            padding: 30px 25px;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 28px;
+            border-radius: 24px;
             text-align: center;
-        }
-
-        .auth-tab-row {
-            display: flex;
-            background: rgba(0,0,0,0.2);
-            border-radius: 14px;
-            padding: 5px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border-color);
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            color: var(--text-muted);
-        }
-
-        .auth-tab.active-auth-tab {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         .auth-form-panel {
             display: none;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
         }
 
         .auth-input-group {
@@ -234,11 +211,10 @@
 
         .auth-input-group label {
             display: block;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--text-muted);
-            margin-bottom: 6px;
-            text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
         .auth-input-group input {
@@ -249,12 +225,13 @@
             border-radius: 12px;
             color: var(--text-color);
             outline: none;
+            font-size: 15px;
         }
 
         .auth-input-group i {
             position: absolute;
             left: 15px;
-            bottom: 14px;
+            bottom: 15px;
             color: var(--text-muted);
         }
 
@@ -263,21 +240,33 @@
             color: white;
             border: none;
             padding: 14px;
-            border-radius: 14px;
+            border-radius: 12px;
             font-weight: bold;
             font-size: 16px;
             cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .auth-toggle-link {
+            font-size: 14px;
+            color: var(--text-muted);
             margin-top: 10px;
         }
 
+        .auth-toggle-link span {
+            color: #00f2fe;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
         .verification-counter-box {
-            font-size: 15px;
+            font-size: 14px;
             color: #ff5858;
-            margin-top: 12px;
+            margin-top: 10px;
             font-weight: 600;
         }
 
-        /* --- COMMON PAGES VISIBILITY WRAPPER --- */
+        /* --- DASHBOARD VIEW PANEL --- */
         .app-view-panel {
             display: none;
             max-width: 600px;
@@ -286,7 +275,7 @@
         }
 
         #home-view {
-            display: none; /* Initially hidden until fake register/login is bypassed */
+            display: none; /* Hidden until unlocked via auth workflow */
         }
 
         /* --- SEARCH SECTION --- */
@@ -358,7 +347,7 @@
 
         .cat-card i { font-size: 24px; }
 
-        /* --- LIST CONTAINER STYLES --- */
+        /* --- APP LIST CONTAINER --- */
         .section-title {
             padding: 15px 20px 5px 20px;
             font-size: 20px;
@@ -463,7 +452,7 @@
             display: none;
         }
 
-        /* --- CONTROL TIMERS & BLOCKS GENERAL STYLES --- */
+        /* --- TIMERS TIMELINES SYST --- */
         .back-btn {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -552,7 +541,6 @@
             font-weight: 600;
         }
 
-        /* --- LINEAR TIMER RUNNING LINE --- */
         .linear-progress-wrapper {
             width: 100%;
             height: 6px;
@@ -599,7 +587,6 @@
             margin: 15px 0;
         }
 
-        /* --- NEW DYNAMIC PROMOTED/ANIMATION AD BOX SYSTEM --- */
         .timer-bottom-content-box {
             background-color: var(--card-bg);
             border: 1px dashed var(--search-border);
@@ -639,19 +626,9 @@
             object-fit: cover;
         }
 
-        .ad-app-details {
-            flex: 1;
-        }
-
-        .ad-app-name {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .ad-app-tagline {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
+        .ad-app-details { flex: 1; }
+        .ad-app-name { font-size: 14px; font-weight: bold; }
+        .ad-app-tagline { font-size: 12px; color: var(--text-muted); }
 
         .ad-install-btn {
             background: #1f4068;
@@ -673,10 +650,7 @@
             gap: 8px;
         }
 
-        .live-log-item i {
-            animation: spinLog 1s linear infinite;
-        }
-
+        .live-log-item i { animation: spinLog 1s linear infinite; }
         @keyframes spinLog {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -685,6 +659,7 @@
 </head>
 <body>
 
+    <!-- Side Navigation Menu Drawer -->
     <div class="drawer-overlay" id="menuDrawerOverlay" onclick="toggleSideNavigationDrawer(false)"></div>
     <div class="side-navigation-drawer" id="sideNavigationDrawer">
         <div class="drawer-header">
@@ -699,10 +674,11 @@
             <div class="drawer-item" onclick="handleDrawerNavigation('game')"><i class="fas fa-gamepad"></i> Premium Games</div>
             <div class="drawer-item" onclick="handleDrawerNavigation('app')"><i class="fas fa-th-large"></i> Pro Mobile Apps</div>
             <div class="drawer-item" onclick="toggleThemeSystem(); toggleSideNavigationDrawer(false);"><i class="fas fa-lightbulb"></i> Switch Theme Mode</div>
-            <div class="drawer-item" onclick="alert('Device system status configuration is fully secure.')"><i class="fas fa-shield-alt"></i> Security Logs</div>
+            <div class="drawer-item" onclick="alert('System secure logs updating...')"><i class="fas fa-shield-alt"></i> Security Status</div>
         </div>
     </div>
 
+    <!-- Header Block -->
     <header>
         <div class="header-left">
             <button class="menu-trigger-btn" onclick="toggleSideNavigationDrawer(true)"><i class="fas fa-bars"></i></button>
@@ -717,58 +693,62 @@
         </div>
     </header>
 
+    <!-- ================= AUTH SYSTEM PAGES FLOW ================= -->
     <div id="auth-portal-screen" class="auth-portal-screen-wrapper">
         <div class="logo-icon" style="margin: 0 auto 15px auto; width: 50px; height: 50px; font-size: 26px;">G</div>
-        <h2 style="margin-bottom: 20px; font-size: 22px;" id="auth-main-title">Login Required</h2>
         
-        <div class="auth-tab-row">
-            <div class="auth-tab active-auth-tab" id="tab-login-btn" onclick="toggleAuthPanels('login')">Login Screen</div>
-            <div class="auth-tab" id="tab-register-btn" onclick="toggleAuthPanels('register')">Registration</div>
-        </div>
-
-        <div class="auth-form-panel" id="form-panel-login" style="display: flex;">
+        <!-- Screen 1: Fake Login -->
+        <div class="auth-form-panel" id="screen-login" style="display: flex;">
+            <h2 style="margin-bottom: 20px; font-size: 22px;">Login With Email</h2>
             <div class="auth-input-group">
                 <label>Email Address</label>
                 <i class="fas fa-envelope"></i>
                 <input type="email" id="login-email-input" placeholder="name@email.com">
             </div>
             <div class="auth-input-group">
-                <label>Security Password</label>
+                <label>Password</label>
                 <i class="fas fa-lock"></i>
                 <input type="password" id="login-pass-input" placeholder="••••••••">
             </div>
-            <button class="auth-action-btn" onclick="validateAndProcessFakeAuth('login')">Login With Email</button>
+            <button class="auth-action-btn" onclick="processAuthFlow('login')">Login</button>
+            <div class="auth-toggle-link">Don't have an account? <span onclick="switchAuthScreen('register')">Register here</span></div>
         </div>
 
-        <div class="auth-form-panel" id="form-panel-register">
+        <!-- Screen 2: Fake Registration -->
+        <div class="auth-form-panel" id="screen-register">
+            <h2 style="margin-bottom: 20px; font-size: 22px;">Registration</h2>
             <div class="auth-input-group">
-                <label>Create Email Address</label>
+                <label>Enter Email Address</label>
                 <i class="fas fa-envelope"></i>
                 <input type="email" id="reg-email-input" placeholder="username@email.com">
             </div>
             <div class="auth-input-group">
-                <label>Choose Strong Password</label>
+                <label>Password</label>
                 <i class="fas fa-lock"></i>
-                <input type="password" id="reg-pass-input" placeholder="Enter secure password">
+                <input type="password" id="reg-pass-input" placeholder="Choose a password">
             </div>
-            <button class="auth-action-btn" id="reg-main-action-btn" onclick="validateAndProcessFakeAuth('register')">Verify Email</button>
-            <div class="verification-counter-box" id="fakeOtpTimerDisplay" style="display: none;"> OTP Sent! Resend button locks for: <span id="otpSecondsCount">60</span>s</div>
+            <button class="auth-action-btn" onclick="processAuthFlow('register')">Verify Email</button>
+            <div class="auth-toggle-link">Already have an account? <span onclick="switchAuthScreen('login')">Login instead</span></div>
         </div>
 
-        <div class="auth-form-panel" id="form-panel-verification" style="margin-top: 10px;">
-            <div style="border-top: 1px dashed var(--border-color); padding-top: 15px;">
-                <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Verification dynamic sequence keys issued to inbox. Enter code below:</p>
-            </div>
+        <!-- Screen 3: Fake OTP Page -->
+        <div class="auth-form-panel" id="screen-otp">
+            <h2 style="margin-bottom: 10px; font-size: 22px;">Email Verification</h2>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">OTP has been sent to your email. Please enter it below to access downloads.</p>
+            
             <div class="auth-input-group">
-                <label>Enter received OTP token</label>
+                <label>Enter OTP Code</label>
                 <i class="fas fa-key"></i>
-                <input type="text" id="verification-otp-input" placeholder="Any code skips access parameters">
+                <input type="text" id="verification-otp-input" placeholder="Enter any verification code">
             </div>
-            <button class="auth-action-btn" onclick="bypassVerificationToMainDashboard()" style="background: #00b894;">Confirm & Unlock Packages</button>
-            <p style="font-size:12px; color:var(--text-muted); margin-top:10px; cursor:pointer;" onclick="triggerFakeOtpResendSequence()">Didn't receive code? <span style="color:#00f2fe; text-decoration: underline;">Resend now</span></p>
+            <button class="auth-action-btn" onclick="bypassVerificationToMainDashboard()" style="background: #00b894;">Verify & Open Site</button>
+            
+            <div class="verification-counter-box" id="fakeOtpTimerDisplay">OTP Sent! Resend button locked for: <span id="otpSecondsCount">60</span>s</div>
+            <div class="auth-toggle-link" id="resend-link-btn" style="display:none; margin-top:15px;">Didn't get code? <span onclick="triggerFakeOtpResendSequence()">Resend Code</span></div>
         </div>
     </div>
 
+    <!-- ================= MAIN PLATFORM DASHBOARD (VIEW 1) ================= -->
     <div id="home-view">
         <div class="search-container">
             <div class="search-box">
@@ -790,7 +770,7 @@
             <div class="cat-card cat-blog" onclick="alert('Blogs database updating...')">
                 <i class="fas fa-bell"></i><span>Blog</span>
             </div>
-            <div class="cat-card cat-faqs" onclick="alert('Security Parameters are active!')">
+            <div class="cat-card cat-faqs" onclick="alert('Security Logs are completely functional!')">
                 <i class="fas fa-comment-dots"></i><span>FAQs</span>
             </div>
             <div class="cat-card cat-dark" onclick="toggleThemeSystem()">
@@ -799,31 +779,33 @@
         </div>
 
         <div class="section-title" id="list-title">VIP Premium Mods</div>
-        <div class="no-results" id="noResultsText">No secure installation packages found.</div>
+        <div class="no-results" id="noResultsText">No packages found match parameters.</div>
 
         <div class="app-list" id="appsDynamicRenderContainer">
-            </div>
+            <!-- Apps list loaded dynamically from script below -->
+        </div>
     </div>
 
 
+    <!-- ================= VIEW 2: DETAILS STEP 1 (18 SECONDS) ================= -->
     <div id="step1-view" class="app-view-panel">
         <button class="back-btn" onclick="switchToHomeView()"><i class="fas fa-arrow-left"></i> Cancel</button>
         
         <div class="panel-card">
             <img id="st1-icon" src="" class="panel-icon">
             <div id="st1-title" class="panel-title">App Title</div>
-            <span class="vip-tag">SECURE FILE PARAMETER ACTIVE</span>
+            <span class="vip-tag">SECURE FILE ACCESS ROUTE LOADED</span>
         </div>
 
         <div class="info-table">
             <div class="info-row"><i class="fas fa-th-large"></i><div class="info-data"><label>Package Name</label><span id="st1-row-name">-</span></div></div>
-            <div class="info-row"><i class="fas fa-history"></i><div class="info-data"><label>Version Profile</label><span id="st1-row-version">-</span></div></div>
-            <div class="info-row"><i class="fas fa-hdd"></i><div class="info-data"><label>File Allocation Size</label><span id="st1-row-size">-</span></div></div>
+            <div class="info-row"><i class="fas fa-history"></i><div class="info-data"><label>Version Code</label><span id="st1-row-version">-</span></div></div>
+            <div class="info-row"><i class="fas fa-hdd"></i><div class="info-data"><label>Allocation Size</label><span id="st1-row-size">-</span></div></div>
         </div>
 
         <div class="timer-box-layout">
             <div id="timer18sContainer">
-                <div class="status-txt">Analyzing installation scripts... Please wait 18s</div>
+                <div class="status-txt">Analyzing payload parameters... Please wait 18s</div>
                 <div class="linear-progress-wrapper">
                     <div class="linear-line" id="line18s"></div>
                 </div>
@@ -838,16 +820,8 @@
             <div class="ad-app-strip">
                 <img src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=150" class="ad-app-img">
                 <div class="ad-app-details">
-                    <div class="ad-app-name">Spotify Music Mod</div>
-                    <div class="ad-app-tagline">Unlimited Skips, No Ad Interruptions</div>
-                </div>
-                <button class="ad-install-btn" onclick="switchToHomeView()">Get</button>
-            </div>
-            <div class="ad-app-strip">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150" class="ad-app-img">
-                <div class="ad-app-details">
-                    <div class="ad-app-name">CapCut Pro Tool</div>
-                    <div class="ad-app-tagline">VIP Cinematic Filters Active</div>
+                    <div class="ad-app-name">Spotify Music Pro</div>
+                    <div class="ad-app-tagline">Unlimited Skips, Audio Tracks Premium</div>
                 </div>
                 <button class="ad-install-btn" onclick="switchToHomeView()">Get</button>
             </div>
@@ -855,15 +829,16 @@
     </div>
 
 
+    <!-- ================= VIEW 3: STEP 2 TRANSITION SECONDS COUNTER ================= -->
     <div id="step2-view" class="app-view-panel">
         <div class="panel-card">
-            <div class="panel-title" style="color: #ff5858;"><i class="fas fa-shield-alt"></i> Link Verification Page</div>
-            <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">Please hold tightly while our secure server encrypts your redirect handshake keys.</p>
+            <div class="panel-title" style="color: #ff5858;"><i class="fas fa-shield-alt"></i> Redirection Handshake Line</div>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">Please do not exit this environment frame while configuration is ongoing.</p>
         </div>
 
         <div class="timer-box-layout">
             <div id="counter10sBox">
-                <div class="status-txt">Checking system integrity cloud configurations...</div>
+                <div class="status-txt">Mapping dynamic cloud mirrors registry targets...</div>
                 <div class="counter-numeric-text" id="numericCounterText">10</div>
             </div>
             <button class="btn-action-trigger" id="nextBtnStep2" onclick="navigateToStep3View()">
@@ -872,24 +847,24 @@
         </div>
 
         <div class="timer-bottom-content-box">
-            <div class="box-header-title" style="color:#2af598;"><i class="fas fa-terminal"></i> Secure Core Live Console</div>
-            <div class="live-log-item"><i class="fas fa-spinner"></i> <span>Handshaking secure node hash: 0x8F92...</span></div>
-            <div class="live-log-item"><i class="fas fa-spinner"></i> <span>Bypassing payload checking algorithms...</span></div>
-            <div class="live-log-item" style="color:var(--text-muted);"><i class="fas fa-check-circle" style="animation:none; color:#2af598;"></i> <span>SSL Key Generation Completed successfully.</span></div>
+            <div class="box-header-title" style="color:#2af598;"><i class="fas fa-terminal"></i> Core Console Handshake</div>
+            <div class="live-log-item"><i class="fas fa-spinner"></i> <span>Requesting mirror node mapping tokens...</span></div>
+            <div class="live-log-item"><i class="fas fa-spinner"></i> <span>Injecting anti-ad bypass layers natively...</span></div>
         </div>
     </div>
 
 
+    <!-- ================= VIEW 4: STEP 3 FINAL FILE LINE (5 SECONDS) ================= -->
     <div id="step3-view" class="app-view-panel">
         <div class="panel-card">
             <img id="st3-icon" src="" class="panel-icon">
             <div id="st3-title" class="panel-title">App Title</div>
-            <span class="vip-tag" style="background: #00b894; color: #fff;">FINAL STEP READY</span>
+            <span class="vip-tag" style="background: #00b894; color: #fff;">GATEWAY ACCESS DISPATCHED</span>
         </div>
 
         <div class="timer-box-layout">
             <div id="timer5sContainer">
-                <div class="status-txt">Finalizing safe download gateway lines... Please wait 5s</div>
+                <div class="status-txt">Finalizing deep package installation lines... Please wait 5s</div>
                 <div class="linear-progress-wrapper">
                     <div class="linear-line" id="line5s"></div>
                 </div>
@@ -898,22 +873,12 @@
                 <i class="fas fa-cloud-download-alt"></i> Download Now
             </button>
         </div>
-
-        <div class="timer-bottom-content-box">
-            <div class="box-header-title" style="color:#00b894;"><i class="fas fa-user-shield"></i> Play Protect Handshake</div>
-            <div class="ad-app-strip" style="border: 1px solid #00b894; background: rgba(0,184,148,0.05);">
-                <i class="fas fa-shield-virus" style="font-size: 28px; color: #00b894; margin: 0 10px;"></i>
-                <div class="ad-app-details">
-                    <div class="ad-app-name" style="color:#00b894;">100% Virus Free Scanner</div>
-                    <div class="ad-app-tagline">Fully certified package. Final link redirects straight to official Google Play Store app server layers.</div>
-                </div>
-            </div>
-        </div>
     </div>
 
 
+    <!-- ================= SCRIPTS CONTROLLER LOGIC ================= -->
     <script>
-        // --- 1. 15 AUTHENTIC APP STORES LIST DATABASE ---
+        // Database
         const globalAppsDatabase = [
             { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", icon: "https://images.unsplash.com/photo-1611605698335-8b15d27e83f9?w=150", playstore: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically" },
             { id: "whatsapp", name: "WhatsApp Plus Elite", type: "app", version: "2.24.8", size: "65 MB", rating: "4.6", desc: "Enhanced customization profiles with anti-delete tools and extreme privacy parameters enabled.", icon: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150", playstore: "https://play.google.com/store/apps/details?id=com.whatsapp" },
@@ -923,13 +888,7 @@
             { id: "capcut", name: "CapCut Video Pro", type: "app", version: "11.6.0", size: "210 MB", rating: "4.7", desc: "Advanced premium filters composition frames and complete tracking asset options unlocked.", icon: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150", playstore: "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas" },
             { id: "subway", name: "Subway Surfers VIP+", type: "game", version: "3.28.0", size: "155 MB", rating: "4.5", desc: "Infinite execution tracks running cycles with optimized global leaderboard systems active.", icon: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150", playstore: "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf" },
             { id: "spotify", name: "Spotify Premium Mod", type: "app", version: "8.9.22", size: "45 MB", rating: "4.8", desc: "Unlimited skip structures with pure audio parameters music streaming ad-free listening.", icon: "https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=150", playstore: "https://play.google.com/store/apps/details?id=com.spotify.music" },
-            { id: "minecraft", name: "Minecraft Premium Edition", type: "game", version: "1.20.73", size: "620 MB", rating: "4.6", desc: "Explore endless generation simulation sandbox blocks worlds with completely secure packages.", icon: "https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?w=150", playstore: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" },
-            { id: "facebook", name: "Facebook Lite VIP", type: "app", version: "405.0.0", size: "3 MB", rating: "4.2", desc: "Extremely fast navigation profile layouts with active dark system mode configurations integrated.", icon: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=150", playstore: "https://play.google.com/store/apps/details?id=com.facebook.lite" },
-            { id: "candycrush", name: "Candy Crush Saga Mod", type: "game", version: "1.274.0", size: "95 MB", rating: "4.5", desc: "Unlimited logic execution lives and strategic moves profile keys fully accessible.", icon: "https://images.unsplash.com/photo-1553481187-be93c21490a9?w=150", playstore: "https://play.google.com/store/apps/details?id=com.king.candycrushsaga" },
-            { id: "ludo", name: "Ludo King VIP Master", type: "game", version: "8.7.3", size: "62 MB", rating: "4.3", desc: "Premium online interactive desktop board configurations parameters running smoothly.", icon: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=150", playstore: "https://play.google.com/store/apps/details?id=com.ludo.king" },
-            { id: "picsart", name: "PicsArt Photo Gold", type: "app", version: "24.7.1", size: "85 MB", rating: "4.6", desc: "Unlocking advanced image layering matrix tools and full filter properties.", icon: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=150", playstore: "https://play.google.com/store/apps/details?id=com.picsart.studio" },
-            { id: "templerun", name: "Temple Run 2 VIP", type: "game", version: "1.109.0", size: "124 MB", rating: "4.4", desc: "Infinite velocity running tracks maps and safe coin configurations loaded natively.", icon: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150", playstore: "https://play.google.com/store/apps/details?id=com.imangi.templerun2" },
-            { id: "netflix", name: "Netflix Premium Engine", type: "app", version: "8.112.0", size: "72 MB", rating: "4.7", desc: "High dynamic content visual playback engine streaming servers configurations parameters active.", icon: "https://images.unsplash.com/photo-1574375927938-d5a98e8edd86?w=150", playstore: "https://play.google.com/store/apps/details?id=com.netflix.mediaclient" }
+            { id: "minecraft", name: "Minecraft Premium Edition", type: "game", version: "1.20.73", size: "620 MB", rating: "4.6", desc: "Explore endless generation simulation sandbox blocks worlds with completely secure packages.", icon: "https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?w=150", playstore: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" }
         ];
 
         let selectedAppObject = null;
@@ -938,20 +897,15 @@
         let isAppInternalPageActive = false;
         let fakeOtpCountdownReference = null;
 
-        // --- 2. INITIALIZATION ROUTINE ENGINE ---
         window.addEventListener('DOMContentLoaded', () => {
             renderAppsToDOMInterface(globalAppsDatabase);
-            
-            // INTEL BACK BUTTON INTERACTION FIXER
             window.history.replaceState({page: 'auth'}, 'Auth', '');
             window.addEventListener('popstate', function(event) {
-                if (isAppInternalPageActive) {
-                    switchToHomeView();
-                }
+                if (isAppInternalPageActive) switchToHomeView();
             });
         });
 
-        // --- 3. SIDE DRAWER INTERFACE CONTROL SYSTEM ---
+        // Side Menu Drawer
         function toggleSideNavigationDrawer(open) {
             const drawer = document.getElementById('sideNavigationDrawer');
             const overlay = document.getElementById('menuDrawerOverlay');
@@ -966,58 +920,45 @@
 
         function handleDrawerNavigation(category) {
             toggleSideNavigationDrawer(false);
-            // Check if main dashboard interface is currently unlocked
             if(document.getElementById('home-view').style.display === "block") {
                 filterCategoryList(category);
             } else {
-                alert("Please complete authentication portal steps first!");
+                alert("Please complete access verification phases first!");
             }
         }
 
-        // --- 4. FAKE AUTHENTICATION LOGIC SWITCHERS ---
-        function toggleAuthPanels(mode) {
-            document.getElementById('form-panel-verification').style.display = "none";
-            if(mode === 'login') {
-                document.getElementById('auth-main-title').innerText = "Login Required";
-                document.getElementById('tab-login-btn').classList.add('active-auth-tab');
-                document.getElementById('tab-register-btn').classList.remove('active-auth-tab');
-                document.getElementById('form-panel-login').style.display = "flex";
-                document.getElementById('form-panel-register').style.display = "none";
-            } else {
-                document.getElementById('auth-main-title').innerText = "Register Account";
-                document.getElementById('tab-register-btn').classList.add('active-auth-tab');
-                document.getElementById('tab-login-btn').classList.remove('active-auth-tab');
-                document.getElementById('form-panel-register').style.display = "flex";
-                document.getElementById('form-panel-login').style.display = "none";
-            }
+        // Auth Screens Workflow Transitions
+        function switchAuthScreen(screenId) {
+            document.querySelectorAll('.auth-form-panel').forEach(panel => panel.style.display = "none");
+            document.getElementById('screen-' + screenId).style.display = "flex";
         }
 
-        function validateAndProcessFakeAuth(type) {
-            let emailField = (type === 'login') ? document.getElementById('login-email-input').value : document.getElementById('reg-email-input').value;
+        function processAuthFlow(type) {
+            let emailValue = (type === 'login') ? document.getElementById('login-email-input').value : document.getElementById('reg-email-input').value;
             
-            // Standard validation parameter checker
-            if(!emailField.includes('@')) {
-                alert("Invalid configuration! Please enter a valid email address containing '@' symbols.");
+            if(!emailValue.includes('@')) {
+                alert("Please enter a valid real email containing '@'.");
                 return;
             }
 
             if(type === 'login') {
-                // Direct bypass injection on mock profile login
+                // If login, proceed direct bypass
                 bypassVerificationToMainDashboard();
             } else {
-                // Switch panel structure into mock OTP loop window
-                document.getElementById('form-panel-register').style.display = "none";
-                document.getElementById('form-panel-verification').style.display = "flex";
+                // If register, transition straight to Fake OTP sequence screen
+                switchAuthScreen('otp');
                 triggerFakeOtpResendSequence();
             }
         }
 
         function triggerFakeOtpResendSequence() {
             if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
-            
             const timerContainer = document.getElementById('fakeOtpTimerDisplay');
+            const resendBtn = document.getElementById('resend-link-btn');
             const countdownSpan = document.getElementById('otpSecondsCount');
+            
             timerContainer.style.display = "block";
+            resendBtn.style.style = "none";
             
             let timeLimit = 60;
             countdownSpan.innerText = timeLimit;
@@ -1028,26 +969,25 @@
                 if(timeLimit <= 0) {
                     clearInterval(fakeOtpCountdownReference);
                     timerContainer.style.display = "none";
+                    resendBtn.style.display = "block";
                 }
             }, 1000);
         }
 
         function bypassVerificationToMainDashboard() {
             if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
-            // Dynamic sequence unlocking the home dashboard platform interface
             document.getElementById('auth-portal-screen').style.display = "none";
             document.getElementById('home-view').style.display = "block";
             window.history.replaceState({page: 'home'}, 'Home', '');
             window.scrollTo(0,0);
         }
 
-        // --- 5. DATA RENDERING SYSTEMS ---
+        // Main Site App Functions
         function renderAppsToDOMInterface(dataArray) {
             const container = document.getElementById('appsDynamicRenderContainer');
             container.innerHTML = ""; 
-            
             dataArray.forEach(app => {
-                const cardHTML = `
+                container.innerHTML += `
                     <div class="app-card" data-type="${app.type}" onclick="initiateDownloadSequence('${app.id}')">
                         <div class="app-main-info">
                             <img src="${app.icon}" class="app-icon" alt="icon">
@@ -1066,7 +1006,6 @@
                         </div>
                     </div>
                 `;
-                container.innerHTML += cardHTML;
             });
         }
 
@@ -1083,7 +1022,6 @@
             window.scrollTo(0,0);
         }
 
-        // --- STEP 1: 18 SECONDS TIMER EXECUTION ---
         function initiateDownloadSequence(appId) {
             selectedAppObject = globalAppsDatabase.find(x => x.id === appId);
             if(!selectedAppObject) return;
@@ -1118,7 +1056,6 @@
             }, 18000);
         }
 
-        // --- STEP 2: 10 SECONDS WAITING ENGINE ---
         function navigateToStep2View() {
             clearAllTimerStates();
             document.getElementById('step1-view').style.display = "none";
@@ -1145,7 +1082,6 @@
             }, 1000);
         }
 
-        // --- STEP 3: 5 SECONDS FINAL TIME BAR ---
         function navigateToStep3View() {
             clearAllTimerStates();
             document.getElementById('step2-view').style.display = "none";
@@ -1178,7 +1114,6 @@
             }
         }
 
-        // --- SEARCH ENGINE INTERFACE ---
         function executeSearchFilter() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('app-card');
@@ -1197,7 +1132,6 @@
             noResults.style.display = (matched === 0) ? "block" : "none";
         }
 
-        // --- FILTER CATEGORIES ENGINE ---
         function filterCategoryList(category) {
             let cards = document.getElementsByClassName('app-card');
             let title = document.getElementById('list-title');
@@ -1227,7 +1161,6 @@
             }
         }
 
-        // Theme switching utilities
         function toggleThemeSystem() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme');
