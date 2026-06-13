@@ -16,6 +16,7 @@
             --search-bg: #162447;
             --search-border: #1f4068;
             --text-muted: #8492a6;
+            --primary-accent: #00b894;
         }
 
         [data-theme="light"] {
@@ -26,6 +27,7 @@
             --search-bg: #ffffff;
             --search-border: #ccd6dd;
             --text-muted: #657786;
+            --primary-accent: #2ecc71;
         }
 
         * {
@@ -39,6 +41,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             padding-bottom: 60px;
+            overflow-x: hidden;
         }
 
         /* --- HEADER NAVIGATION --- */
@@ -52,6 +55,20 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-trigger-btn {
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-color);
+            background: none;
+            border: none;
         }
 
         .logo-area {
@@ -94,6 +111,172 @@
             cursor: pointer;
         }
 
+        /* --- SIDE NAVIGATION DRAWER CONTROLS --- */
+        .side-navigation-drawer {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background-color: var(--card-bg);
+            z-index: 1000;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+            transition: left 0.3s ease;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+        }
+
+        .side-navigation-drawer.drawer-open {
+            left: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .drawer-close-btn {
+            font-size: 22px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+        }
+
+        .drawer-menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .drawer-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-color);
+            transition: background 0.2s;
+        }
+
+        .drawer-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .drawer-item i {
+            width: 24px;
+            font-size: 18px;
+            color: var(--primary-accent);
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+            display: none;
+        }
+
+        /* --- AUTH LAYER LANDING SCREEN --- */
+        .auth-portal-screen-wrapper {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 25px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            text-align: center;
+        }
+
+        .auth-tab-row {
+            display: flex;
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
+            padding: 5px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-muted);
+        }
+
+        .auth-tab.active-auth-tab {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .auth-form-panel {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-input-group {
+            position: relative;
+            text-align: left;
+        }
+
+        .auth-input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .auth-input-group input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            background: var(--bg-color);
+            border: 1px solid var(--search-border);
+            border-radius: 12px;
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .auth-input-group i {
+            position: absolute;
+            left: 15px;
+            bottom: 14px;
+            color: var(--text-muted);
+        }
+
+        .auth-action-btn {
+            background: linear-gradient(135deg, #2af598 0%, #009ed2 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .verification-counter-box {
+            font-size: 15px;
+            color: #ff5858;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
         /* --- COMMON PAGES VISIBILITY WRAPPER --- */
         .app-view-panel {
             display: none;
@@ -103,7 +286,7 @@
         }
 
         #home-view {
-            display: block;
+            display: none; /* Initially hidden until fake register/login is bypassed */
         }
 
         /* --- SEARCH SECTION --- */
@@ -480,7 +663,6 @@
             font-weight: bold;
         }
 
-        /* Server log item animation placeholder */
         .live-log-item {
             font-size: 13px;
             color: #2af598;
@@ -503,16 +685,89 @@
 </head>
 <body>
 
+    <div class="drawer-overlay" id="menuDrawerOverlay" onclick="toggleSideNavigationDrawer(false)"></div>
+    <div class="side-navigation-drawer" id="sideNavigationDrawer">
+        <div class="drawer-header">
+            <div class="logo-area">
+                <div class="logo-icon">G</div>
+                <div class="logo-text">Menu Panel</div>
+            </div>
+            <button class="drawer-close-btn" onclick="toggleSideNavigationDrawer(false)"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="drawer-menu-list">
+            <div class="drawer-item" onclick="handleDrawerNavigation('all')"><i class="fas fa-home"></i> Dashboard Home</div>
+            <div class="drawer-item" onclick="handleDrawerNavigation('game')"><i class="fas fa-gamepad"></i> Premium Games</div>
+            <div class="drawer-item" onclick="handleDrawerNavigation('app')"><i class="fas fa-th-large"></i> Pro Mobile Apps</div>
+            <div class="drawer-item" onclick="toggleThemeSystem(); toggleSideNavigationDrawer(false);"><i class="fas fa-lightbulb"></i> Switch Theme Mode</div>
+            <div class="drawer-item" onclick="alert('Device system status configuration is fully secure.')"><i class="fas fa-shield-alt"></i> Security Logs</div>
+        </div>
+    </div>
+
     <header>
-        <div class="logo-area" onclick="switchToHomeView()">
-            <div class="logo-icon">G</div>
-            <div class="logo-text">Getmods<span>download & enjoy</span></div>
+        <div class="header-left">
+            <button class="menu-trigger-btn" onclick="toggleSideNavigationDrawer(true)"><i class="fas fa-bars"></i></button>
+            <div class="logo-area" onclick="switchToHomeView()">
+                <div class="logo-icon">G</div>
+                <div class="logo-text">Getmods<span>download & enjoy</span></div>
+            </div>
         </div>
         <div class="nav-icons">
             <i class="fas fa-search" onclick="focusSearchInput()"></i>
             <i class="fas fa-moon" id="theme-icon-top" onclick="toggleThemeSystem()"></i>
         </div>
     </header>
+
+    <div id="auth-portal-screen" class="auth-portal-screen-wrapper">
+        <div class="logo-icon" style="margin: 0 auto 15px auto; width: 50px; height: 50px; font-size: 26px;">G</div>
+        <h2 style="margin-bottom: 20px; font-size: 22px;" id="auth-main-title">Login Required</h2>
+        
+        <div class="auth-tab-row">
+            <div class="auth-tab active-auth-tab" id="tab-login-btn" onclick="toggleAuthPanels('login')">Login Screen</div>
+            <div class="auth-tab" id="tab-register-btn" onclick="toggleAuthPanels('register')">Registration</div>
+        </div>
+
+        <div class="auth-form-panel" id="form-panel-login" style="display: flex;">
+            <div class="auth-input-group">
+                <label>Email Address</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="login-email-input" placeholder="name@email.com">
+            </div>
+            <div class="auth-input-group">
+                <label>Security Password</label>
+                <i class="fas fa-lock"></i>
+                <input type="password" id="login-pass-input" placeholder="••••••••">
+            </div>
+            <button class="auth-action-btn" onclick="validateAndProcessFakeAuth('login')">Login With Email</button>
+        </div>
+
+        <div class="auth-form-panel" id="form-panel-register">
+            <div class="auth-input-group">
+                <label>Create Email Address</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="reg-email-input" placeholder="username@email.com">
+            </div>
+            <div class="auth-input-group">
+                <label>Choose Strong Password</label>
+                <i class="fas fa-lock"></i>
+                <input type="password" id="reg-pass-input" placeholder="Enter secure password">
+            </div>
+            <button class="auth-action-btn" id="reg-main-action-btn" onclick="validateAndProcessFakeAuth('register')">Verify Email</button>
+            <div class="verification-counter-box" id="fakeOtpTimerDisplay" style="display: none;"> OTP Sent! Resend button locks for: <span id="otpSecondsCount">60</span>s</div>
+        </div>
+
+        <div class="auth-form-panel" id="form-panel-verification" style="margin-top: 10px;">
+            <div style="border-top: 1px dashed var(--border-color); padding-top: 15px;">
+                <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Verification dynamic sequence keys issued to inbox. Enter code below:</p>
+            </div>
+            <div class="auth-input-group">
+                <label>Enter received OTP token</label>
+                <i class="fas fa-key"></i>
+                <input type="text" id="verification-otp-input" placeholder="Any code skips access parameters">
+            </div>
+            <button class="auth-action-btn" onclick="bypassVerificationToMainDashboard()" style="background: #00b894;">Confirm & Unlock Packages</button>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:10px; cursor:pointer;" onclick="triggerFakeOtpResendSequence()">Didn't receive code? <span style="color:#00f2fe; text-decoration: underline;">Resend now</span></p>
+        </div>
+    </div>
 
     <div id="home-view">
         <div class="search-container">
@@ -681,13 +936,14 @@
         let runningGlobalTimerReference = null;
         let counterIntervalTimerReference = null;
         let isAppInternalPageActive = false;
+        let fakeOtpCountdownReference = null;
 
         // --- 2. INITIALIZATION ROUTINE ENGINE ---
         window.addEventListener('DOMContentLoaded', () => {
             renderAppsToDOMInterface(globalAppsDatabase);
             
             // INTEL BACK BUTTON INTERACTION FIXER
-            window.history.replaceState({page: 'home'}, 'Home', '');
+            window.history.replaceState({page: 'auth'}, 'Auth', '');
             window.addEventListener('popstate', function(event) {
                 if (isAppInternalPageActive) {
                     switchToHomeView();
@@ -695,6 +951,97 @@
             });
         });
 
+        // --- 3. SIDE DRAWER INTERFACE CONTROL SYSTEM ---
+        function toggleSideNavigationDrawer(open) {
+            const drawer = document.getElementById('sideNavigationDrawer');
+            const overlay = document.getElementById('menuDrawerOverlay');
+            if(open) {
+                drawer.classList.add('drawer-open');
+                overlay.style.display = "block";
+            } else {
+                drawer.classList.remove('drawer-open');
+                overlay.style.display = "none";
+            }
+        }
+
+        function handleDrawerNavigation(category) {
+            toggleSideNavigationDrawer(false);
+            // Check if main dashboard interface is currently unlocked
+            if(document.getElementById('home-view').style.display === "block") {
+                filterCategoryList(category);
+            } else {
+                alert("Please complete authentication portal steps first!");
+            }
+        }
+
+        // --- 4. FAKE AUTHENTICATION LOGIC SWITCHERS ---
+        function toggleAuthPanels(mode) {
+            document.getElementById('form-panel-verification').style.display = "none";
+            if(mode === 'login') {
+                document.getElementById('auth-main-title').innerText = "Login Required";
+                document.getElementById('tab-login-btn').classList.add('active-auth-tab');
+                document.getElementById('tab-register-btn').classList.remove('active-auth-tab');
+                document.getElementById('form-panel-login').style.display = "flex";
+                document.getElementById('form-panel-register').style.display = "none";
+            } else {
+                document.getElementById('auth-main-title').innerText = "Register Account";
+                document.getElementById('tab-register-btn').classList.add('active-auth-tab');
+                document.getElementById('tab-login-btn').classList.remove('active-auth-tab');
+                document.getElementById('form-panel-register').style.display = "flex";
+                document.getElementById('form-panel-login').style.display = "none";
+            }
+        }
+
+        function validateAndProcessFakeAuth(type) {
+            let emailField = (type === 'login') ? document.getElementById('login-email-input').value : document.getElementById('reg-email-input').value;
+            
+            // Standard validation parameter checker
+            if(!emailField.includes('@')) {
+                alert("Invalid configuration! Please enter a valid email address containing '@' symbols.");
+                return;
+            }
+
+            if(type === 'login') {
+                // Direct bypass injection on mock profile login
+                bypassVerificationToMainDashboard();
+            } else {
+                // Switch panel structure into mock OTP loop window
+                document.getElementById('form-panel-register').style.display = "none";
+                document.getElementById('form-panel-verification').style.display = "flex";
+                triggerFakeOtpResendSequence();
+            }
+        }
+
+        function triggerFakeOtpResendSequence() {
+            if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
+            
+            const timerContainer = document.getElementById('fakeOtpTimerDisplay');
+            const countdownSpan = document.getElementById('otpSecondsCount');
+            timerContainer.style.display = "block";
+            
+            let timeLimit = 60;
+            countdownSpan.innerText = timeLimit;
+
+            fakeOtpCountdownReference = setInterval(() => {
+                timeLimit--;
+                countdownSpan.innerText = timeLimit;
+                if(timeLimit <= 0) {
+                    clearInterval(fakeOtpCountdownReference);
+                    timerContainer.style.display = "none";
+                }
+            }, 1000);
+        }
+
+        function bypassVerificationToMainDashboard() {
+            if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
+            // Dynamic sequence unlocking the home dashboard platform interface
+            document.getElementById('auth-portal-screen').style.display = "none";
+            document.getElementById('home-view').style.display = "block";
+            window.history.replaceState({page: 'home'}, 'Home', '');
+            window.scrollTo(0,0);
+        }
+
+        // --- 5. DATA RENDERING SYSTEMS ---
         function renderAppsToDOMInterface(dataArray) {
             const container = document.getElementById('appsDynamicRenderContainer');
             container.innerHTML = ""; 
@@ -723,7 +1070,6 @@
             });
         }
 
-        // --- 3. SYSTEM NAVIGATION FLOWS ROUTERS ---
         function clearAllTimerStates() {
             if(runningGlobalTimerReference) clearTimeout(runningGlobalTimerReference);
             if(counterIntervalTimerReference) clearInterval(counterIntervalTimerReference);
@@ -742,7 +1088,6 @@
             selectedAppObject = globalAppsDatabase.find(x => x.id === appId);
             if(!selectedAppObject) return;
 
-            // Register push state inside browser to trick the hardware back button
             isAppInternalPageActive = true;
             window.history.pushState({page: 'internal'}, 'Details', '#view');
 
