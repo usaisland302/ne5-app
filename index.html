@@ -107,9 +107,32 @@
 
         .nav-icons {
             display: flex;
-            gap: 20px;
+            align-items: center;
+            gap: 15px;
             font-size: 20px;
             cursor: pointer;
+        }
+
+        /* --- NEW PREMIUM VIP BUTTON ANIMATION --- */
+        .vip-channel-btn {
+            background: linear-gradient(45deg, #ffd700, #ff8800);
+            color: #000000 !important;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            animation: vipPulseGlow 1.2s infinite alternate;
+        }
+
+        @keyframes vipPulseGlow {
+            0% { transform: scale(0.95); box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            100% { transform: scale(1.03); box-shadow: 0 0 15px rgba(255, 136, 0, 0.9); }
         }
 
         /* --- SIDE NAVIGATION DRAWER --- */
@@ -196,6 +219,7 @@
             border: 1px solid var(--border-color);
             border-radius: 24px;
             text-align: center;
+            display: none; /* Controlled dynamically by localstorage checker */
         }
 
         .auth-form-panel {
@@ -275,7 +299,7 @@
         }
 
         #home-view {
-            display: none; /* Hidden until unlocked via auth workflow */
+            display: none; 
         }
 
         /* --- SEARCH SECTION --- */
@@ -384,7 +408,7 @@
             align-items: center;
         }
 
-        /* --- MAGICAL FIRE CONTAINER (REPLACING IMAGE ICON) --- */
+        /* --- MAGICAL FIRE CONTAINER --- */
         .magical-fire-container {
             width: 70px;
             height: 70px;
@@ -495,7 +519,7 @@
             display: none;
         }
 
-        /* --- TIMERS TIMELINES SYST --- */
+        /* --- TIMERS PANEL LAYOUTS --- */
         .back-btn {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -732,6 +756,10 @@
             </div>
         </div>
         <div class="nav-icons">
+            <!-- DYNAMIC VIP WHATSAPP LINK BUTTON -->
+            <a href="https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19" target="_blank" class="vip-channel-btn">
+                <i class="fab fa-whatsapp"></i> VIP CHANNEL
+            </a>
             <i class="fas fa-search" onclick="focusSearchInput()"></i>
             <i class="fas fa-moon" id="theme-icon-top" onclick="toggleThemeSystem()"></i>
         </div>
@@ -826,7 +854,7 @@
         <div class="no-results" id="noResultsText">No packages found match parameters.</div>
 
         <div class="app-list" id="appsDynamicRenderContainer">
-            <!-- Apps list loaded dynamically with Magical Fire Styles -->
+            <!-- Dynamic Apps Cards Loaded with Fire Elements -->
         </div>
     </div>
 
@@ -875,7 +903,7 @@
     </div>
 
 
-    <!-- ================= VIEW 3: STEP 2 TRANSITION SECONDS COUNTER ================= -->
+    <!-- ================= VIEW 3: STEP 2 TRANSITION COUNTER ================= -->
     <div id="step2-view" class="app-view-panel">
         <div class="panel-card">
             <div class="panel-title" style="color: #ff5858;"><i class="fas fa-shield-alt"></i> Redirection Handshake Line</div>
@@ -945,15 +973,31 @@
         let isAppInternalPageActive = false;
         let fakeOtpCountdownReference = null;
 
+        // ONE-TIME AUTHCHECK RULES (ON REFRESH/LOAD)
         window.addEventListener('DOMContentLoaded', () => {
             renderAppsToDOMInterface(globalAppsDatabase);
-            window.history.replaceState({page: 'auth'}, 'Auth', '');
+            
+            // Check if user is already authenticated once before
+            const isAuthenticatedUser = localStorage.getItem("siteUserUnlockedStatus");
+
+            if(isAuthenticatedUser === "true") {
+                // Seedha dashboard open karega, login screen skip ho jayegi
+                document.getElementById('auth-portal-screen').style.display = "none";
+                document.getElementById('home-view').style.display = "block";
+                window.history.replaceState({page: 'home'}, 'Home', '');
+            } else {
+                // Agar pehli baar aya h to authentication form load hoga
+                document.getElementById('auth-portal-screen').style.display = "block";
+                document.getElementById('home-view').style.display = "none";
+                window.history.replaceState({page: 'auth'}, 'Auth', '');
+            }
+
             window.addEventListener('popstate', function(event) {
                 if (isAppInternalPageActive) switchToHomeView();
             });
         });
 
-        // Helper to convert plain string name into split characters with CSS variable indexing for magical wave
+        // Convert plain string name into split characters for wave
         function generateMagicalWaveHTML(appNameString) {
             let htmlOutput = "";
             for (let i = 0; i < appNameString.length; i++) {
@@ -989,7 +1033,7 @@
             }
         }
 
-        // Auth Screens Workflow Transitions
+        // Auth Screens Flow Transitions
         function switchAuthScreen(screenId) {
             document.querySelectorAll('.auth-form-panel').forEach(panel => panel.style.display = "none");
             document.getElementById('screen-' + screenId).style.display = "flex";
@@ -1018,7 +1062,7 @@
             const countdownSpan = document.getElementById('otpSecondsCount');
             
             timerContainer.style.display = "block";
-            resendBtn.style.style = "none";
+            resendBtn.style.display = "none";
             
             let timeLimit = 60;
             countdownSpan.innerText = timeLimit;
@@ -1034,15 +1078,20 @@
             }, 1000);
         }
 
+        // SUCCESSFUL VERIFICATION FUNCTION (SAVES STATE FOR ONE-TIME ONLY RULE)
         function bypassVerificationToMainDashboard() {
             if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
+            
+            // Set identification rules inside browser permanently
+            localStorage.setItem("siteUserUnlockedStatus", "true");
+
             document.getElementById('auth-portal-screen').style.display = "none";
             document.getElementById('home-view').style.display = "block";
             window.history.replaceState({page: 'home'}, 'Home', '');
             window.scrollTo(0,0);
         }
 
-        // Main Site App Functions - Updated with Fire & Wave Effects
+        // Main Site App Functions - Fire & Wave Renderer
         function renderAppsToDOMInterface(dataArray) {
             const container = document.getElementById('appsDynamicRenderContainer');
             container.innerHTML = ""; 
@@ -1051,12 +1100,10 @@
                 container.innerHTML += `
                     <div class="app-card" data-type="${app.type}" onclick="initiateDownloadSequence('${app.id}')">
                         <div class="app-main-info">
-                            <!-- MAGICAL FIRE ELEMENT INSTEAD OF ICON IMAGE -->
                             <div class="magical-fire-container">
                                 <i class="fas fa-fire"></i>
                             </div>
                             <div class="app-details">
-                                <!-- HILTA HUA MAGICAL NAME -->
                                 <div class="magical-wave-text">${waveTextHTML} <span class="vip-tag">VIP+</span></div>
                                 <div class="app-rating"><i class="fas fa-star"></i> ${app.rating}</div>
                             </div>
