@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getmods - Download & Enjoy VIP Mods</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -298,7 +299,7 @@
         }
 
         #home-view {
-            display: block; /* Default visible for showcase */
+            display: none; 
         }
 
         /* --- SEARCH --- */
@@ -499,12 +500,11 @@
             border-radius: 20px;
             font-weight: bold;
             border: none;
-            cursor: pointer;
         }
 
         .vip-tag {
             background: linear-gradient(45deg, #ffd700, #ffa500);
-            color: #000;
+            color: #00!important;
             font-size: 10px;
             padding: 2px 6px;
             border-radius: 4px;
@@ -512,101 +512,200 @@
             margin-left: 5px;
         }
 
-        /* --- NEW PURCHASE MODAL SYSTEM STYLES --- */
-        .premium-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 11, 20, 0.95);
-            z-index: 2000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-        }
-
-        .premium-modal-card {
-            background: var(--card-bg);
-            border: 2px solid #ffd700;
-            border-radius: 28px;
-            width: 100%;
-            max-width: 450px;
-            padding: 30px 20px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        .no-results {
             text-align: center;
-            position: relative;
+            padding: 30px;
+            color: var(--text-muted);
+            display: none;
         }
 
-        .premium-badge {
-            background: linear-gradient(45deg, #ffd700, #ff8800);
-            color: #000;
-            font-size: 12px;
-            font-weight: 800;
-            padding: 6px 16px;
+        /* --- TIMERS & PROGRESS --- */
+        .back-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 10px 20px;
             border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
             display: inline-block;
-            margin-bottom: 15px;
         }
 
-        .pricing-plans {
+        .panel-card {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .panel-icon-placeholder {
+            width: 90px;
+            height: 90px;
+            border-radius: 24px;
+            margin: 0 auto 15px auto;
+            background: #050b14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ff5858;
+            box-shadow: 0 0 20px rgba(255, 88, 88, 0.6);
+        }
+
+        .panel-icon-placeholder i {
+            font-size: 45px;
+            color: #ff761b;
+            animation: flickeringFire 0.5s infinite alternate;
+        }
+
+        .panel-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .info-table {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin: 20px 0;
+            margin-bottom: 25px;
         }
 
-        .plan-card {
-            background: var(--bg-color);
+        .info-row {
+            background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 15px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .plan-card:hover, .plan-card.selected-plan {
-            border-color: #ffd700;
-            background: rgba(255, 215, 0, 0.05);
-        }
-
-        .plan-info { text-align: left; }
-        .plan-name { font-weight: bold; font-size: 16px; }
-        .plan-price { font-size: 18px; font-weight: 800; color: #ffd700; }
-
-        .payment-methods {
-            display: flex;
-            justify-content: center;
             gap: 15px;
-            margin: 20px 0;
         }
 
-        .pay-btn {
+        .info-row i {
+            font-size: 20px;
+            color: #00b894;
+            width: 30px;
+            text-align: center;
+        }
+
+        .info-data label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .info-data span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .timer-box-layout {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .status-txt {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .linear-progress-wrapper {
             width: 100%;
-            background: linear-gradient(45deg, #ffd700, #ff8800);
-            color: #000;
+            height: 6px;
+            background-color: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .linear-line {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+
+        .run-18s-timer { animation: reduceLine 18s linear forwards; }
+        .run-5s-timer { animation: reduceLine 5s linear forwards; }
+
+        @keyframes reduceLine {
+            from { transform: scaleX(1); }
+            to { transform: scaleX(0); }
+        }
+
+        .btn-action-trigger {
+            background: linear-gradient(135deg, #2af598 0%, #009ed2 100%);
+            color: white;
             font-size: 18px;
             font-weight: bold;
-            padding: 14px;
-            border-radius: 14px;
+            padding: 15px 40px;
+            border-radius: 30px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 136, 0, 0.4);
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(42, 245, 152, 0.3);
+            display: none;
         }
 
-        .close-premium-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 20px;
-            color: var(--text-muted);
-            cursor: pointer;
-            background: none;
+        .counter-numeric-text {
+            font-size: 48px;
+            font-weight: 800;
+            color: #00b894;
+            margin: 15px 0;
+        }
+
+        .timer-bottom-content-box {
+            background-color: var(--card-bg);
+            border: 1px dashed var(--search-border);
+            border-radius: 24px;
+            padding: 20px;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .box-header-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ff5858;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ad-app-strip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.04);
+            padding: 12px;
+            border-radius: 16px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .ad-install-btn {
+            background: #1f4068;
             border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
         }
 
         .live-log-item {
@@ -618,212 +717,556 @@
             align-items: center;
             gap: 8px;
         }
+
         .live-log-item i { animation: spinLog 1s linear infinite; }
-        @keyframes spinLog { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spinLog {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-left">
-            <button class="menu-trigger-btn" onclick="toggleDrawer()"><i class="fas fa-bars"></i></button>
+    <!-- Side Menu Drawer -->
+    <div class="drawer-overlay" id="menuDrawerOverlay" onclick="toggleSideNavigationDrawer(false)"></div>
+    <div class="side-navigation-drawer" id="sideNavigationDrawer">
+        <div class="drawer-header">
             <div class="logo-area">
                 <div class="logo-icon">G</div>
-                <div class="logo-text">Getmods <span>VIP Hub</span></div>
+                <div class="logo-text">Menu Panel</div>
             </div>
-        </div>
-        <a href="#" class="vip-channel-btn"><i class="fas fa-crown"></i> Join VIP</a>
-    </header>
-
-    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
-
-    <div class="side-navigation-drawer" id="sideDrawer">
-        <div class="drawer-header">
-            <h3>Navigation</h3>
-            <button class="drawer-close-btn" onclick="toggleDrawer()"><i class="fas fa-times"></i></button>
+            <button class="drawer-close-btn" onclick="toggleSideNavigationDrawer(false)"><i class="fas fa-times"></i></button>
         </div>
         <div class="drawer-menu-list">
-            <div class="drawer-item"><i class="fas fa-home"></i> Home</div>
-            <div class="drawer-item"><i class="fas fa-gamepad"></i> Premium Games</div>
-            <div class="drawer-item"><i class="fas fa-cubes"></i> Pro Apps</div>
-            <div class="drawer-item"><i class="fas fa-question-circle"></i> FAQs</div>
+            <div class="drawer-item" onclick="handleDrawerNavigation('all')"><i class="fas fa-home"></i> Dashboard Home</div>
+            <div class="drawer-item" onclick="handleDrawerNavigation('game')"><i class="fas fa-gamepad"></i> Premium Games</div>
+            <div class="drawer-item" onclick="handleDrawerNavigation('app')"><i class="fas fa-th-large"></i> Pro Mobile Apps</div>
+            <div class="drawer-item" onclick="toggleThemeSystem(); toggleSideNavigationDrawer(false);"><i class="fas fa-lightbulb"></i> Switch Theme Mode</div>
+            <div class="drawer-item" onclick="alert('System secure logs updating...')"><i class="fas fa-shield-alt"></i> Security Status</div>
         </div>
     </div>
 
-    <div id="home-view" class="app-view-panel">
+    <!-- Header Block -->
+    <header>
+        <div class="header-left">
+            <button class="menu-trigger-btn" onclick="toggleSideNavigationDrawer(true)"><i class="fas fa-bars"></i></button>
+            <div class="logo-area" onclick="switchToHomeView()">
+                <div class="logo-icon">G</div>
+                <div class="logo-text">Getmods<span>download & enjoy</span></div>
+            </div>
+        </div>
+        <div class="nav-icons">
+            <a href="https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19" target="_blank" class="vip-channel-btn">
+                <i class="fab fa-whatsapp"></i> VIP CHANNEL
+            </a>
+            <i class="fas fa-search" onclick="focusSearchInput()"></i>
+            <i class="fas fa-moon" id="theme-icon-top" onclick="toggleThemeSystem()"></i>
+        </div>
+    </header>
+
+    <!-- ================= AUTH SYSTEM ================= -->
+    <div id="auth-portal-screen" class="auth-portal-screen-wrapper">
+        <div class="logo-icon" style="margin: 0 auto 15px auto; width: 50px; height: 50px; font-size: 26px;">G</div>
         
+        <!-- Screen 1: Login -->
+        <div class="auth-form-panel" id="screen-login" style="display: flex;">
+            <h2 style="margin-bottom: 20px; font-size: 22px;">Login With Email</h2>
+            <div class="auth-input-group">
+                <label>Email Address</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="login-email-input" placeholder="name@email.com">
+            </div>
+            <div class="auth-input-group">
+                <label>Password</label>
+                <i class="fas fa-lock"></i>
+                <input type="password" id="login-pass-input" placeholder="••••••••">
+            </div>
+            <button class="auth-action-btn" onclick="processAuthFlow('login')">Login</button>
+            <div class="auth-toggle-link">Don't have an account? <span onclick="switchAuthScreen('register')">Register here</span></div>
+        </div>
+
+        <!-- Screen 2: Register -->
+        <div class="auth-form-panel" id="screen-register">
+            <h2 style="margin-bottom: 20px; font-size: 22px;">Registration</h2>
+            <div class="auth-input-group">
+                <label>Enter Email Address</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="reg-email-input" placeholder="username@email.com">
+            </div>
+            <div class="auth-input-group">
+                <label>Password</label>
+                <i class="fas fa-lock"></i>
+                <input type="password" id="reg-pass-input" placeholder="Choose a password">
+            </div>
+            <button class="auth-action-btn" onclick="processAuthFlow('register')">Verify Email</button>
+            <div class="auth-toggle-link">Already have an account? <span onclick="switchAuthScreen('login')">Login instead</span></div>
+        </div>
+
+        <!-- Screen 3: OTP -->
+        <div class="auth-form-panel" id="screen-otp">
+            <h2 style="margin-bottom: 10px; font-size: 22px;">Email Verification</h2>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">OTP has been sent to your email. Please enter it below to access downloads.</p>
+            
+            <div class="auth-input-group">
+                <label>Enter OTP Code</label>
+                <i class="fas fa-key"></i>
+                <input type="text" id="verification-otp-input" placeholder="Enter any verification code">
+            </div>
+            <button class="auth-action-btn" onclick="bypassVerificationToMainDashboard()" style="background: #00b894;">Verify & Open Site</button>
+            
+            <div class="verification-counter-box" id="fakeOtpTimerDisplay">OTP Sent! Resend button locked for: <span id="otpSecondsCount">60</span>s</div>
+            <div class="auth-toggle-link" id="resend-link-btn" style="display:none; margin-top:15px;">Didn't get code? <span onclick="triggerFakeOtpResendSequence()">Resend Code</span></div>
+        </div>
+    </div>
+
+    <!-- ================= MAIN DASHBOARD (VIEW 1) ================= -->
+    <div id="home-view">
         <div class="search-container">
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search Premium Mods & Apps...">
+                <input type="text" id="searchInput" placeholder="Search from thousands of apps..." onkeyup="executeSearchFilter()">
             </div>
         </div>
 
         <div class="category-grid">
-            <div class="cat-card cat-games"><i class="fas fa-gamepad"></i> Games</div>
-            <div class="cat-apps class cat-apps"><i class="fas fa-mobile-alt"></i> Apps</div>
+            <div class="cat-card cat-home active-tab" id="tab-all" onclick="filterCategoryList('all')">
+                <i class="fas fa-home"></i><span>Home</span>
+            </div>
+            <div class="cat-card cat-games" id="tab-game" onclick="filterCategoryList('game')">
+                <i class="fas fa-gamepad"></i><span>Games</span>
+            </div>
+            <div class="cat-card cat-apps" id="tab-app" onclick="filterCategoryList('app')">
+                <i class="fas fa-th-large"></i><span>Apps</span>
+            </div>
+            <div class="cat-card cat-blog" onclick="alert('Blogs database updating...')">
+                <i class="fas fa-bell"></i><span>Blog</span>
+            </div>
+            <div class="cat-card cat-faqs" onclick="alert('Security Logs are completely functional!')">
+                <i class="fas fa-comment-dots"></i><span>FAQs</span>
+            </div>
+            <div class="cat-card cat-dark" onclick="toggleThemeSystem()">
+                <i class="fas fa-lightbulb"></i><span id="theme-text">Light Mode</span>
+            </div>
         </div>
 
-        <div class="section-title">Exclusive Premium Mods</div>
+        <div class="section-title" id="list-title">VIP Premium Mods</div>
+        <div class="no-results" id="noResultsText">No packages found match parameters.</div>
 
-        <div class="app-list">
-            
-            <div class="app-card">
-                <div class="app-main-info">
-                    <div class="magical-fire-container">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="app-details">
-                        <div class="magical-wave-text">
-                            <span style="--i:1">G</span><span style="--i:2">T</span><span style="--i:3">A</span>&nbsp;
-                            <span style="--i:4">V</span>&nbsp;<span style="--i:5">M</span><span style="--i:6">o</span><span style="--i:7">d</span>
-                            <span class="vip-tag">PREMIUM</span>
-                        </div>
-                        <div class="app-rating"><i class="fas fa-star"></i> 4.9 (VIP Choice)</div>
-                    </div>
-                    <button class="btn-get" onclick="openPremiumModal('GTA V Mobile Mod')">Get</button>
-                </div>
-                <p class="app-desc">Unlock full premium content, unlimited money, mega menu, and high-speed gameplay mechanics.</p>
-                <div class="app-meta">
-                    <div class="meta-specs">
-                        <span><i class="fas fa-download"></i> 100K+</span>
-                        <span><i class="fas fa-hdd"></i> 1.8 GB</span>
-                    </div>
-                    <span>v2.5 (Latest)</span>
-                </div>
-            </div>
-
-            <div class="app-card">
-                <div class="app-main-info">
-                    <div class="magical-fire-container" style="border-color: #b180ff; box-shadow: 0 0 15px rgba(177,128,255,0.4)">
-                        <i class="fas fa-bolt" style="color: #b180ff; text-shadow: 0 0 10px #8a3ffc;"></i>
-                    </div>
-                    <div class="app-details">
-                        <div class="magical-wave-text">
-                            <span style="--i:1">S</span><span style="--i:2">p</span><span style="--i:3">o</span><span style="--i:4">t</span><span style="--i:5">i</span><span style="--i:6">f</span><span style="--i:7">y</span>
-                            <span class="vip-tag">VIP</span>
-                        </div>
-                        <div class="app-rating"><i class="fas fa-star"></i> 4.8</div>
-                    </div>
-                    <button class="btn-get" onclick="openPremiumModal('Spotify Premium Ultra Mod')">Get</button>
-                </div>
-                <p class="app-desc">Enjoy ad-free music, unlimited skips, extreme audio quality unlocked, and offline downloads.</p>
-                <div class="app-meta">
-                    <div class="meta-specs">
-                        <span><i class="fas fa-download"></i> 500K+</span>
-                        <span><i class="fas fa-hdd"></i> 45 MB</span>
-                    </div>
-                    <span>v8.9 VIP</span>
-                </div>
-            </div>
-
+        <div class="app-list" id="appsDynamicRenderContainer">
+            <!-- Loaded dynamically -->
         </div>
     </div>
 
-    <div class="premium-modal-overlay" id="premiumModal">
-        <div class="premium-modal-card">
-            <button class="close-premium-btn" onclick="closePremiumModal()"><i class="fas fa-times"></i></button>
-            <div class="premium-badge"><i class="fas fa-crown"></i> VIP PREMIUM ACCESS</div>
-            <h2 id="premiumAppTitle">App Name</h2>
-            <p style="color: var(--text-muted); font-size: 14px; margin-top: 5px;">This is a premium mod. Purchase a subscription plan to unlock instant high-speed download.</p>
-            
-            <div class="pricing-plans">
-                <div class="plan-card selected-plan" onclick="selectPlan(this)">
-                    <div class="plan-info">
-                        <div class="plan-name">Weekly Pass</div>
-                        <span style="font-size: 12px; color: var(--text-muted);">7 Days Access</span>
-                    </div>
-                    <div class="plan-price">$4.99</div>
-                </div>
-                <div class="plan-card" onclick="selectPlan(this)">
-                    <div class="plan-info">
-                        <div class="plan-name">Monthly Premium</div>
-                        <span style="font-size: 12px; color: var(--text-muted);">30 Days Access</span>
-                    </div>
-                    <div class="plan-price">$12.99</div>
-                </div>
-                <div class="plan-card" onclick="selectPlan(this)">
-                    <div class="plan-info">
-                        <div class="plan-name">Lifetime VIP</div>
-                        <span style="font-size: 12px; color: var(--text-muted);">Permanent Access</span>
-                    </div>
-                    <div class="plan-price">$29.99</div>
-                </div>
-            </div>
 
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Secure Checkout Via:</p>
-            <div class="payment-methods">
-                <i class="fab fa-cc-visa fa-2x" style="color: #1a1aff;"></i>
-                <i class="fab fa-cc-mastercard fa-2x" style="color: #ff5f00;"></i>
-                <i class="fab fa-cc-paypal fa-2x" style="color: #003087;"></i>
-                <i class="fab fa-apple-pay fa-2x" style="color: #ffffff;"></i>
+    <!-- ================= VIEW 2: STEP 1 (18 SECONDS) ================= -->
+    <div id="step1-view" class="app-view-panel">
+        <button class="back-btn" onclick="switchToHomeView()"><i class="fas fa-arrow-left"></i> Cancel</button>
+        
+        <div class="panel-card">
+            <div class="panel-icon-placeholder">
+                <i class="fas fa-fire"></i>
             </div>
+            <div id="st1-title" class="panel-title">App Title</div>
+            <span class="vip-tag">SECURE FILE ACCESS ROUTE LOADED</span>
+        </div>
 
-            <button class="pay-btn" onclick="processPremiumPayment()">Proceed to Pay</button>
-            
-            <div id="premiumPaymentLog" style="margin-top: 15px; display: none; text-align: left; background: #050b14; padding: 12px; border-radius: 14px; border: 1px solid #ffd700;">
-                <div class="live-log-item"><i class="fas fa-spinner"></i> <span id="logText">Connecting to secure gateway...</span></div>
+        <div class="info-table">
+            <div class="info-row"><i class="fas fa-th-large"></i><div class="info-data"><label>Package Name</label><span id="st1-row-name">-</span></div></div>
+            <div class="info-row"><i class="fas fa-history"></i><div class="info-data"><label>Version Code</label><span id="st1-row-version">-</span></div></div>
+            <div class="info-row"><i class="fas fa-hdd"></i><div class="info-data"><label>Allocation Size</label><span id="st1-row-size">-</span></div></div>
+        </div>
+
+        <div class="timer-box-layout">
+            <div id="timer18sContainer">
+                <div class="status-txt">Analyzing payload parameters... Please wait 18s</div>
+                <div class="linear-progress-wrapper">
+                    <div class="linear-line" id="line18s"></div>
+                </div>
             </div>
+            <button class="btn-action-trigger" id="nextBtnStep1" onclick="navigateToStep2View()">
+                Verify Next <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 
+
+    <!-- ================= VIEW 3: STEP 2 (10 SECONDS COUNTER) ================= -->
+    <div id="step2-view" class="app-view-panel">
+        <div class="panel-card">
+            <div class="panel-title" style="color: #ff5858;"><i class="fas fa-shield-alt"></i> Redirection Handshake Line</div>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">Please do not exit this environment frame while configuration is ongoing.</p>
+        </div>
+
+        <div class="timer-box-layout">
+            <div id="counter10sBox">
+                <div class="status-txt">Mapping dynamic cloud mirrors registry targets...</div>
+                <div class="counter-numeric-text" id="numericCounterText">10</div>
+            </div>
+            <button class="btn-action-trigger" id="nextBtnStep2" onclick="navigateToStep3View()">
+                Proceed Link <i class="fas fa-external-link-alt"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ================= VIEW 4: STEP 3 FINAL FILE LINE (5 SECONDS) ================= -->
+    <div id="step3-view" class="app-view-panel">
+        <div class="panel-card">
+            <div class="panel-icon-placeholder">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div id="st3-title" class="panel-title">App Title</div>
+            <span class="vip-tag" style="background: #00b894; color: #fff;">GATEWAY ACCESS DISPATCHED</span>
+        </div>
+
+        <div class="timer-box-layout">
+            <div id="timer5sContainer">
+                <div class="status-txt">Finalizing deep package installation lines... Please wait 5s</div>
+                <div class="linear-progress-wrapper">
+                    <div class="linear-line" id="line5s"></div>
+                </div>
+            </div>
+            <!-- FINAL DOWNLOAD BUTTON TARGETED TO MEDIAFIRE NATIVELY -->
+            <button class="btn-action-trigger" id="finalDownloadBtn" onclick="executeMediafireRedirection()" style="background: linear-gradient(135deg, #00b894 0%, #2ecc71 100%);">
+                <i class="fas fa-cloud-download-alt"></i> Download From MediaFire
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ================= SCRIPTS CONTROLLER LOGIC ================= -->
     <script>
-        // Drawer toggle panel logic
-        function toggleDrawer() {
-            const drawer = document.getElementById('sideDrawer');
-            const overlay = document.getElementById('drawerOverlay');
-            drawer.classList.toggle('drawer-open');
-            overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
-        }
+        // APP DATABASE (TikTok ka link aapke real link se update ho chuka hai)
+        const globalAppsDatabase = [
+            { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", mediafire: "https://www.mediafire.com/file/89jgwv6hwslkruy/TIKTOK_Live_APK_v45.5.zip/file" },
+            { id: "whatsapp", name: "WhatsApp Plus Elite", type: "app", version: "2.24.8", size: "65 MB", rating: "4.6", desc: "Enhanced customization profiles with anti-delete tools and extreme privacy parameters enabled.", mediafire: "https://www.mediafire.com/file/demo_whatsapp" },
+            { id: "pubg", name: "PUBG Mobile Ultra Mod", type: "game", version: "3.1.0", size: "1.2 GB", rating: "4.5", desc: "Extreme graphics configuration profiles optimized for maximum smooth processing operations.", mediafire: "https://www.mediafire.com/file/demo_pubg" },
+            { id: "freefire", name: "Free Fire Max VIP+", type: "game", version: "1.104.1", size: "645 MB", rating: "4.7", desc: "Experience advanced acceleration mechanics optimized perfectly for mobile battlefields.", mediafire: "https://www.mediafire.com/file/demo_freefire" },
+            { id: "instagram", name: "Instagram Pro Pure", type: "app", version: "320.0.1", size: "58 MB", rating: "4.4", desc: "Download high definition layout media profiles directly from the feed channel layout securely.", mediafire: "https://www.mediafire.com/file/demo_instagram" },
+            { id: "capcut", name: "CapCut Video Pro", type: "app", version: "11.6.0", size: "210 MB", rating: "4.7", desc: "Advanced premium filters composition frames and complete tracking asset options unlocked.", mediafire: "https://www.mediafire.com/file/demo_capcut" },
+            { id: "subway", name: "Subway Surfers VIP+", type: "game", version: "3.28.0", size: "155 MB", rating: "4.5", desc: "Infinite execution tracks running cycles with optimized global leaderboard systems active.", mediafire: "https://www.mediafire.com/file/demo_subway" },
+            { id: "spotify", name: "Spotify Premium Mod", type: "app", version: "8.9.22", size: "45 MB", rating: "4.8", desc: "Unlimited skip structures with pure audio parameters music streaming ad-free listening.", mediafire: "https://www.mediafire.com/file/demo_spotify" },
+            { id: "minecraft", name: "Minecraft Premium Edition", type: "game", version: "1.20.73", size: "620 MB", rating: "4.6", desc: "Explore endless generation simulation sandbox blocks worlds with completely secure packages.", mediafire: "https://www.mediafire.com/file/demo_minecraft" }
+        ];
 
-        // Open Premium Purchase Modal Function
-        function openPremiumModal(appName) {
-            document.getElementById('premiumAppTitle').innerText = appName;
-            document.getElementById('premiumModal').style.display = 'flex';
+        let selectedAppObject = null;
+        let runningGlobalTimerReference = null;
+        let counterIntervalTimerReference = null;
+        let isAppInternalPageActive = false;
+        let fakeOtpCountdownReference = null;
+
+        // ONE-TIME AUTHCHECK RULES
+        window.addEventListener('DOMContentLoaded', () => {
+            renderAppsToDOMInterface(globalAppsDatabase);
             
-            // Reset logs and payment button
-            document.getElementById('premiumPaymentLog').style.display = 'none';
-            const payBtn = document.querySelector('.pay-btn');
-            payBtn.style.display = 'block';
-            payBtn.innerText = 'Proceed to Pay';
-        }
+            const isAuthenticatedUser = localStorage.getItem("siteUserUnlockedStatus");
+            if(isAuthenticatedUser === "true") {
+                document.getElementById('auth-portal-screen').style.display = "none";
+                document.getElementById('home-view').style.display = "block";
+                window.history.replaceState({page: 'home'}, 'Home', '');
+            } else {
+                document.getElementById('auth-portal-screen').style.display = "block";
+                document.getElementById('home-view').style.display = "none";
+                window.history.replaceState({page: 'auth'}, 'Auth', '');
+            }
 
-        // Close Premium Modal Function
-        function closePremiumModal() {
-            document.getElementById('premiumModal').style.display = 'none';
-        }
-
-        // Selection style dynamic toggler
-        function selectPlan(element) {
-            document.querySelectorAll('.plan-card').forEach(card => {
-                card.classList.remove('selected-plan');
+            window.addEventListener('popstate', function(event) {
+                if (isAppInternalPageActive) switchToHomeView();
             });
-            element.classList.add('selected-plan');
+        });
+
+        function generateMagicalWaveHTML(appNameString) {
+            let htmlOutput = "";
+            for (let i = 0; i < appNameString.length; i++) {
+                let char = appNameString[i];
+                if (char === " ") {
+                    htmlOutput += `<span style="--i:${i}">&nbsp;</span>`;
+                } else {
+                    htmlOutput += `<span style="--i:${i}">${char}</span>`;
+                }
+            }
+            return htmlOutput;
         }
 
-        // Automated Processing Terminal Workflow
-        function processPremiumPayment() {
-            const logBox = document.getElementById('premiumPaymentLog');
-            const logText = document.getElementById('logText');
-            const payBtn = document.querySelector('.pay-btn');
+        // Side Menu Drawer
+        function toggleSideNavigationDrawer(open) {
+            const drawer = document.getElementById('sideNavigationDrawer');
+            const overlay = document.getElementById('menuDrawerOverlay');
+            if(open) {
+                drawer.classList.add('drawer-open');
+                overlay.style.display = "block";
+            } else {
+                drawer.classList.remove('drawer-open');
+                overlay.style.display = "none";
+            }
+        }
+
+        function handleDrawerNavigation(category) {
+            toggleSideNavigationDrawer(false);
+            if(document.getElementById('home-view').style.display === "block") {
+                filterCategoryList(category);
+            } else {
+                alert("Please complete access verification phases first!");
+            }
+        }
+
+        // Auth Flow
+        function switchAuthScreen(screenId) {
+            document.querySelectorAll('.auth-form-panel').forEach(panel => panel.style.display = "none");
+            document.getElementById('screen-' + screenId).style.display = "flex";
+        }
+
+        function processAuthFlow(type) {
+            let emailValue = (type === 'login') ? document.getElementById('login-email-input').value : document.getElementById('reg-email-input').value;
+            if(!emailValue.includes('@')) {
+                alert("Please enter a valid real email containing '@'.");
+                return;
+            }
+            if(type === 'login') {
+                bypassVerificationToMainDashboard();
+            } else {
+                switchAuthScreen('otp');
+                triggerFakeOtpResendSequence();
+            }
+        }
+
+        function triggerFakeOtpResendSequence() {
+            if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
+            const timerContainer = document.getElementById('fakeOtpTimerDisplay');
+            const resendBtn = document.getElementById('resend-link-btn');
+            const countdownSpan = document.getElementById('otpSecondsCount');
             
-            payBtn.style.display = 'none';
-            logBox.style.display = 'block';
-            logText.innerHTML = '<i class="fas fa-spinner"></i> Initializing 256-bit SSL encryption...';
+            timerContainer.style.display = "block";
+            resendBtn.style.display = "none";
             
-            setTimeout(() => {
-                logText.innerHTML = '<i class="fas fa-spinner"></i> Connecting with secure banking API gateway...';
-                setTimeout(() => {
-                    logText.innerHTML = '<i class="fas fa-spinner"></i> Verifying transaction & authorization code...';
-                    setTimeout(() => {
-                        logText.innerHTML = '<i class="fas fa-check-circle" style="color:#2af598;"></i> Payment Successful! Unlocking VIP link...';
-                        setTimeout(() => {
-                            alert("🎉 Payment Confirmed Successfully! Your Premium Link has been unlocked.");
-                            closePremiumModal();
-                        }, 1200);
-                    }, 2000);
-                }, 2000);
-            }, 1500);
+            let timeLimit = 60;
+            countdownSpan.innerText = timeLimit;
+
+            fakeOtpCountdownReference = setInterval(() => {
+                timeLimit--;
+                countdownSpan.innerText = timeLimit;
+                if(timeLimit <= 0) {
+                    clearInterval(fakeOtpCountdownReference);
+                    timerContainer.style.display = "none";
+                    resendBtn.style.display = "block";
+                }
+            }, 1000);
+        }
+
+        function bypassVerificationToMainDashboard() {
+            if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
+            localStorage.setItem("siteUserUnlockedStatus", "true");
+            document.getElementById('auth-portal-screen').style.display = "none";
+            document.getElementById('home-view').style.display = "block";
+            window.history.replaceState({page: 'home'}, 'Home', '');
+            window.scrollTo(0,0);
+        }
+
+        // Render Cards
+        function renderAppsToDOMInterface(dataArray) {
+            const container = document.getElementById('appsDynamicRenderContainer');
+            container.innerHTML = ""; 
+            dataArray.forEach(app => {
+                let waveTextHTML = generateMagicalWaveHTML(app.name);
+                container.innerHTML += `
+                    <div class="app-card" data-type="${app.type}" onclick="initiateDownloadSequence('${app.id}')">
+                        <div class="app-main-info">
+                            <div class="magical-fire-container">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="app-details">
+                                <div class="magical-wave-text">${waveTextHTML} <span class="vip-tag">VIP+</span></div>
+                                <div class="app-rating"><i class="fas fa-star"></i> ${app.rating}</div>
+                            </div>
+                        </div>
+                        <div class="app-desc">${app.desc}</div>
+                        <div class="app-meta">
+                            <div class="meta-specs">
+                                <span><i class="fas fa-layer-group"></i> ${app.version}</span>
+                                <span><i class="fas fa-hdd"></i> ${app.size}</span>
+                            </div>
+                            <button class="btn-get">Get</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function clearAllTimerStates() {
+            if(runningGlobalTimerReference) clearTimeout(runningGlobalTimerReference);
+            if(counterIntervalTimerReference) clearInterval(counterIntervalTimerReference);
+        }
+
+        function switchToHomeView() {
+            clearAllTimerStates();
+            isAppInternalPageActive = false;
+            document.querySelectorAll('.app-view-panel').forEach(view => view.style.display = "none");
+            document.getElementById('home-view').style.display = "block";
+            window.scrollTo(0,0);
+        }
+
+        function initiateDownloadSequence(appId) {
+            selectedAppObject = globalAppsDatabase.find(x => x.id === appId);
+            if(!selectedAppObject) return;
+
+            isAppInternalPageActive = true;
+            window.history.pushState({page: 'internal'}, 'Details', '#view');
+
+            document.getElementById('st1-title').innerText = selectedAppObject.name;
+            document.getElementById('st1-row-name').innerText = selectedAppObject.name;
+            document.getElementById('st1-row-version').innerText = selectedAppObject.version;
+            document.getElementById('st1-row-size').innerText = selectedAppObject.size;
+
+            document.getElementById('home-view').style.display = "none";
+            document.getElementById('step1-view').style.display = "block";
+            window.scrollTo(0,0);
+
+            const line = document.getElementById('line18s');
+            const timerContainer = document.getElementById('timer18sContainer');
+            const actionBtn = document.getElementById('nextBtnStep1');
+
+            actionBtn.style.display = "none";
+            timerContainer.style.display = "block";
+
+            line.classList.remove('run-18s-timer');
+            void line.offsetWidth; 
+            line.classList.add('run-18s-timer');
+
+            runningGlobalTimerReference = setTimeout(() => {
+                timerContainer.style.display = "none";
+                actionBtn.style.display = "block";
+            }, 18000);
+        }
+
+        document.getElementById('st1-title').style.color = "#00ffc4";
+        document.getElementById('st3-title').style.color = "#00ffc4";
+
+        function navigateToStep2View() {
+            clearAllTimerStates();
+            document.getElementById('step1-view').style.display = "none";
+            document.getElementById('step2-view').style.display = "block";
+            window.scrollTo(0,0);
+
+            const displayCounter = document.getElementById('numericCounterText');
+            const counterContainer = document.getElementById('counter10sBox');
+            const actionBtn = document.getElementById('nextBtnStep2');
+
+            let timeLeft = 10;
+            displayCounter.innerText = timeLeft;
+            actionBtn.style.display = "none";
+            counterContainer.style.display = "block";
+
+            counterIntervalTimerReference = setInterval(() => {
+                timeLeft--;
+                displayCounter.innerText = timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(counterIntervalTimerReference);
+                    counterContainer.style.display = "none";
+                    actionBtn.style.display = "block";
+                }
+            }, 1000);
+        }
+
+        function navigateToStep3View() {
+            clearAllTimerStates();
+            document.getElementById('step2-view').style.display = "none";
+            document.getElementById('step3-view').style.display = "block";
+            window.scrollTo(0,0);
+
+            document.getElementById('st3-title').innerText = selectedAppObject.name;
+
+            const line = document.getElementById('line5s');
+            const timerContainer = document.getElementById('timer5sContainer');
+            const actionBtn = document.getElementById('finalDownloadBtn');
+
+            actionBtn.style.display = "none";
+            timerContainer.style.display = "block";
+
+            line.classList.remove('run-5s-timer');
+            void line.offsetWidth; 
+            line.classList.add('run-5s-timer');
+
+            runningGlobalTimerReference = setTimeout(() => {
+                timerContainer.style.display = "none";
+                actionBtn.style.display = "block";
+            }, 5000);
+        }
+
+        // MEDIAFIRE REDIRECTION FUNCTION
+        function executeMediafireRedirection() {
+            if(selectedAppObject && selectedAppObject.mediafire) {
+                window.location.href = selectedAppObject.mediafire;
+            } else {
+                alert("Link uploading in progress... Please try again shortly.");
+            }
+        }
+
+        function executeSearchFilter() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('app-card');
+            let noResults = document.getElementById('noResultsText');
+            let matched = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                let text = cards[i].innerText.toLowerCase();
+                if(text.includes(input)) {
+                    cards[i].style.display = "flex";
+                    matched++;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+            noResults.style.display = (matched === 0) ? "block" : "none";
+        }
+
+        function filterCategoryList(category) {
+            let cards = document.getElementsByClassName('app-card');
+            let title = document.getElementById('list-title');
+            
+            document.getElementById('tab-all').classList.remove('active-tab');
+            document.getElementById('tab-game').classList.remove('active-tab');
+            document.getElementById('tab-app').classList.remove('active-tab');
+
+            if(category === 'all') {
+                document.getElementById('tab-all').classList.add('active-tab');
+                title.innerText = "VIP Premium Mods";
+            } else if(category === 'game') {
+                document.getElementById('tab-game').classList.add('active-tab');
+                title.innerText = "Premium VIP Games";
+            } else if(category === 'app') {
+                document.getElementById('tab-app').classList.add('active-tab');
+                title.innerText = "Premium VIP Apps";
+            }
+
+            for (let i = 0; i < cards.length; i++) {
+                let type = cards[i].getAttribute('data-type');
+                if (category === 'all' || type === category) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        function toggleThemeSystem() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const themeText = document.getElementById('theme-text');
+            const topIcon = document.getElementById('theme-icon-top');
+
+            if (currentTheme === 'light') {
+                body.removeAttribute('data-theme');
+                if(themeText) themeText.innerText = "Light Mode";
+                topIcon.className = "fas fa-moon";
+            } else {
+                body.setAttribute('data-theme', 'light');
+                if(themeText) themeText.innerText = "Dark Mode";
+                topIcon.className = "fas fa-sun";
+            }
+        }
+
+        function focusSearchInput() {
+            document.getElementById('searchInput').focus();
         }
     </script>
 </body>
