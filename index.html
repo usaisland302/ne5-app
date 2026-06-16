@@ -936,17 +936,10 @@
 
     <!-- ================= SCRIPTS CONTROLLER LOGIC ================= -->
     <script>
-        // APP DATABASE (TikTok ka link aapke real link se update ho chuka hai)
+        // APP DATABASE (CapCut Pro VIP add kar diya hai bina purane data ko chedte hue)
         const globalAppsDatabase = [
             { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", mediafire: "https://www.mediafire.com/file/89jgwv6hwslkruy/TIKTOK_Live_APK_v45.5.zip/file" },
-            { id: "whatsapp", name: "WhatsApp Plus Elite", type: "app", version: "2.24.8", size: "65 MB", rating: "4.6", desc: "Enhanced customization profiles with anti-delete tools and extreme privacy parameters enabled.", mediafire: "https://www.mediafire.com/file/demo_whatsapp" },
-            { id: "pubg", name: "PUBG Mobile Ultra Mod", type: "game", version: "3.1.0", size: "1.2 GB", rating: "4.5", desc: "Extreme graphics configuration profiles optimized for maximum smooth processing operations.", mediafire: "https://www.mediafire.com/file/demo_pubg" },
-            { id: "freefire", name: "Free Fire Max VIP+", type: "game", version: "1.104.1", size: "645 MB", rating: "4.7", desc: "Experience advanced acceleration mechanics optimized perfectly for mobile battlefields.", mediafire: "https://www.mediafire.com/file/demo_freefire" },
-            { id: "instagram", name: "Instagram Pro Pure", type: "app", version: "320.0.1", size: "58 MB", rating: "4.4", desc: "Download high definition layout media profiles directly from the feed channel layout securely.", mediafire: "https://www.mediafire.com/file/demo_instagram" },
-            { id: "capcut", name: "CapCut Video Pro", type: "app", version: "11.6.0", size: "210 MB", rating: "4.7", desc: "Advanced premium filters composition frames and complete tracking asset options unlocked.", mediafire: "https://www.mediafire.com/file/demo_capcut" },
-            { id: "subway", name: "Subway Surfers VIP+", type: "game", version: "3.28.0", size: "155 MB", rating: "4.5", desc: "Infinite execution tracks running cycles with optimized global leaderboard systems active.", mediafire: "https://www.mediafire.com/file/demo_subway" },
-            { id: "spotify", name: "Spotify Premium Mod", type: "app", version: "8.9.22", size: "45 MB", rating: "4.8", desc: "Unlimited skip structures with pure audio parameters music streaming ad-free listening.", mediafire: "https://www.mediafire.com/file/demo_spotify" },
-            { id: "minecraft", name: "Minecraft Premium Edition", type: "game", version: "1.20.73", size: "620 MB", rating: "4.6", desc: "Explore endless generation simulation sandbox blocks worlds with completely secure packages.", mediafire: "https://www.mediafire.com/file/demo_minecraft" }
+            { id: "capcut", name: "CapCut Pro VIP", type: "app", version: "7.7.5", size: "210 MB", rating: "4.9", desc: "Premium video editing unlocked. Premium effects, transitions, and no watermark layout.", mediafire: "https://www.mediafire.com/file/1yn5rdjb2v9ysho/CapCut-Pad-v7.7.5-mod.apk/file" }
         ];
 
         let selectedAppObject = null;
@@ -1066,6 +1059,10 @@
         function renderAppsToDOMInterface(dataArray) {
             const container = document.getElementById('appsDynamicRenderContainer');
             container.innerHTML = ""; 
+            if (dataArray.length === 0) {
+                document.getElementById('noResultsText').style.display = "block";
+                return;
+            }
             dataArray.forEach(app => {
                 let waveTextHTML = generateMagicalWaveHTML(app.name);
                 container.innerHTML += `
@@ -1222,6 +1219,8 @@
         function filterCategoryList(category) {
             let cards = document.getElementsByClassName('app-card');
             let title = document.getElementById('list-title');
+            let noResults = document.getElementById('noResultsText');
+            let matched = 0;
             
             document.getElementById('tab-all').classList.remove('active-tab');
             document.getElementById('tab-game').classList.remove('active-tab');
@@ -1242,10 +1241,12 @@
                 let type = cards[i].getAttribute('data-type');
                 if (category === 'all' || type === category) {
                     cards[i].style.display = "flex";
+                    matched++;
                 } else {
                     cards[i].style.display = "none";
                 }
             }
+            noResults.style.display = (matched === 0) ? "block" : "none";
         }
 
         function toggleThemeSystem() {
