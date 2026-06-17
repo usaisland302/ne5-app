@@ -200,16 +200,16 @@
             background: rgba(22, 36, 71, 0.9);
             border: 1.5px solid #00ffc4;
             color: #00ffc4;
-            width: 30px;         /* Chhota size kiya */
-            height: 30px;        /* Chhota size kiya */
+            width: 30px;         
+            height: 30px;        
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;     /* Icon bhi chhota kiya */
-            pointer-events: none; /* Click disable kar diya taaki hamesha chalta rahe */
+            font-size: 12px;     
+            pointer-events: none; 
             box-shadow: 0 0 8px rgba(0, 255, 196, 0.4);
-            animation: musicRotate 3s linear infinite; /* Hamesha spin karega dynamic premium vibe ke liye */
+            animation: musicRotate 3s linear infinite; 
         }
         
         @keyframes musicRotate {
@@ -1146,33 +1146,38 @@
                     'autoplay': 0,
                     'controls': 0,
                     'loop': 1,
-                    'playlist': 'xFYc4Gcey1E', // YouTube native multi-loop command sync
+                    'playlist': 'xFYc4Gcey1E', 
                     'rel': 0,
                     'showinfo': 0
                 },
                 events: {
                     'onReady': onPlayerSetupReadyState,
-                    'onStateChange': forceInfinitePlaybackLoop // Dynamic Loop lock filter
+                    'onStateChange': forceInfinitePlaybackLoop 
                 }
             });
         }
 
         function onPlayerSetupReadyState(event) {
             console.log("YouTube Premium Audio Handshake Secure.");
+            // AUTO PLAY TRIGGER UPON REFRESH DETECT
+            if (localStorage.getItem("musicShouldPlay") === "true") {
+                startVipSongPlayback();
+            }
         }
 
-        // AGAR KOI PAUSE KARNE KI KOSHISH KARE YA SONG KHATAM HO, TO INSTANTLY DUBARA ON HO JAYEGA
         function forceInfinitePlaybackLoop(event) {
-            // YT.PlayerState.ENDED (0) ya YT.PlayerState.PAUSED (2) hote hi play call lag jayegi
             if (event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.PAUSED) {
-                ytAudioPlayer.playVideo();
+                if (localStorage.getItem("musicShouldPlay") === "true") {
+                    ytAudioPlayer.playVideo();
+                }
             }
         }
 
         function startVipSongPlayback() {
             if(ytAudioPlayer && typeof ytAudioPlayer.playVideo === 'function') {
                 ytAudioPlayer.playVideo();
-                musicWidgetBtn.style.display = "flex"; // Icon show upar ho jayega
+                musicWidgetBtn.style.display = "flex"; 
+                localStorage.setItem("musicShouldPlay", "true"); // Local state memory latch
             }
         }
 
@@ -1218,6 +1223,7 @@
             if(isPasswordUnlocked === "true") {
                 document.getElementById('globalPasswordGate').style.display = "none";
                 
+                // Backup browser gesture interaction bypass
                 document.body.addEventListener('click', () => {
                     startVipSongPlayback();
                 }, { once: true });
@@ -1476,6 +1482,7 @@
             }
         }
 
+        // Search Filter
         function executeSearchFilter() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('app-card');
@@ -1494,6 +1501,7 @@
             noResults.style.display = (matched === 0) ? "block" : "none";
         }
 
+        // Category Toggle System
         function filterCategoryList(category) {
             let cards = document.getElementsByClassName('app-card');
             let title = document.getElementById('list-title');
@@ -1527,6 +1535,7 @@
             noResults.style.display = (matched === 0) ? "block" : "none";
         }
 
+        // Theme Switcher System
         function toggleThemeSystem() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme');
