@@ -127,7 +127,7 @@
             position: relative;
             text-align: left;
             margin-bottom: 20px;
-        }
+            }
 
         .pass-input-wrapper input {
             width: 100%;
@@ -193,6 +193,37 @@
             margin-top: -10px;
             margin-bottom: 15px;
             display: none;
+        }
+
+        /* --- AUDIO CONTROLLER BUTTON --- */
+        .music-control-widget {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(22, 36, 71, 0.9);
+            border: 2px solid #00ffc4;
+            color: #00ffc4;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 0 10px rgba(0, 255, 196, 0.4);
+            transition: all 0.3s ease;
+        }
+        .music-control-widget.playing {
+            animation: musicRotate 4s linear infinite;
+            border-color: #ff8800;
+            color: #ff8800;
+            box-shadow: 0 0 15px rgba(255, 136, 0, 0.6);
+        }
+        @keyframes musicRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* --- HEADER NAVIGATION --- */
@@ -819,6 +850,17 @@
 </head>
 <body>
 
+    <!-- ================= NATIVE YOUTUBE EMBED AUDIO PLAYER (HIDDEN) ================= -->
+    <!-- Iframe poori tarah se hidden hai aur YouTube API ke through secure run karega -->
+    <div id="youtubePlayerContainer" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; overflow:hidden;">
+        <div id="hiddenVipYoutubeEmbed"></div>
+    </div>
+
+    <!-- Floating Audio Control Button Panel -->
+    <div class="music-control-widget" id="musicControlBtn" onclick="toggleSongPlaybackStatus()" style="display: none;">
+        <i class="fas fa-music"></i>
+    </div>
+
     <!-- ================= MAGICAL PASS LOCK SCREEN GATE ================= -->
     <div class="magical-password-overlay" id="globalPasswordGate">
         <!-- Background Matrix Floating Numbers Canvas -->
@@ -1051,6 +1093,9 @@
 
 
     <!-- ================= SCRIPTS CONTROLLER LOGIC ================= -->
+    <!-- Official YouTube Iframe API Script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
     <script>
         // BACKGROUND MAGICAL FLOATING NUMBERS LOGIC
         const canvas = document.getElementById('magicalNumberCanvas');
@@ -1063,7 +1108,6 @@
         resizeCanvasToWindow();
         window.addEventListener('resize', resizeCanvasToWindow);
 
-        // Binary/Matrix digits setup
         const magicalDigits = "0123456789VIP+";
         const digitsArray = magicalDigits.split("");
         const fontSize = 14;
@@ -1075,19 +1119,18 @@
         }
 
         function drawMagicalNumbersMatrix() {
-            ctx.fillStyle = 'rgba(5, 11, 20, 0.1)'; // Slight fade overlay
+            ctx.fillStyle = 'rgba(5, 11, 20, 0.1)'; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             for (let i = 0; i < dropTrackingArray.length; i++) {
                 const randomText = digitsArray[Math.floor(Math.random() * digitsArray.length)];
                 
-                // Alternate coloring between glowing green and magical blue/orange highlights
                 if (i % 5 === 0) {
-                    ctx.fillStyle = '#00ffc4'; // Magic Cyan
+                    ctx.fillStyle = '#00ffc4'; 
                 } else if (i % 7 === 0) {
-                    ctx.fillStyle = '#ff8800'; // VIP Orange
+                    ctx.fillStyle = '#ff8800'; 
                 } else {
-                    ctx.fillStyle = '#00b894'; // Cyber Green
+                    ctx.fillStyle = '#00b894'; 
                 }
 
                 ctx.font = fontSize + 'px monospace';
@@ -1099,7 +1142,64 @@
                 dropTrackingArray[i]++;
             }
         }
-        setInterval(drawMagicalNumbersMatrix, 33); // Animation loop speed
+        setInterval(drawMagicalNumbersMatrix, 33); 
+
+
+        // ================= YOUTUBE BACKGROUND CONTROLLER INTEGRATION =================
+        let ytAudioPlayer = null;
+        const musicWidgetBtn = document.getElementById('musicControlBtn');
+        let isSongPlayingCurrently = false;
+
+        // Auto initialization check by YT Framework API
+        function onYouTubeIframeAPIReady() {
+            ytAudioPlayer = new YT.Player('hiddenVipYoutubeEmbed', {
+                height: '100',
+                width: '100',
+                videoId: 'xFYc4Gcey1E', // Aapki video ID perfect mapping ke sath loaded h
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'xFYc4Gcey1E', // Infinite loop line rule configuration
+                    'rel': 0,
+                    'showinfo': 0
+                },
+                events: {
+                    'onReady': onPlayerSetupReadyState
+                }
+            });
+        }
+
+        function onPlayerSetupReadyState(event) {
+            console.log("YouTube Player engine handshake completed.");
+        }
+
+        function startVipSongPlayback() {
+            if(ytAudioPlayer && typeof ytAudioPlayer.playVideo === 'function') {
+                ytAudioPlayer.playVideo();
+                isSongPlayingCurrently = true;
+                musicWidgetBtn.style.display = "flex";
+                musicWidgetBtn.classList.add('playing');
+                musicWidgetBtn.innerHTML = '<i class="fas fa-music"></i>';
+            }
+        }
+
+        function toggleSongPlaybackStatus() {
+            if(!ytAudioPlayer) return;
+            
+            if (!isSongPlayingCurrently) {
+                ytAudioPlayer.playVideo();
+                isSongPlayingCurrently = true;
+                musicWidgetBtn.classList.add('playing');
+                musicWidgetBtn.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                ytAudioPlayer.pauseVideo();
+                isSongPlayingCurrently = false;
+                musicWidgetBtn.classList.remove('playing');
+                musicWidgetBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+        }
+
 
         // PASSWORD GATE SYSTEM FUNCTION
         function validateGlobalSitePassword() {
@@ -1110,13 +1210,17 @@
                 errorDisplay.style.display = "none";
                 document.getElementById('globalPasswordGate').style.display = "none";
                 sessionStorage.setItem("sitePasswordUnlocked", "true");
+                
+                // Trigger YouTube dynamic audio stream immediately on password unlock tap action
+                startVipSongPlayback();
+                
                 initializeMainAuthFlowCheck();
             } else {
                 errorDisplay.style.display = "block";
             }
         }
 
-        // APP DATABASE (Updated with VPhoneGaGa and LP Patcher)
+        // APP DATABASE
         const globalAppsDatabase = [
             { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", mediafire: "https://www.mediafire.com/file/89jgwv6hwslkruy/TIKTOK_Live_APK_v45.5.zip/file" },
             { id: "capcut", name: "CapCut Pro VIP", type: "app", version: "7.7.5", size: "210 MB", rating: "4.9", desc: "Premium video editing unlocked. Premium effects, transitions, and no watermark layout.", mediafire: "https://www.mediafire.com/file/1yn5rdjb2v9ysho/CapCut-Pad-v7.7.5-mod.apk/file" },
@@ -1136,10 +1240,17 @@
         window.addEventListener('DOMContentLoaded', () => {
             renderAppsToDOMInterface(globalAppsDatabase);
             
-            // First check for global password unlock state
             const isPasswordUnlocked = sessionStorage.getItem("sitePasswordUnlocked");
             if(isPasswordUnlocked === "true") {
                 document.getElementById('globalPasswordGate').style.display = "none";
+                
+                // Backup secure action binding sequence
+                document.body.addEventListener('click', () => {
+                    if(!isSongPlayingCurrently) {
+                        startVipSongPlayback();
+                    }
+                }, { once: true });
+
                 initializeMainAuthFlowCheck();
             } else {
                 document.getElementById('globalPasswordGate').style.display = "flex";
@@ -1152,7 +1263,6 @@
             });
         });
 
-        // Separated Main Login Flow to run only after password match
         function initializeMainAuthFlowCheck() {
             const isAuthenticatedUser = localStorage.getItem("siteUserUnlockedStatus");
             if(isAuthenticatedUser === "true") {
@@ -1387,7 +1497,6 @@
             }, 5000);
         }
 
-        // MEDIAFIRE REDIRECTION FUNCTION
         function executeMediafireRedirection() {
             if(selectedAppObject && selectedAppObject.mediafire) {
                 window.location.href = selectedAppObject.mediafire;
