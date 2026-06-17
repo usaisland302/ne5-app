@@ -58,18 +58,33 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow: hidden;
+        }
+
+        /* --- MAGICAL BACKGROUND MATRIX CANVAS --- */
+        #magicalNumberCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.35;
+            pointer-events: none;
         }
 
         .password-box-panel {
             max-width: 420px;
             width: 100%;
-            background: #0b1326;
+            background: rgba(11, 19, 38, 0.95);
             border: 2px solid #00ffc4;
             box-shadow: 0 0 25px rgba(0, 255, 196, 0.3);
             border-radius: 24px;
             padding: 35px 25px;
             text-align: center;
             position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
         }
 
         .magical-animated-logo {
@@ -806,6 +821,9 @@
 
     <!-- ================= MAGICAL PASS LOCK SCREEN GATE ================= -->
     <div class="magical-password-overlay" id="globalPasswordGate">
+        <!-- Background Matrix Floating Numbers Canvas -->
+        <canvas id="magicalNumberCanvas"></canvas>
+
         <div class="password-box-panel">
             <div class="magical-animated-logo">G</div>
             <div class="password-prompt-title">Enter Security Password</div>
@@ -1034,6 +1052,55 @@
 
     <!-- ================= SCRIPTS CONTROLLER LOGIC ================= -->
     <script>
+        // BACKGROUND MAGICAL FLOATING NUMBERS LOGIC
+        const canvas = document.getElementById('magicalNumberCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvasToWindow() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvasToWindow();
+        window.addEventListener('resize', resizeCanvasToWindow);
+
+        // Binary/Matrix digits setup
+        const magicalDigits = "0123456789VIP+";
+        const digitsArray = magicalDigits.split("");
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const dropTrackingArray = [];
+
+        for (let x = 0; x < columns; x++) {
+            dropTrackingArray[x] = 1;
+        }
+
+        function drawMagicalNumbersMatrix() {
+            ctx.fillStyle = 'rgba(5, 11, 20, 0.1)'; // Slight fade overlay
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < dropTrackingArray.length; i++) {
+                const randomText = digitsArray[Math.floor(Math.random() * digitsArray.length)];
+                
+                // Alternate coloring between glowing green and magical blue/orange highlights
+                if (i % 5 === 0) {
+                    ctx.fillStyle = '#00ffc4'; // Magic Cyan
+                } else if (i % 7 === 0) {
+                    ctx.fillStyle = '#ff8800'; // VIP Orange
+                } else {
+                    ctx.fillStyle = '#00b894'; // Cyber Green
+                }
+
+                ctx.font = fontSize + 'px monospace';
+                ctx.fillText(randomText, i * fontSize, dropTrackingArray[i] * fontSize);
+
+                if (dropTrackingArray[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    dropTrackingArray[i] = 0;
+                }
+                dropTrackingArray[i]++;
+            }
+        }
+        setInterval(drawMagicalNumbersMatrix, 33); // Animation loop speed
+
         // PASSWORD GATE SYSTEM FUNCTION
         function validateGlobalSitePassword() {
             const enteredPass = document.getElementById('siteGlobalPasswordField').value;
