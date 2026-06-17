@@ -45,6 +45,141 @@
             overflow-x: hidden;
         }
 
+        /* ================= MAGICAL PASSWORD LOCK SYSTEM ================= */
+        .magical-password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050b14;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .password-box-panel {
+            max-width: 420px;
+            width: 100%;
+            background: #0b1326;
+            border: 2px solid #00ffc4;
+            box-shadow: 0 0 25px rgba(0, 255, 196, 0.3);
+            border-radius: 24px;
+            padding: 35px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .magical-animated-logo {
+            width: 80px;
+            height: 80px;
+            background: #162447;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #00ffc4;
+            border: 3px solid #00ffc4;
+            text-shadow: 0 0 10px #00ffc4;
+            box-shadow: 0 0 15px rgba(0, 255, 196, 0.5);
+            animation: logoMagicalPulse 2s infinite alternate;
+        }
+
+        @keyframes logoMagicalPulse {
+            0% { transform: scale(1) rotate(0deg); box-shadow: 0 0 10px rgba(0, 255, 196, 0.4); border-color: #00ffc4; }
+            100% { transform: scale(1.08) rotate(5deg); box-shadow: 0 0 25px rgba(0, 255, 196, 0.8); border-color: #ff8800; color: #ff8800; text-shadow: 0 0 10px #ff8800; }
+        }
+
+        .password-prompt-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .password-prompt-desc {
+            font-size: 13px;
+            color: #8492a6;
+            margin-bottom: 25px;
+        }
+
+        .pass-input-wrapper {
+            position: relative;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .pass-input-wrapper input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            background: #162447;
+            border: 1px solid #1f4068;
+            border-radius: 14px;
+            color: #ffffff;
+            outline: none;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .pass-input-wrapper input:focus {
+            border-color: #00ffc4;
+        }
+
+        .pass-input-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8492a6;
+            font-size: 18px;
+        }
+
+        .btn-verify-password {
+            width: 100%;
+            background: linear-gradient(135deg, #00b894 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+            margin-bottom: 15px;
+        }
+
+        .btn-get-password-link {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366 0%, #075e54 100%);
+            color: white !important;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+            text-transform: uppercase;
+        }
+
+        .pass-error-msg {
+            color: #ff5858;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
         /* --- HEADER NAVIGATION --- */
         header {
             background-color: var(--card-bg);
@@ -113,7 +248,7 @@
             cursor: pointer;
         }
 
-        /* --- NEW PREMIUM VIP BUTTON ANIMATION --- */
+        /* --- VIP BUTTON --- */
         .vip-channel-btn {
             background: linear-gradient(45deg, #ffd700, #ff8800);
             color: #000000 !important;
@@ -135,7 +270,7 @@
             100% { transform: scale(1.03); box-shadow: 0 0 15px rgba(255, 136, 0, 0.9); }
         }
 
-        /* --- SIDE NAVIGATION DRAWER --- */
+        /* --- SIDE DRAWER --- */
         .side-navigation-drawer {
             position: fixed;
             top: 0;
@@ -210,7 +345,7 @@
             display: none;
         }
 
-        /* --- AUTH PORTAL SCREENS --- */
+        /* --- AUTH SYSTEM --- */
         .auth-portal-screen-wrapper {
             max-width: 450px;
             margin: 60px auto;
@@ -219,7 +354,7 @@
             border: 1px solid var(--border-color);
             border-radius: 24px;
             text-align: center;
-            display: none; /* Controlled dynamically by localstorage checker */
+            display: none;
         }
 
         .auth-form-panel {
@@ -290,7 +425,7 @@
             font-weight: 600;
         }
 
-        /* --- DASHBOARD VIEW PANEL --- */
+        /* --- VIEW PANELS --- */
         .app-view-panel {
             display: none;
             max-width: 600px;
@@ -302,7 +437,7 @@
             display: none; 
         }
 
-        /* --- SEARCH SECTION --- */
+        /* --- SEARCH --- */
         .search-container {
             padding: 15px;
             max-width: 600px;
@@ -333,7 +468,7 @@
             color: var(--text-muted);
         }
 
-        /* --- CATEGORIES SYSTEM GRID --- */
+        /* --- CATEGORIES GRID --- */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -371,7 +506,7 @@
 
         .cat-card i { font-size: 24px; }
 
-        /* --- APP LIST CONTAINER --- */
+        /* --- APP CARDS --- */
         .section-title {
             padding: 15px 20px 5px 20px;
             font-size: 20px;
@@ -504,7 +639,7 @@
 
         .vip-tag {
             background: linear-gradient(45deg, #ffd700, #ffa500);
-            color: #000;
+            color: #00!important;
             font-size: 10px;
             padding: 2px 6px;
             border-radius: 4px;
@@ -519,7 +654,7 @@
             display: none;
         }
 
-        /* --- TIMERS PANEL LAYOUTS --- */
+        /* --- TIMERS & PROGRESS --- */
         .back-btn {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -665,69 +800,32 @@
             color: #00b894;
             margin: 15px 0;
         }
-
-        .timer-bottom-content-box {
-            background-color: var(--card-bg);
-            border: 1px dashed var(--search-border);
-            border-radius: 24px;
-            padding: 20px;
-            margin-top: 15px;
-            text-align: left;
-        }
-
-        .box-header-title {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #ff5858;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .ad-app-strip {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255,255,255,0.04);
-            padding: 12px;
-            border-radius: 16px;
-            margin-bottom: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        .ad-install-btn {
-            background: #1f4068;
-            border: none;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .live-log-item {
-            font-size: 13px;
-            color: #2af598;
-            font-family: 'Courier New', Courier, monospace;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .live-log-item i { animation: spinLog 1s linear infinite; }
-        @keyframes spinLog {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Side Navigation Menu Drawer -->
+    <!-- ================= MAGICAL PASS LOCK SCREEN GATE ================= -->
+    <div class="magical-password-overlay" id="globalPasswordGate">
+        <div class="password-box-panel">
+            <div class="magical-animated-logo">G</div>
+            <div class="password-prompt-title">Enter Security Password</div>
+            <div class="password-prompt-desc">Please enter the VIP access password to unlock premium dashboard files.</div>
+            
+            <div class="pass-input-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="siteGlobalPasswordField" placeholder="Enter password here...">
+            </div>
+            
+            <div class="pass-error-msg" id="passwordErrorDisplay">Incorrect Password! Please try again.</div>
+            
+            <button class="btn-verify-password" onclick="validateGlobalSitePassword()">Unlock Dashboard</button>
+            <a href="https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19" target="_blank" class="btn-get-password-link">
+                <i class="fab fa-whatsapp"></i> Get Password
+            </a>
+        </div>
+    </div>
+
+    <!-- Side Menu Drawer -->
     <div class="drawer-overlay" id="menuDrawerOverlay" onclick="toggleSideNavigationDrawer(false)"></div>
     <div class="side-navigation-drawer" id="sideNavigationDrawer">
         <div class="drawer-header">
@@ -756,7 +854,6 @@
             </div>
         </div>
         <div class="nav-icons">
-            <!-- DYNAMIC VIP WHATSAPP LINK BUTTON -->
             <a href="https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19" target="_blank" class="vip-channel-btn">
                 <i class="fab fa-whatsapp"></i> VIP CHANNEL
             </a>
@@ -765,11 +862,11 @@
         </div>
     </header>
 
-    <!-- ================= AUTH SYSTEM PAGES FLOW ================= -->
+    <!-- ================= AUTH SYSTEM ================= -->
     <div id="auth-portal-screen" class="auth-portal-screen-wrapper">
         <div class="logo-icon" style="margin: 0 auto 15px auto; width: 50px; height: 50px; font-size: 26px;">G</div>
         
-        <!-- Screen 1: Fake Login -->
+        <!-- Screen 1: Login -->
         <div class="auth-form-panel" id="screen-login" style="display: flex;">
             <h2 style="margin-bottom: 20px; font-size: 22px;">Login With Email</h2>
             <div class="auth-input-group">
@@ -786,7 +883,7 @@
             <div class="auth-toggle-link">Don't have an account? <span onclick="switchAuthScreen('register')">Register here</span></div>
         </div>
 
-        <!-- Screen 2: Fake Registration -->
+        <!-- Screen 2: Register -->
         <div class="auth-form-panel" id="screen-register">
             <h2 style="margin-bottom: 20px; font-size: 22px;">Registration</h2>
             <div class="auth-input-group">
@@ -803,7 +900,7 @@
             <div class="auth-toggle-link">Already have an account? <span onclick="switchAuthScreen('login')">Login instead</span></div>
         </div>
 
-        <!-- Screen 3: Fake OTP Page -->
+        <!-- Screen 3: OTP -->
         <div class="auth-form-panel" id="screen-otp">
             <h2 style="margin-bottom: 10px; font-size: 22px;">Email Verification</h2>
             <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">OTP has been sent to your email. Please enter it below to access downloads.</p>
@@ -820,7 +917,7 @@
         </div>
     </div>
 
-    <!-- ================= MAIN PLATFORM DASHBOARD (VIEW 1) ================= -->
+    <!-- ================= MAIN DASHBOARD (VIEW 1) ================= -->
     <div id="home-view">
         <div class="search-container">
             <div class="search-box">
@@ -854,12 +951,12 @@
         <div class="no-results" id="noResultsText">No packages found match parameters.</div>
 
         <div class="app-list" id="appsDynamicRenderContainer">
-            <!-- Dynamic Apps Cards Loaded with Fire Elements -->
+            <!-- Loaded dynamically -->
         </div>
     </div>
 
 
-    <!-- ================= VIEW 2: DETAILS STEP 1 (18 SECONDS) ================= -->
+    <!-- ================= VIEW 2: STEP 1 (18 SECONDS) ================= -->
     <div id="step1-view" class="app-view-panel">
         <button class="back-btn" onclick="switchToHomeView()"><i class="fas fa-arrow-left"></i> Cancel</button>
         
@@ -888,22 +985,10 @@
                 Verify Next <i class="fas fa-chevron-right"></i>
             </button>
         </div>
-
-        <div class="timer-bottom-content-box">
-            <div class="box-header-title"><i class="fas fa-fire"></i> Sponsored Hot Unlocks</div>
-            <div class="ad-app-strip">
-                <div class="magical-fire-container" style="width:45px; height:45px;"><i class="fas fa-fire" style="font-size:20px;"></i></div>
-                <div class="ad-app-details">
-                    <div class="ad-app-name">Spotify Music Pro</div>
-                    <div class="ad-app-tagline">Unlimited Skips, Audio Tracks Premium</div>
-                </div>
-                <button class="ad-install-btn" onclick="switchToHomeView()">Get</button>
-            </div>
-        </div>
     </div>
 
 
-    <!-- ================= VIEW 3: STEP 2 TRANSITION COUNTER ================= -->
+    <!-- ================= VIEW 3: STEP 2 (10 SECONDS COUNTER) ================= -->
     <div id="step2-view" class="app-view-panel">
         <div class="panel-card">
             <div class="panel-title" style="color: #ff5858;"><i class="fas fa-shield-alt"></i> Redirection Handshake Line</div>
@@ -918,12 +1003,6 @@
             <button class="btn-action-trigger" id="nextBtnStep2" onclick="navigateToStep3View()">
                 Proceed Link <i class="fas fa-external-link-alt"></i>
             </button>
-        </div>
-
-        <div class="timer-bottom-content-box">
-            <div class="box-header-title" style="color:#2af598;"><i class="fas fa-terminal"></i> Core Console Handshake</div>
-            <div class="live-log-item"><i class="fas fa-spinner"></i> <span>Requesting mirror node mapping tokens...</span></div>
-            <div class="live-log-item"><i class="fas fa-spinner"></i> <span>Injecting anti-ad bypass layers natively...</span></div>
         </div>
     </div>
 
@@ -945,8 +1024,9 @@
                     <div class="linear-line" id="line5s"></div>
                 </div>
             </div>
-            <button class="btn-action-trigger" id="finalDownloadBtn" onclick="executePlayStoreRedirection()" style="background: linear-gradient(135deg, #00b894 0%, #2ecc71 100%);">
-                <i class="fas fa-cloud-download-alt"></i> Download Now
+            <!-- FINAL DOWNLOAD BUTTON TARGETED TO MEDIAFIRE NATIVELY -->
+            <button class="btn-action-trigger" id="finalDownloadBtn" onclick="executeMediafireRedirection()" style="background: linear-gradient(135deg, #00b894 0%, #2ecc71 100%);">
+                <i class="fas fa-cloud-download-alt"></i> Download From MediaFire
             </button>
         </div>
     </div>
@@ -954,17 +1034,27 @@
 
     <!-- ================= SCRIPTS CONTROLLER LOGIC ================= -->
     <script>
-        // Database
+        // PASSWORD GATE SYSTEM FUNCTION
+        function validateGlobalSitePassword() {
+            const enteredPass = document.getElementById('siteGlobalPasswordField').value;
+            const errorDisplay = document.getElementById('passwordErrorDisplay');
+            
+            if(enteredPass === "Alibaba") {
+                errorDisplay.style.display = "none";
+                document.getElementById('globalPasswordGate').style.display = "none";
+                sessionStorage.setItem("sitePasswordUnlocked", "true");
+                initializeMainAuthFlowCheck();
+            } else {
+                errorDisplay.style.display = "block";
+            }
+        }
+
+        // APP DATABASE 
         const globalAppsDatabase = [
-            { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", playstore: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically" },
-            { id: "whatsapp", name: "WhatsApp Plus Elite", type: "app", version: "2.24.8", size: "65 MB", rating: "4.6", desc: "Enhanced customization profiles with anti-delete tools and extreme privacy parameters enabled.", playstore: "https://play.google.com/store/apps/details?id=com.whatsapp" },
-            { id: "pubg", name: "PUBG Mobile Ultra Mod", type: "game", version: "3.1.0", size: "1.2 GB", rating: "4.5", desc: "Extreme graphics configuration profiles optimized for maximum smooth processing operations.", playstore: "https://play.google.com/store/apps/details?id=com.tencent.ig" },
-            { id: "freefire", name: "Free Fire Max VIP+", type: "game", version: "1.104.1", size: "645 MB", rating: "4.7", desc: "Experience advanced acceleration mechanics optimized perfectly for mobile battlefields.", playstore: "https://play.google.com/store/apps/details?id=com.dts.freefireth" },
-            { id: "instagram", name: "Instagram Pro Pure", type: "app", version: "320.0.1", size: "58 MB", rating: "4.4", desc: "Download high definition layout media profiles directly from the feed channel layout securely.", playstore: "https://play.google.com/store/apps/details?id=com.instagram.android" },
-            { id: "capcut", name: "CapCut Video Pro", type: "app", version: "11.6.0", size: "210 MB", rating: "4.7", desc: "Advanced premium filters composition frames and complete tracking asset options unlocked.", playstore: "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas" },
-            { id: "subway", name: "Subway Surfers VIP+", type: "game", version: "3.28.0", size: "155 MB", rating: "4.5", desc: "Infinite execution tracks running cycles with optimized global leaderboard systems active.", playstore: "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf" },
-            { id: "spotify", name: "Spotify Premium Mod", type: "app", version: "8.9.22", size: "45 MB", rating: "4.8", desc: "Unlimited skip structures with pure audio parameters music streaming ad-free listening.", playstore: "https://play.google.com/store/apps/details?id=com.spotify.music" },
-            { id: "minecraft", name: "Minecraft Premium Edition", type: "game", version: "1.20.73", size: "620 MB", rating: "4.6", desc: "Explore endless generation simulation sandbox blocks worlds with completely secure packages.", playstore: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe" }
+            { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", mediafire: "https://www.mediafire.com/file/89jgwv6hwslkruy/TIKTOK_Live_APK_v45.5.zip/file" },
+            { id: "capcut", name: "CapCut Pro VIP", type: "app", version: "7.7.5", size: "210 MB", rating: "4.9", desc: "Premium video editing unlocked. Premium effects, transitions, and no watermark layout.", mediafire: "https://www.mediafire.com/file/1yn5rdjb2v9ysho/CapCut-Pad-v7.7.5-mod.apk/file" },
+            { id: "virtualmaster", name: "Virtual Master VIP", type: "app", version: "2.1.0", size: "145 MB", rating: "4.9", desc: "Premium virtual Android system system sandbox with full VIP privileges unlocked.", mediafire: "https://www.mediafire.com/file/lwv7u5zb3s8nxej/Virtual+Master+.Ne5.apk/file" },
+            { id: "vactras", name: "Vactras VIP", type: "app", version: "1.0.4", size: "85 MB", rating: "4.7", desc: "Exclusive performance tools and optimization patches fully operational.", mediafire: "https://www.mediafire.com/file/mujjknzkwdyghjb/app-release.apk/file" }
         ];
 
         let selectedAppObject = null;
@@ -973,23 +1063,19 @@
         let isAppInternalPageActive = false;
         let fakeOtpCountdownReference = null;
 
-        // ONE-TIME AUTHCHECK RULES (ON REFRESH/LOAD)
+        // ONE-TIME LOAD RULES
         window.addEventListener('DOMContentLoaded', () => {
             renderAppsToDOMInterface(globalAppsDatabase);
             
-            // Check if user is already authenticated once before
-            const isAuthenticatedUser = localStorage.getItem("siteUserUnlockedStatus");
-
-            if(isAuthenticatedUser === "true") {
-                // Seedha dashboard open karega, login screen skip ho jayegi
-                document.getElementById('auth-portal-screen').style.display = "none";
-                document.getElementById('home-view').style.display = "block";
-                window.history.replaceState({page: 'home'}, 'Home', '');
+            // First check for global password unlock state
+            const isPasswordUnlocked = sessionStorage.getItem("sitePasswordUnlocked");
+            if(isPasswordUnlocked === "true") {
+                document.getElementById('globalPasswordGate').style.display = "none";
+                initializeMainAuthFlowCheck();
             } else {
-                // Agar pehli baar aya h to authentication form load hoga
-                document.getElementById('auth-portal-screen').style.display = "block";
+                document.getElementById('globalPasswordGate').style.display = "flex";
+                document.getElementById('auth-portal-screen').style.display = "none";
                 document.getElementById('home-view').style.display = "none";
-                window.history.replaceState({page: 'auth'}, 'Auth', '');
             }
 
             window.addEventListener('popstate', function(event) {
@@ -997,7 +1083,20 @@
             });
         });
 
-        // Convert plain string name into split characters for wave
+        // Separated Main Login Flow to run only after password match
+        function initializeMainAuthFlowCheck() {
+            const isAuthenticatedUser = localStorage.getItem("siteUserUnlockedStatus");
+            if(isAuthenticatedUser === "true") {
+                document.getElementById('auth-portal-screen').style.display = "none";
+                document.getElementById('home-view').style.display = "block";
+                window.history.replaceState({page: 'home'}, 'Home', '');
+            } else {
+                document.getElementById('auth-portal-screen').style.display = "block";
+                document.getElementById('home-view').style.display = "none";
+                window.history.replaceState({page: 'auth'}, 'Auth', '');
+            }
+        }
+
         function generateMagicalWaveHTML(appNameString) {
             let htmlOutput = "";
             for (let i = 0; i < appNameString.length; i++) {
@@ -1033,7 +1132,7 @@
             }
         }
 
-        // Auth Screens Flow Transitions
+        // Auth Flow
         function switchAuthScreen(screenId) {
             document.querySelectorAll('.auth-form-panel').forEach(panel => panel.style.display = "none");
             document.getElementById('screen-' + screenId).style.display = "flex";
@@ -1041,12 +1140,10 @@
 
         function processAuthFlow(type) {
             let emailValue = (type === 'login') ? document.getElementById('login-email-input').value : document.getElementById('reg-email-input').value;
-            
             if(!emailValue.includes('@')) {
                 alert("Please enter a valid real email containing '@'.");
                 return;
             }
-
             if(type === 'login') {
                 bypassVerificationToMainDashboard();
             } else {
@@ -1078,23 +1175,23 @@
             }, 1000);
         }
 
-        // SUCCESSFUL VERIFICATION FUNCTION (SAVES STATE FOR ONE-TIME ONLY RULE)
         function bypassVerificationToMainDashboard() {
             if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
-            
-            // Set identification rules inside browser permanently
             localStorage.setItem("siteUserUnlockedStatus", "true");
-
             document.getElementById('auth-portal-screen').style.display = "none";
             document.getElementById('home-view').style.display = "block";
             window.history.replaceState({page: 'home'}, 'Home', '');
             window.scrollTo(0,0);
         }
 
-        // Main Site App Functions - Fire & Wave Renderer
+        // Render Cards
         function renderAppsToDOMInterface(dataArray) {
             const container = document.getElementById('appsDynamicRenderContainer');
             container.innerHTML = ""; 
+            if (dataArray.length === 0) {
+                document.getElementById('noResultsText').style.display = "block";
+                return;
+            }
             dataArray.forEach(app => {
                 let waveTextHTML = generateMagicalWaveHTML(app.name);
                 container.innerHTML += `
@@ -1221,9 +1318,12 @@
             }, 5000);
         }
 
-        function executePlayStoreRedirection() {
-            if(selectedAppObject && selectedAppObject.playstore) {
-                window.location.href = selectedAppObject.playstore;
+        // MEDIAFIRE REDIRECTION FUNCTION
+        function executeMediafireRedirection() {
+            if(selectedAppObject && selectedAppObject.mediafire) {
+                window.location.href = selectedAppObject.mediafire;
+            } else {
+                alert("Link uploading in progress... Please try again shortly.");
             }
         }
 
@@ -1248,6 +1348,8 @@
         function filterCategoryList(category) {
             let cards = document.getElementsByClassName('app-card');
             let title = document.getElementById('list-title');
+            let noResults = document.getElementById('noResultsText');
+            let matched = 0;
             
             document.getElementById('tab-all').classList.remove('active-tab');
             document.getElementById('tab-game').classList.remove('active-tab');
@@ -1268,10 +1370,12 @@
                 let type = cards[i].getAttribute('data-type');
                 if (category === 'all' || type === category) {
                     cards[i].style.display = "flex";
+                    matched++;
                 } else {
                     cards[i].style.display = "none";
                 }
             }
+            noResults.style.display = (matched === 0) ? "block" : "none";
         }
 
         function toggleThemeSystem() {
