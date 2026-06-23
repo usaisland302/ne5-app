@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getmods - Download & Enjoy VIP Mods</title>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -45,7 +44,7 @@
             overflow-x: hidden;
         }
 
-        /* ================= MAGICAL PASSWORD LOCK SYSTEM ================= */
+        /* ================= ONE TIME LOGIN KEY SYSTEM OVERLAY ================= */
         .magical-password-overlay {
             position: fixed;
             top: 0;
@@ -164,7 +163,6 @@
             font-weight: bold;
             font-size: 16px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
             margin-bottom: 15px;
         }
 
@@ -193,9 +191,10 @@
             margin-top: -10px;
             margin-bottom: 15px;
             display: none;
+            line-height: 1.4;
         }
 
-        /* --- UPDATED TOP MUSIC ICON WIDGET --- */
+        /* --- TOP MUSIC ICON WIDGET --- */
         .music-control-widget {
             background: rgba(22, 36, 71, 0.9);
             border: 1.5px solid #00ffc4;
@@ -380,86 +379,6 @@
             background: rgba(0,0,0,0.6);
             z-index: 999;
             display: none;
-        }
-
-        /* --- AUTH SYSTEM --- */
-        .auth-portal-screen-wrapper {
-            max-width: 450px;
-            margin: 60px auto;
-            padding: 30px 25px;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            text-align: center;
-            display: none;
-        }
-
-        .auth-form-panel {
-            display: none;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .auth-input-group {
-            position: relative;
-            text-align: left;
-        }
-
-        .auth-input-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-
-        .auth-input-group input {
-            width: 100%;
-            padding: 12px 15px 12px 40px;
-            background: var(--bg-color);
-            border: 1px solid var(--search-border);
-            border-radius: 12px;
-            color: var(--text-color);
-            outline: none;
-            font-size: 15px;
-        }
-
-        .auth-input-group i {
-            position: absolute;
-            left: 15px;
-            bottom: 15px;
-            color: var(--text-muted);
-        }
-
-        .auth-action-btn {
-            background: linear-gradient(135deg, #2af598 0%, #009ed2 100%);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 5px;
-        }
-
-        .auth-toggle-link {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 10px;
-        }
-
-        .auth-toggle-link span {
-            color: #00f2fe;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .verification-counter-box {
-            font-size: 14px;
-            color: #ff5858;
-            margin-top: 10px;
-            font-weight: 600;
         }
 
         /* --- VIEW PANELS --- */
@@ -841,36 +760,32 @@
 </head>
 <body>
 
-    <!-- ================= NATIVE YOUTUBE EMBED AUDIO PLAYER (HIDDEN) ================= -->
     <div id="youtubePlayerContainer" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; overflow:hidden;">
         <div id="hiddenVipYoutubeEmbed"></div>
     </div>
 
-    <!-- ================= MAGICAL PASS LOCK SCREEN GATE ================= -->
     <div class="magical-password-overlay" id="globalPasswordGate">
-        <!-- Background Matrix Floating Numbers Canvas -->
         <canvas id="magicalNumberCanvas"></canvas>
 
         <div class="password-box-panel">
             <div class="magical-animated-logo">G</div>
-            <div class="password-prompt-title">Enter Security Password</div>
-            <div class="password-prompt-desc">Please enter the VIP access password to unlock premium dashboard files.</div>
+            <div class="password-prompt-title">Enter Access Key</div>
+            <div class="password-prompt-desc">Enter your unique trial or personal key to open dashboard panel. Each access locks for 20 Hours.</div>
             
             <div class="pass-input-wrapper">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="siteGlobalPasswordField" placeholder="Enter password here...">
+                <i class="fas fa-key"></i>
+                <input type="text" id="siteGlobalPasswordField" placeholder="Paste access key here...">
             </div>
             
-            <div class="pass-error-msg" id="passwordErrorDisplay">Incorrect Password! Please try again.</div>
+            <div class="pass-error-msg" id="passwordErrorDisplay">Incorrect Access Key! Please verify inputs.</div>
             
-            <button class="btn-verify-password" onclick="validateGlobalSitePassword()">Unlock Dashboard</button>
+            <button class="btn-verify-password" onclick="validateGlobalSitePassword()">Verify Access Key</button>
             <a href="https://whatsapp.com/channel/0029VbDGuesHVvTaPjGUzn19" target="_blank" class="btn-get-password-link">
-                <i class="fab fa-whatsapp"></i> Get Password
+                <i class="fab fa-whatsapp"></i> Get Active Keys
             </a>
         </div>
     </div>
 
-    <!-- Side Menu Drawer -->
     <div class="drawer-overlay" id="menuDrawerOverlay" onclick="toggleSideNavigationDrawer(false)"></div>
     <div class="side-navigation-drawer" id="sideNavigationDrawer">
         <div class="drawer-header">
@@ -889,7 +804,6 @@
         </div>
     </div>
 
-    <!-- Header Block -->
     <header>
         <div class="header-left">
             <button class="menu-trigger-btn" onclick="toggleSideNavigationDrawer(true)"><i class="fas fa-bars"></i></button>
@@ -899,7 +813,6 @@
             </div>
         </div>
         <div class="nav-icons">
-            <!-- COLOURED CHHOTA MUSIC INDICATOR ON TOP RIGHT -->
             <div class="music-control-widget" id="musicControlBtn" style="display: none;">
                 <i class="fas fa-music"></i>
             </div>
@@ -911,62 +824,6 @@
         </div>
     </header>
 
-    <!-- ================= AUTH SYSTEM ================= -->
-    <div id="auth-portal-screen" class="auth-portal-screen-wrapper">
-        <div class="logo-icon" style="margin: 0 auto 15px auto; width: 50px; height: 50px; font-size: 26px;">G</div>
-        
-        <!-- Screen 1: Login -->
-        <div class="auth-form-panel" id="screen-login" style="display: flex;">
-            <h2 style="margin-bottom: 20px; font-size: 22px;">Login With Email</h2>
-            <div class="auth-input-group">
-                <label>Email Address</label>
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="login-email-input" placeholder="name@email.com">
-            </div>
-            <div class="auth-input-group">
-                <label>Password</label>
-                <i class="fas fa-lock"></i>
-                <input type="password" id="login-pass-input" placeholder="••••••••">
-            </div>
-            <button class="auth-action-btn" onclick="processAuthFlow('login')">Login</button>
-            <div class="auth-toggle-link">Don't have an account? <span onclick="switchAuthScreen('register')">Register here</span></div>
-        </div>
-
-        <!-- Screen 2: Register -->
-        <div class="auth-form-panel" id="screen-register">
-            <h2 style="margin-bottom: 20px; font-size: 22px;">Registration</h2>
-            <div class="auth-input-group">
-                <label>Enter Email Address</label>
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="reg-email-input" placeholder="username@email.com">
-            </div>
-            <div class="auth-input-group">
-                <label>Password</label>
-                <i class="fas fa-lock"></i>
-                <input type="password" id="reg-pass-input" placeholder="Choose a password">
-            </div>
-            <button class="auth-action-btn" onclick="processAuthFlow('register')">Verify Email</button>
-            <div class="auth-toggle-link">Already have an account? <span onclick="switchAuthScreen('login')">Login instead</span></div>
-        </div>
-
-        <!-- Screen 3: OTP -->
-        <div class="auth-form-panel" id="screen-otp">
-            <h2 style="margin-bottom: 10px; font-size: 22px;">Email Verification</h2>
-            <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">OTP has been sent to your email. Please enter it below to access downloads.</p>
-            
-            <div class="auth-input-group">
-                <label>Enter OTP Code</label>
-                <i class="fas fa-key"></i>
-                <input type="text" id="verification-otp-input" placeholder="Enter any verification code">
-            </div>
-            <button class="auth-action-btn" onclick="bypassVerificationToMainDashboard()" style="background: #00b894;">Verify & Open Site</button>
-            
-            <div class="verification-counter-box" id="fakeOtpTimerDisplay">OTP Sent! Resend button locked for: <span id="otpSecondsCount">60</span>s</div>
-            <div class="auth-toggle-link" id="resend-link-btn" style="display:none; margin-top:15px;">Didn't get code? <span onclick="triggerFakeOtpResendSequence()">Resend Code</span></div>
-        </div>
-    </div>
-
-    <!-- ================= MAIN DASHBOARD (VIEW 1) ================= -->
     <div id="home-view">
         <div class="search-container">
             <div class="search-box">
@@ -1000,12 +857,10 @@
         <div class="no-results" id="noResultsText">No packages found match parameters.</div>
 
         <div class="app-list" id="appsDynamicRenderContainer">
-            <!-- Loaded dynamically -->
-        </div>
+            </div>
     </div>
 
 
-    <!-- ================= VIEW 2: STEP 1 (18 SECONDS) ================= -->
     <div id="step1-view" class="app-view-panel">
         <button class="back-btn" onclick="switchToHomeView()"><i class="fas fa-arrow-left"></i> Cancel</button>
         
@@ -1037,7 +892,6 @@
     </div>
 
 
-    <!-- ================= VIEW 3: STEP 2 (10 SECONDS COUNTER) ================= -->
     <div id="step2-view" class="app-view-panel">
         <div class="panel-card">
             <div class="panel-title" style="color: #ff5858;"><i class="fas fa-shield-alt"></i> Redirection Handshake Line</div>
@@ -1056,7 +910,6 @@
     </div>
 
 
-    <!-- ================= VIEW 4: STEP 3 FINAL FILE LINE (5 SECONDS) ================= -->
     <div id="step3-view" class="app-view-panel">
         <div class="panel-card">
             <div class="panel-icon-placeholder">
@@ -1073,7 +926,6 @@
                     <div class="linear-line" id="line5s"></div>
                 </div>
             </div>
-            <!-- FINAL DOWNLOAD BUTTON TARGETED TO MEDIAFIRE NATIVELY -->
             <button class="btn-action-trigger" id="finalDownloadBtn" onclick="executeMediafireRedirection()" style="background: linear-gradient(135deg, #00b894 0%, #2ecc71 100%);">
                 <i class="fas fa-cloud-download-alt"></i> Download From MediaFire
             </button>
@@ -1081,7 +933,6 @@
     </div>
 
 
-    <!-- ================= SCRIPTS CONTROLLER LOGIC ================= -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
@@ -1133,7 +984,7 @@
         setInterval(drawMagicalNumbersMatrix, 33); 
 
 
-        // ================= YOUTUBE LOOP & LOCKING SYSTEM =================
+        // ================= YOUTUBE LOOP & PLAYBACK =================
         let ytAudioPlayer = null;
         const musicWidgetBtn = document.getElementById('musicControlBtn');
 
@@ -1147,8 +998,8 @@
                     'controls': 0,
                     'loop': 1,
                     'playlist': 'xFYc4Gcey1E', 
-                    'rel': 0,
-                    'showinfo': 0
+                    rel: 0,
+                    showinfo: 0
                 },
                 events: {
                     'onReady': onPlayerSetupReadyState,
@@ -1159,7 +1010,6 @@
 
         function onPlayerSetupReadyState(event) {
             console.log("YouTube Premium Audio Handshake Secure.");
-            // AUTO PLAY TRIGGER UPON REFRESH DETECT
             if (localStorage.getItem("musicShouldPlay") === "true") {
                 startVipSongPlayback();
             }
@@ -1177,29 +1027,71 @@
             if(ytAudioPlayer && typeof ytAudioPlayer.playVideo === 'function') {
                 ytAudioPlayer.playVideo();
                 musicWidgetBtn.style.display = "flex"; 
-                localStorage.setItem("musicShouldPlay", "true"); // Local state memory latch
+                localStorage.setItem("musicShouldPlay", "true"); 
             }
         }
 
 
-        // PASSWORD GATE SYSTEM FUNCTION
+        // ================= ONE-TIME LOGIN KEY ENGINE SYSTEM =================
+        const registeredAccessKeysList = [
+            "Ne5-trail-d10293w",
+            "Ne5-trail-d19349r",
+            "Ne5-trail-d19494k",
+            "Ne5-trail-d19332l",
+            "Ne5-trail-d12932n",
+            "Ne5-trail-d12939p",
+            "Ne5-trail-d11939s",
+            "Ne5-trail-d12939b",
+            "Ne5-trail-d1292x",
+            "Ne5-trail-d1393i",
+            "FF-2026" // Personal Unique Premium Key
+        ];
+
+        const LOCK_DURATION_TIME_LIMIT = 20 * 60 * 60 * 1000; // 20 Hours lock window in milliseconds
+
         function validateGlobalSitePassword() {
-            const enteredPass = document.getElementById('siteGlobalPasswordField').value;
-            const errorDisplay = document.getElementById('passwordErrorDisplay');
+            const enteredKeyInput = document.getElementById('siteGlobalPasswordField').value.trim();
+            const errorDisplayElement = document.getElementById('passwordErrorDisplay');
             
-            if(enteredPass === "Alibaba") {
-                errorDisplay.style.display = "none";
-                document.getElementById('globalPasswordGate').style.display = "none";
-                sessionStorage.setItem("sitePasswordUnlocked", "true");
+            // Check if key exists inside database pool
+            if (registeredAccessKeysList.includes(enteredKeyInput)) {
+                const globalCurrentTimestamp = new Date().getTime();
+                const systemSavedLockTimestamp = localStorage.getItem("lock_key_" + enteredKeyInput);
+
+                if (systemSavedLockTimestamp) {
+                    const elapsedDurationTime = globalCurrentTimestamp - parseInt(systemSavedLockTimestamp);
+
+                    if (elapsedDurationTime < LOCK_DURATION_TIME_LIMIT) {
+                        // Key locked phase execution logic (calculates hours, minutes, seconds remaining)
+                        const remainingLockTimeMs = LOCK_DURATION_TIME_LIMIT - elapsedDurationTime;
+                        const hoursRemaining = Math.floor(remainingLockTimeMs / (1000 * 60 * 60));
+                        const minutesRemaining = Math.floor((remainingLockTimeMs % (1000 * 60 * 60)) / (1000 * 60));
+                        const secondsRemaining = Math.floor((remainingLockTimeMs % (1000 * 60)) / 1000);
+
+                        errorDisplayElement.style.display = "block";
+                        errorDisplayElement.innerHTML = `Key is locked! One-Time use active.<br>Please wait: <b>${hoursRemaining}h ${minutesRemaining}m ${secondsRemaining}s</b> to reuse.`;
+                        return;
+                    }
+                }
+
+                // If key is totally fine and free, lock it instantly for 20 Hours and launch site framework
+                localStorage.setItem("lock_key_" + enteredKeyInput, globalCurrentTimestamp);
+                localStorage.setItem("sitePersistentTokenUnlocked", "true");
                 
+                errorDisplayElement.style.display = "none";
+                document.getElementById('globalPasswordGate').style.display = "none";
+                document.getElementById('home-view').style.display = "block";
+                window.history.replaceState({page: 'home'}, 'Home', '');
+
                 startVipSongPlayback();
-                initializeMainAuthFlowCheck();
             } else {
-                errorDisplay.style.display = "block";
+                errorDisplayElement.style.display = "block";
+                errorDisplayElement.innerHTML = "Invalid Access Key! Please enter a correct valid key.";
             }
         }
 
-        // APP DATABASE (UPDATED WITH YOUR REQUESTED APPS ONLY)
+
+        // APP DATABASE STRUCT
         const globalAppsDatabase = [
             { id: "tiktok", name: "TikTok Premium VIP", type: "app", version: "34.5.3", size: "112 MB", rating: "4.8", desc: "Ad-free short video experience with fully unlocked video downloads option seamlessly.", mediafire: "https://www.mediafire.com/file/89jgwv6hwslkruy/TIKTOK_Live_APK_v45.5.zip/file" },
             { id: "capcut", name: "CapCut Pro VIP", type: "app", version: "17.8.0", size: "224 MB", rating: "4.9", desc: "Premium video editing unlocked. Premium effects, transitions, and no watermark layout.", mediafire: "https://www.mediafire.com/file/cxcr6hqkvelhelo/CapCut+17.8.0.apk/file" },
@@ -1216,25 +1108,22 @@
         let runningGlobalTimerReference = null;
         let counterIntervalTimerReference = null;
         let isAppInternalPageActive = false;
-        let fakeOtpCountdownReference = null;
 
-        // ONE-TIME LOAD RULES
+        // ONE-TIME DOM INITIAL LOAD COMPONENT ASSIGNMENT
         window.addEventListener('DOMContentLoaded', () => {
             renderAppsToDOMInterface(globalAppsDatabase);
             
-            const isPasswordUnlocked = sessionStorage.getItem("sitePasswordUnlocked");
-            if(isPasswordUnlocked === "true") {
+            const isPersistentSessionActive = localStorage.getItem("sitePersistentTokenUnlocked");
+            if(isPersistentSessionActive === "true") {
                 document.getElementById('globalPasswordGate').style.display = "none";
+                document.getElementById('home-view').style.display = "block";
+                window.history.replaceState({page: 'home'}, 'Home', '');
                 
-                // Backup browser gesture interaction bypass
                 document.body.addEventListener('click', () => {
                     startVipSongPlayback();
                 }, { once: true });
-
-                initializeMainAuthFlowCheck();
             } else {
                 document.getElementById('globalPasswordGate').style.display = "flex";
-                document.getElementById('auth-portal-screen').style.display = "none";
                 document.getElementById('home-view').style.display = "none";
             }
 
@@ -1242,19 +1131,6 @@
                 if (isAppInternalPageActive) switchToHomeView();
             });
         });
-
-        function initializeMainAuthFlowCheck() {
-            const isAuthenticatedUser = localStorage.getItem("siteUserUnlockedStatus");
-            if(isAuthenticatedUser === "true") {
-                document.getElementById('auth-portal-screen').style.display = "none";
-                document.getElementById('home-view').style.display = "block";
-                window.history.replaceState({page: 'home'}, 'Home', '');
-            } else {
-                document.getElementById('auth-portal-screen').style.display = "block";
-                document.getElementById('home-view').style.display = "none";
-                window.history.replaceState({page: 'auth'}, 'Auth', '');
-            }
-        }
 
         function generateMagicalWaveHTML(appNameString) {
             let htmlOutput = "";
@@ -1269,7 +1145,6 @@
             return htmlOutput;
         }
 
-        // Side Menu Drawer
         function toggleSideNavigationDrawer(open) {
             const drawer = document.getElementById('sideNavigationDrawer');
             const overlay = document.getElementById('menuDrawerOverlay');
@@ -1287,63 +1162,11 @@
             if(document.getElementById('home-view').style.display === "block") {
                 filterCategoryList(category);
             } else {
-                alert("Please complete access verification phases first!");
+                alert("Please authenticate using active access keys first!");
             }
         }
 
-        // Auth Flow
-        function switchAuthScreen(screenId) {
-            document.querySelectorAll('.auth-form-panel').forEach(panel => panel.style.display = "none");
-            document.getElementById('screen-' + screenId).style.display = "flex";
-        }
-
-        function processAuthFlow(type) {
-            let emailValue = (type === 'login') ? document.getElementById('login-email-input').value : document.getElementById('reg-email-input').value;
-            if(!emailValue.includes('@')) {
-                alert("Please enter a valid real email containing '@'.");
-                return;
-            }
-            if(type === 'login') {
-                bypassVerificationToMainDashboard();
-            } else {
-                switchAuthScreen('otp');
-                triggerFakeOtpResendSequence();
-            }
-        }
-
-        function triggerFakeOtpResendSequence() {
-            if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
-            const timerContainer = document.getElementById('fakeOtpTimerDisplay');
-            const resendBtn = document.getElementById('resend-link-btn');
-            const countdownSpan = document.getElementById('otpSecondsCount');
-            
-            timerContainer.style.display = "block";
-            resendBtn.style.display = "none";
-            
-            let timeLimit = 60;
-            countdownSpan.innerText = timeLimit;
-
-            fakeOtpCountdownReference = setInterval(() => {
-                timeLimit--;
-                countdownSpan.innerText = timeLimit;
-                if(timeLimit <= 0) {
-                    clearInterval(fakeOtpCountdownReference);
-                    timerContainer.style.display = "none";
-                    resendBtn.style.display = "block";
-                }
-            }, 1000);
-        }
-
-        function bypassVerificationToMainDashboard() {
-            if(fakeOtpCountdownReference) clearInterval(fakeOtpCountdownReference);
-            localStorage.setItem("siteUserUnlockedStatus", "true");
-            document.getElementById('auth-portal-screen').style.display = "none";
-            document.getElementById('home-view').style.display = "block";
-            window.history.replaceState({page: 'home'}, 'Home', '');
-            window.scrollTo(0,0);
-        }
-
-        // Render Cards
+        // Render Cards Interface
         function renderAppsToDOMInterface(dataArray) {
             const container = document.getElementById('appsDynamicRenderContainer');
             container.innerHTML = ""; 
@@ -1485,7 +1308,6 @@
             }
         }
 
-        // Search Filter
         function executeSearchFilter() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('app-card');
@@ -1504,7 +1326,6 @@
             noResults.style.display = (matched === 0) ? "block" : "none";
         }
 
-        // Category Toggle System
         function filterCategoryList(category) {
             let cards = document.getElementsByClassName('app-card');
             let title = document.getElementById('list-title');
@@ -1538,7 +1359,6 @@
             noResults.style.display = (matched === 0) ? "block" : "none";
         }
 
-        // Theme Switcher System
         function toggleThemeSystem() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme');
