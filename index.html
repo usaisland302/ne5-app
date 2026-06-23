@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getmods - Download & Enjoy VIP Mods</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -760,11 +761,14 @@
 </head>
 <body>
 
+    <!-- ================= NATIVE YOUTUBE EMBED AUDIO PLAYER (HIDDEN) ================= -->
     <div id="youtubePlayerContainer" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; overflow:hidden;">
         <div id="hiddenVipYoutubeEmbed"></div>
     </div>
 
+    <!-- ================= ONE TIME LOGIN ACCESS SYSTEM GATE ================= -->
     <div class="magical-password-overlay" id="globalPasswordGate">
+        <!-- Background Matrix Floating Numbers Canvas -->
         <canvas id="magicalNumberCanvas"></canvas>
 
         <div class="password-box-panel">
@@ -786,6 +790,7 @@
         </div>
     </div>
 
+    <!-- Side Menu Drawer -->
     <div class="drawer-overlay" id="menuDrawerOverlay" onclick="toggleSideNavigationDrawer(false)"></div>
     <div class="side-navigation-drawer" id="sideNavigationDrawer">
         <div class="drawer-header">
@@ -804,6 +809,7 @@
         </div>
     </div>
 
+    <!-- Header Block -->
     <header>
         <div class="header-left">
             <button class="menu-trigger-btn" onclick="toggleSideNavigationDrawer(true)"><i class="fas fa-bars"></i></button>
@@ -813,6 +819,7 @@
             </div>
         </div>
         <div class="nav-icons">
+            <!-- COLOURED CHHOTA MUSIC INDICATOR ON TOP RIGHT -->
             <div class="music-control-widget" id="musicControlBtn" style="display: none;">
                 <i class="fas fa-music"></i>
             </div>
@@ -824,6 +831,7 @@
         </div>
     </header>
 
+    <!-- ================= MAIN DASHBOARD (VIEW 1) ================= -->
     <div id="home-view">
         <div class="search-container">
             <div class="search-box">
@@ -857,10 +865,12 @@
         <div class="no-results" id="noResultsText">No packages found match parameters.</div>
 
         <div class="app-list" id="appsDynamicRenderContainer">
-            </div>
+            <!-- Loaded dynamically -->
+        </div>
     </div>
 
 
+    <!-- ================= VIEW 2: STEP 1 (18 SECONDS) ================= -->
     <div id="step1-view" class="app-view-panel">
         <button class="back-btn" onclick="switchToHomeView()"><i class="fas fa-arrow-left"></i> Cancel</button>
         
@@ -892,6 +902,7 @@
     </div>
 
 
+    <!-- ================= VIEW 3: STEP 2 (10 SECONDS COUNTER) ================= -->
     <div id="step2-view" class="app-view-panel">
         <div class="panel-card">
             <div class="panel-title" style="color: #ff5858;"><i class="fas fa-shield-alt"></i> Redirection Handshake Line</div>
@@ -910,6 +921,7 @@
     </div>
 
 
+    <!-- ================= VIEW 4: STEP 3 FINAL FILE LINE (5 SECONDS) ================= -->
     <div id="step3-view" class="app-view-panel">
         <div class="panel-card">
             <div class="panel-icon-placeholder">
@@ -926,6 +938,7 @@
                     <div class="linear-line" id="line5s"></div>
                 </div>
             </div>
+            <!-- FINAL DOWNLOAD BUTTON TARGETED TO MEDIAFIRE NATIVELY -->
             <button class="btn-action-trigger" id="finalDownloadBtn" onclick="executeMediafireRedirection()" style="background: linear-gradient(135deg, #00b894 0%, #2ecc71 100%);">
                 <i class="fas fa-cloud-download-alt"></i> Download From MediaFire
             </button>
@@ -933,6 +946,7 @@
     </div>
 
 
+    <!-- ================= SCRIPTS CONTROLLER LOGIC ================= -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
@@ -1076,7 +1090,6 @@
 
                 // If key is totally fine and free, lock it instantly for 20 Hours and launch site framework
                 localStorage.setItem("lock_key_" + enteredKeyInput, globalCurrentTimestamp);
-                localStorage.setItem("sitePersistentTokenUnlocked", "true");
                 
                 errorDisplayElement.style.display = "none";
                 document.getElementById('globalPasswordGate').style.display = "none";
@@ -1113,19 +1126,13 @@
         window.addEventListener('DOMContentLoaded', () => {
             renderAppsToDOMInterface(globalAppsDatabase);
             
-            const isPersistentSessionActive = localStorage.getItem("sitePersistentTokenUnlocked");
-            if(isPersistentSessionActive === "true") {
-                document.getElementById('globalPasswordGate').style.display = "none";
-                document.getElementById('home-view').style.display = "block";
-                window.history.replaceState({page: 'home'}, 'Home', '');
-                
-                document.body.addEventListener('click', () => {
-                    startVipSongPlayback();
-                }, { once: true });
-            } else {
-                document.getElementById('globalPasswordGate').style.display = "flex";
-                document.getElementById('home-view').style.display = "none";
-            }
+            // HAR BAR COMPULSORY LOGIN SCREEN SHOW HOGI REFRESH HONE PAR
+            document.getElementById('globalPasswordGate').style.display = "flex";
+            document.getElementById('home-view').style.display = "none";
+
+            document.body.addEventListener('click', () => {
+                startVipSongPlayback();
+            }, { once: true });
 
             window.addEventListener('popstate', function(event) {
                 if (isAppInternalPageActive) switchToHomeView();
